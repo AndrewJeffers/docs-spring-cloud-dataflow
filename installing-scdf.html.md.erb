@@ -2,41 +2,40 @@
 title: Installing Flo
 ---
 
-This section provides instructions for installing Flo for Spring Cloud Data Flow. 
+This topic provides instructions for installing Flo for Spring Cloud Data Flow. 
 
-The intent is to replace the UI jar within the Spring Cloud Data Flow distribution with a Flo enabled UI jar. These are the steps:
+Follow the steps below to replace the UI jar within the Spring Cloud Data Flow distribution with a Flo-enabled UI jar. 
 
-1. Build Spring Cloud Data Flow. This produces an admin jar in the **spring-cloud-dataflow-admin-[VARIANT]/target** subfolder with a name of the form: **spring-cloud-dataflow-admin-[VARIANT]-[VERSION].jar**
+1. Build Spring Cloud Data Flow. This produces an admin jar in the **spring-cloud-dataflow-admin-[VARIANT]/target** subfolder, with a name of the form: **spring-cloud-dataflow-admin-[VARIANT]-[VERSION].jar**
 
-1. Navigate to the **spring-cloud-dataflow-admin-[VARIANT]/target** subfolder and optionally backup the jar that you are about to patch:
-	<pre class='terminal'> $ cd spring-cloud-dataflow-admin-[VARIANT]/target</pre>
-	<pre class='terminal'> $ cp spring-cloud-dataflow-admin-[VARIANT]-[VERSION].jar</pre> 
-	<pre class='terminal'> $ mv spring-cloud-dataflow-admin-[VARIANT]-[VERSION].jar.original</pre>
+1. Navigate to the **spring-cloud-dataflow-admin-[VARIANT]/target** subfolder and, optionally, backup the jar that you are about to patch:
+	<pre class='terminal'>$ cd spring-cloud-dataflow-admin-[VARIANT]/target</pre>
+	<pre class='terminal'>$ cp spring-cloud-dataflow-admin-[VARIANT]-[VERSION].jar</pre> 
+	<pre class='terminal'>$ mv spring-cloud-dataflow-admin-[VARIANT]-[VERSION].jar.original</pre>
 
-1. Visit the <a href="https://network.pivotal.io/">Flo product page</a> and download **flo-spring-cloud-dataflow-admin-[VERSION].zip**. The version should match the version of Spring Cloud Data Flow you are building. If it does not match, you must rename the file step as indicated below for the patch to apply properly, but even then it may not be totally compatible.
+1. Visit the <a href="https://network.pivotal.io/">Flo product page</a> and download **flo-spring-cloud-dataflow-admin-[VERSION].zip**. The version should match the version of Spring Cloud Data Flow that you are building. If it does not match, you must rename the file step as indicated below for the patch to apply properly, but even then it may not be totally compatible.
 
-1. While still in the **target** subfolder, unzip the flo zip file:
+1. While still in the **target** subfolder, unzip the Flo zip file:
 
-	<pre class='terminal'>unzip flo-spring-cloud-dataflow-admin-[VERSION].zip</pre>
+	<pre class='terminal'>$ unzip flo-spring-cloud-dataflow-admin-[VERSION].zip</pre>
 
 	This creates a **lib** subfolder containing our patch jar to apply to the built jar.
 
 1. If the version of Flo downloaded does not exactly match the version of Spring Cloud Data Flow that was built, rename the jar in the **lib** folder so that it matches the Data Flow version:
 
-	<pre class='terminal'> mv lib/spring-cloud-dataflow-ui-[DOWNLOADED_VERSION].jar</pre>
-	<pre class='terminal'> lib/spring-cloud-dataflow-ui-[BUILT_VERSION].jar</pre>
+	<pre class='terminal'>$ mv lib/spring-cloud-dataflow-ui-[DOWNLOADED_VERSION].jar lib/spring-cloud-dataflow-ui-[BUILT_VERSION].jar</pre>
 
 	As mentioned earlier, if this rename step is necessary, the jar may not be compatible.
 
 1. Ensure you are in the **target** subfolder and apply the patch to the built jar:
 
-	<pre class='terminal'>jar -u0vf spring-cloud-dataflow-admin-[VARIANT]-[VERSION].jar lib</pre>
+	<pre class='terminal'>$ jar -u0vf spring-cloud-dataflow-admin-[VARIANT]-[VERSION].jar lib</pre>
 
-	<p class='note'><strong>Note</strong>:Note: the <code>0</code> is important, since otherwise the extra compression damages the executable nature of the jar.</p>
+	<p class='note'><strong>Note</strong>: The <code>0</code> is important, since otherwise the extra compression damages the executable nature of the jar.</p>
 
 1. You can now run the modified jar:
 
-	<pre class='terminal'>java -jar spring-cloud-dataflow-admin-[VARIANT]-[VERSION].jar.</pre>
+	<pre class='terminal'>$ java -jar spring-cloud-dataflow-admin-[VARIANT]-[VERSION].jar.</pre>
 
 1. Open your browser, clear your browser cache, and the admin UI should contain Flo extensions:
 
