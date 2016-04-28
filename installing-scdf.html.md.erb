@@ -4,14 +4,61 @@ title: Installing Flo
 
 This topic provides instructions for installing Flo for Spring Cloud Data Flow. 
 
-Follow the steps below to replace the UI jar within the Spring Cloud Data Flow distribution with a Flo-enabled UI jar. 
+<p class='note'><strong>Note</strong>: The installation process for Flo into Spring Cloud Data Flow M3 vs M2 or earlier is different. It is recommended that you use the M3 version of Spring Cloud Data Flow and Flo but the instructions for installing in M2 and earlier are included in a section at the end of this document.</p>
+
+### Installing Flo into Spring Cloud Data Flow 1.0.0.M3
+
+Follow the steps below to replace the UI jar within the Spring Cloud Data Flow distribution with a Flo-enabled UI jar. The name of the distribution jar you are modifying will depend on your deployer choice, whether that is 'local', 'Cloud Foundry', 'Kubernetes', 'YARN' or 'Mesos'. The deployment choice is represented by the placeholder '[VARIANT]' in the steps below since regardless of deployer choice the same steps apply.
+
+1. Decide if you are building or downloading Spring Cloud Data Flow. If downloading, choose your appropriate variant and download **spring-cloud-dataflow-server-[VARIANT]-[VERSION].jar** then jump to step (4). Proceed to step (2) if choosing to build your own Spring Cloud Data Flow distribution instead.
+
+1. Build the Spring Cloud Data Flow variant. This produces an server jar under the **spring-cloud-dataflow-server-[VARIANT]/target** subfolder, with a name of the form: **spring-cloud-dataflow-server-[VARIANT]-[VERSION].jar**.
+
+1. Navigate to the **spring-cloud-dataflow-server-[VARIANT]/target** subfolder and, optionally, backup the jar that you are about to patch:
+	<pre class='terminal'>$ cd spring-cloud-dataflow-server-[VARIANT]/target</pre>
+	<pre class='terminal'>$ cp spring-cloud-dataflow-server-[VARIANT]-[VERSION].jar spring-cloud-dataflow-server-[VARIANT]-[VERSION].jar.original</pre> 
+
+1. Visit the <a href="https://network.pivotal.io/products/p-flo-for-spring-cloud-data-flow">Flo product page</a> and download **flo-spring-cloud-dataflow-server-[VERSION].zip**. The version should match the version of Spring Cloud Data Flow that you built or have downloaded. If it does not match, you must rename the file as indicated below for the patch to apply properly, but even then it may not be totally compatible.
+
+1. If you have built your own Spring Cloud Data Flow, ensure you are still in the **target** subfolder. If you downloaded Spring Cloud Data Flow go to the directory where you have downloaded it. Unzip the Flo zip file you just downloaded:
+
+	<pre class='terminal'>$ unzip flo-spring-cloud-dataflow-server-[VERSION].zip</pre>
+
+	This creates a **lib** subfolder containing our replacement jar to apply to Spring Cloud Data Flow.
+
+1. If the version of Flo downloaded does not exactly match the version of Spring Cloud Data Flow that was built, rename the jar in the **lib** folder so that it matches the Data Flow version:
+
+	<pre class='terminal'>$ mv lib/spring-cloud-dataflow-ui-[DOWNLOADED_VERSION].jar lib/spring-cloud-dataflow-ui-[BUILT_VERSION].jar</pre>
+
+	<p class='note'>As mentioned earlier, if this renaming step is necessary, the jar may not be compatible.</p>
+
+1. If you have built your own Spring Cloud Data Flow, ensure you are still in the **target** subfolder. If you downloaded Spring Cloud Data Flow ensure you are in the directory where you have downloaded it. Now apply the patch:
+
+	<pre class='terminal'>$ jar -u0vf spring-cloud-dataflow-server-[VARIANT]-[VERSION].jar lib</pre>
+
+	<p class='note'><strong>Note</strong>: The <code>0</code> is important, since otherwise the extra compression damages the executable nature of the jar.</p>
+
+1. You can now run the modified jar:
+
+	<pre class='terminal'>$ java -jar spring-cloud-dataflow-server-[VARIANT]-[VERSION].jar</pre>
+
+1. Open your browser, clear your browser cache, and the UI should contain Flo extensions:
+
+* Main dashboard: http<nolink>://HOST_NAME:PORT/admin-ui
+* Stream creation: http<nolink>://HOST_NAME:PORT/admin-ui/#/streams/create
+
+	<p class='note'><strong>Note</strong>: If unchanged, the default PORT points to <code>9393</code>.</p>
+	
+	
+### Installing Flo into Spring Cloud Data Flow 1.0.0.M2 and earlier
+
+These instructions cover installing Flo into M2 and earlier builds of Spring Cloud Data Flow. Follow the steps below to replace the UI jar within the Spring Cloud Data Flow distribution with a Flo-enabled UI jar. 
 
 1. Build Spring Cloud Data Flow. This produces an admin jar in the **spring-cloud-dataflow-admin-[VARIANT]/target** subfolder, with a name of the form: **spring-cloud-dataflow-admin-[VARIANT]-[VERSION].jar**
 
 1. Navigate to the **spring-cloud-dataflow-admin-[VARIANT]/target** subfolder and, optionally, backup the jar that you are about to patch:
 	<pre class='terminal'>$ cd spring-cloud-dataflow-admin-[VARIANT]/target</pre>
-	<pre class='terminal'>$ cp spring-cloud-dataflow-admin-[VARIANT]-[VERSION].jar</pre> 
-	<pre class='terminal'>$ mv spring-cloud-dataflow-admin-[VARIANT]-[VERSION].jar.original</pre>
+	<pre class='terminal'>$ cp spring-cloud-dataflow-admin-[VARIANT]-[VERSION].jar spring-cloud-dataflow-admin-[VARIANT]-[VERSION].jar.original</pre>
 
 1. Visit the <a href="https://network.pivotal.io/">Flo product page</a> and download **flo-spring-cloud-dataflow-admin-[VERSION].zip**. The version should match the version of Spring Cloud Data Flow that you are building. If it does not match, you must rename the file step as indicated below for the patch to apply properly, but even then it may not be totally compatible.
 
@@ -35,7 +82,7 @@ Follow the steps below to replace the UI jar within the Spring Cloud Data Flow d
 
 1. You can now run the modified jar:
 
-	<pre class='terminal'>$ java -jar spring-cloud-dataflow-admin-[VARIANT]-[VERSION].jar.</pre>
+	<pre class='terminal'>$ java -jar spring-cloud-dataflow-admin-[VARIANT]-[VERSION].jar</pre>
 
 1. Open your browser, clear your browser cache, and the admin UI should contain Flo extensions:
 
@@ -43,3 +90,4 @@ Follow the steps below to replace the UI jar within the Spring Cloud Data Flow d
 * Stream creation: http<nolink>://HOST_NAME:PORT/admin-ui/#/streams/create
 
 	<p class='note'><strong>Note</strong>: If unchanged, the default PORT points to <code>9393</code>.</p>
+	
