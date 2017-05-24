@@ -1,3 +1,11 @@
+## Spring Cloud Dataflow
+
+Some helpful links are as follows:
+
++ Content repo (this one): https://github.com/pivotal-cf/docs-spring-cloud-dataflow
++ Book repo: https://github.com/pivotal-cf/docs-book-scdf
++ Pipeline: https://wings.concourse.ci/teams/cf-docs/pipelines/cf-services?groups=scdf
+
 ## Pivotal Cloud Foundry Partners Template
 
 This template helps partners prepare documentation for Pivotal Cloud Foundry (PCF) partner services that appear on [Pivotal Network](https://network.pivotal.io/). 
