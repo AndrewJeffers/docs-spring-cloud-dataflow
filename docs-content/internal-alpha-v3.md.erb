@@ -1,0 +1,111 @@
+---
+title: Spring Cloud&reg; Data Flow for PCF (ALPHA)
+owner: Spring Cloud Data Flor for PCF
+---
+<style>
+    .note.warning {
+        background-color: #fdd;
+        border-color: #fbb
+    }
+
+    .note.warning:before {
+        color: #f99;
+     }
+</style>
+
+<p class="note warning">
+<strong>IMPORTANT:</strong>
+Spring Cloud Data Flow for PCF version [0.3.0-build.55](https://network.pivotal.io/products/spring-cloud-data-flow#/releases/5627) tile is currently only for Pivotal Internal Alpha testing and feedback. Do not use this product in ANY customer or Pivotal production PCF environments.
+</p>
+
+# Introduction
+
+The Spring Cloud Data Flow (SCDF) OSS & PCF product teams are excited to announce the third Internal Alpha release build [0.3.0-build.55](https://network.pivotal.io/products/spring-cloud-data-flow#/releases/5627) availability for Pivotal Internal Alpha group members on PivNet. If you are not a member of the Pivotal Internal Alpha group for SCDF for PCF product on PivNet, please contact csterling@pivotal.io to be added.
+
+This release includes a change in the deployment topology from the second alpha and allows the SCDF for PCF team to make operations, upgrades and security to be further leverage the PCF foundational capabilities.
+
+# The Goal of this Internal Alpha
+
+The goal of the Pivotal Internal Alpha of SCDF for PCF is to gather feedback on early access builds of the product tile. Since these early access builds are not ready for customer feedback we must request that these builds are not installed in customer environments yet. We will be taking feedback, adding capabilities and fixing issues on our way to a public beta later in Q1.
+
+# Participation
+
+If you are interested in participating in the Pivotal Internal Alpha for SCDF for PCF, please send me an email at csterling@pivotal.io so I can add you to the PivNet Spring Cloud Data Flow - CLOSED ALPHA user group. This will provide you with access to the current Alpha tile release that you can install in your own PCF test environment. Installation of the SCDF for PCF tile via Ops Manager is similar to that of other service tiles.
+
+# Prerequisites
+
+SCDF for PCF requires the installation of the following Pivotal data services products in your PCF environment:
+
+* Elastic Runtime version 1.9+
+* [MySQL for PCF](https://network.pivotal.io/products/p-mysql/)
+* [RabbitMQ for PCF](https://network.pivotal.io/products/pivotal-rabbitmq-service)
+* [Redis for PCF](https://network.pivotal.io/products/p-redis/)
+* [Spring Cloud Data Flow Shell version 1.2.1.RELEASE](http://repo.spring.io/release/org/springframework/cloud/spring-cloud-dataflow-shell/1.2.1.RELEASE/spring-cloud-dataflow-shell-1.2.1.RELEASE.jar)
+
+# Usage
+
+Download the SCDF for PCF tile [version 0.3.0-build.55](https://network.pivotal.io/products/spring-cloud-data-flow#/releases/5627) from PivNet and install the tile using default configuration.
+
+## Create Data Flow Service Instance
+
+Once you have the SCDF for PCF product installed you can create your first Data Flow Server service instance by running the following command using the Cloud Foundry CLI in your target org & space:
+
+$ cf create-service p-dataflow standard mydataflow
+
+[_Note: This release of SCDF for PCF is built on top of SCDF OSS version `1.2.1.RELEASE`. Go to https://cloud.spring.io/spring-cloud-dataflow/ for more information on SCDF OSS releases._]
+
+
+To use this Spring-based shell you must know the URL of the created Data Flow Server. The Data Flow Server by running the `cf service [name]` command in the same org/space that the service instance was created in. 
+
+```
+$ cf service mydataflow
+Service instance: mydataflow
+Service: p-dataflow
+Bound apps: 
+Tags: 
+Plan: standard
+Description: Deploys Spring Cloud Data Flow servers to orchestrate data pipelines
+Documentation url: http://cloud.spring.io/spring-cloud-dataflow/
+Dashboard: https://p-dataflow.apps.demo-gcp.springapps.io/instances/b86dc39c-d311-48c4-ab45-87dab10907ac/dashboard
+
+Last Operation
+Status: create succeeded
+Message: Created
+Started: 2017-05-26T05:03:54Z
+Updated: 2017-05-26T05:05:58Z
+```
+
+Copy the URL from the `Dashboard` property and open it in a web browser. You will be asked to authenticate using your PCF credentials. Once authenticated you will be redirected to the URL of the actual Data Flow Server instance. This URL with no path at the end is the URL to be used for connecting a SCDF shell to. For example, when I open the URL above in a browser and authenticate, I am redirect to the following URL:
+
+https://dataflow-b86dc39c-d311-48c4-ab45-87dab10907ac.apps.demo-gcp.springapps.io/dashboard/index.html
+
+The URL needed for attaching the SCDF shell to would then be the same URL with the path stripped off the end like so:
+
+https://dataflow-b86dc39c-d311-48c4-ab45-87dab10907ac.apps.demo-gcp.springapps.io
+
+## Attaching SCDF Shell to Data Flow Server
+
+Once you have the Data Flow Server URL you can run the following command from the directory where you downloaded the spring-cloud-dataflow-shell-1.2.1.RELEASE.jar file:
+
+```
+$ java -jar spring-cloud-dataflow-shell-1.2.1.RELEASE.jar --dataflow.skip-ssl-validation=true --dataflow.uri=[dataflow.server.url] --dataflow.credentials-provider-command='cf oauth-token'
+```
+
+If you provide the correct information in the command then this will open up a shell that looks like the following:
+
+```
+1.2.1.RELEASE
+
+Welcome to the Spring Cloud Data Flow shell. For assistance hit TAB or type "help".
+dataflow:>
+```
+
+I found it useful when first starting to play with SCDF to type help and then read through the different command usages and descriptions. Also, there is great documentation from the SCDF OSS team that you can use to get familiar if you are not already:
+
+http://docs.spring.io/spring-cloud-dataflow-server-cloudfoundry/docs/1.2.1.RELEASE/reference/htmlsingle/ 
+
+# Feedback
+
+The main reason the SCDF for PCF team is providing Pivotal Internal Alpha builds is to test across more environments and gather feedback. Please keep track of the steps you use when interacting with the p-dataflow service broker so that you can provide detailed information in your feedback. To provide quick feedback please join the #scs-dataflow channel on Slack in the Pivotal org. If you need to provide a detailed account as feedback please record a video or write up a doc on Google drive and provide a link in your message in the #scs-dataflow channel. For any core product specific issues, feature requests, or feedback, please use #sc-dataflow-support channel.
+
+We’re looking forward to gathering more feedback from other Pivotal folks participating in the Internal Alpha. This is our final planned Internal Alpha release as we use the feedback we gather to publish the first Beta release in June for customers to try out and provide feedback themselves. Please let us know if you have any questions, comments or concerns. Thank you.
