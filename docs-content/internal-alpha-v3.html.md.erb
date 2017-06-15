@@ -15,14 +15,14 @@ owner: Spring Cloud Data Flor for PCF
 
 <p class="note warning">
 <strong>IMPORTANT:</strong>
-Spring Cloud Data Flow for PCF version [0.3.0-build.55](https://network.pivotal.io/products/spring-cloud-data-flow#/releases/5627) tile is currently only for Pivotal Internal Alpha testing and feedback. Do not use this product in ANY customer or Pivotal production PCF environments.
+Spring Cloud Data Flow for PCF tile version 0.3.0-build.55 on <a href="https://network.pivotal.io/products/spring-cloud-data-flow#/releases/5627">Pivotal Network</a> is currently only for Pivotal Internal Alpha testing and feedback. Do not use this product in ANY customer or Pivotal production PCF environments.
 </p>
 
 # Introduction
 
-The Spring Cloud Data Flow (SCDF) OSS & PCF product teams are excited to announce the third Internal Alpha release build [0.3.0-build.55](https://network.pivotal.io/products/spring-cloud-data-flow#/releases/5627) availability for Pivotal Internal Alpha group members on PivNet. If you are not a member of the Pivotal Internal Alpha group for SCDF for PCF product on PivNet, please contact csterling@pivotal.io to be added.
+The Spring Cloud Data Flow (SCDF) OSS & PCF product teams are excited to announce the third Internal Alpha release build [0.3.0-build.55](https://network.pivotal.io/products/spring-cloud-data-flow#/releases/5627) availability for Pivotal Internal Alpha group members on Pivotal Network. If you are not a member of the Pivotal Internal Alpha group for SCDF for PCF product on Pivotal Network, contact csterling@pivotal.io to be added.
 
-This release includes a change in the deployment topology from the second alpha and allows the SCDF for PCF team to make operations, upgrades and security to be further leverage the PCF foundational capabilities.
+This release includes a change in the deployment topology from the second alpha and allows the SCDF for PCF team to make operations, upgrades and security to further leverage the PCF foundational capabilities.
 
 # The Goal of this Internal Alpha
 
@@ -30,7 +30,7 @@ The goal of the Pivotal Internal Alpha of SCDF for PCF is to gather feedback on 
 
 # Participation
 
-If you are interested in participating in the Pivotal Internal Alpha for SCDF for PCF, please send me an email at csterling@pivotal.io so I can add you to the PivNet Spring Cloud Data Flow - CLOSED ALPHA user group. This will provide you with access to the current Alpha tile release that you can install in your own PCF test environment. Installation of the SCDF for PCF tile via Ops Manager is similar to that of other service tiles.
+If you are interested in participating in the Pivotal Internal Alpha for SCDF for PCF, please send me an email at csterling@pivotal.io so I can add you to the Pivotal Network Spring Cloud Data Flow - CLOSED ALPHA user group. This will provide you with access to the current Alpha tile release that you can install in your own PCF test environment. Installation of the SCDF for PCF tile via Ops Manager is similar to that of other service tiles.
 
 # Prerequisites
 
@@ -44,15 +44,17 @@ SCDF for PCF requires the installation of the following Pivotal data services pr
 
 # Usage
 
-Download the SCDF for PCF tile [version 0.3.0-build.55](https://network.pivotal.io/products/spring-cloud-data-flow#/releases/5627) from PivNet and install the tile using default configuration.
+Download the SCDF for PCF tile [version 0.3.0-build.55](https://network.pivotal.io/products/spring-cloud-data-flow#/releases/5627) from Pivotal Network and install the tile using default configuration.
 
-## Create Data Flow Service Instance
+## Create a Data Flow Service Instance
 
 Once you have the SCDF for PCF product installed you can create your first Data Flow Server service instance by running the following command using the Cloud Foundry CLI in your target org & space:
 
+```
 $ cf create-service p-dataflow standard mydataflow
+```
 
-[_Note: This release of SCDF for PCF is built on top of SCDF OSS version `1.2.1.RELEASE`. Go to https://cloud.spring.io/spring-cloud-dataflow/ for more information on SCDF OSS releases._]
+[_Note: This release of SCDF for PCF is built on top of SCDF OSS version `1.2.1.RELEASE`. For information on SCDF OSS releases, go to https://cloud.spring.io/spring-cloud-dataflow/._]
 
 
 To use this Spring-based shell you must know the URL of the created Data Flow Server. The Data Flow Server by running the `cf service [name]` command in the same org/space that the service instance was created in. 
