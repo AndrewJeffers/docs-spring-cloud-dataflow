@@ -1,5 +1,5 @@
 ---
-title: Spring Cloud&reg; Data Flow for PCF (ALPHA)
+title: Spring Cloud&reg; Data Flow for PCF (Beta)
 owner: Spring Cloud Data Flor for PCF
 ---
 <style>
@@ -15,48 +15,66 @@ owner: Spring Cloud Data Flor for PCF
 
 <p class="note warning">
 <strong>IMPORTANT: </strong>
-The PRODUCT-NAME for PCF tile is currently in beta and is intended for evaluation and test purposes only. 
+The Spring Cloud Data Flow for PCF tile is currently in beta and is intended for evaluation and test purposes only.
 Do not use this product in a PCF production environment.
 </p>
 
-**This topic begins with a brief description of what the product tile (e.g. Apigee Edge Service Broker for PCF) does, 
-whereas the Overview section below describes what the service itself (e.g. Apigee Edge) does. See below for an example.**
+Spring Cloud Data Flow for Pivotal Cloud Foundry (PCF) automates the deployment of a Spring Cloud Data Flow (SCDF)
+Server and the services it depends on.
 
-This documentation describes the Apigee Edge Service Broker for Pivotal Cloud Foundry (PCF). The Apigee Edge Service 
-Broker for PCF enables developers to manage APIs for their PCF apps through the Apigee Edge management console.
-
-**Note**: This description will appear under **OVERVIEW** in the tile's listing on 
-[Pivotal Network](http://network.pivotal.io).
+Developers use Apps Manager to deploy their own SCDF Server. They can then access the Data Flow Server
+via the SCDF dashboard UI or from the SCDF Shell using PCF credentials.
 
 ## <a id='overview'></a>Overview
 
-**The overview describes the service that your product offers to PCF developers. See below for an example.**
+Spring Cloud Data Flow is a toolkit for building data integration and real-time data processing pipelines.
 
-The Apigee Edge Service Broker for PCF registers a service broker with PCF and exposes its service plans on the 
-Marketplace. Developers can then create service plan instances using Apps Manager or the Cloud Foundry Command 
-Line Interface (cf CLI) and bind them to their apps.
+Pipelines consist of [Spring Boot](http://projects.spring.io/spring-boot/) apps, built using
+the [Spring Cloud Stream](http://cloud.spring.io/spring-cloud-stream/)
+or [Spring Cloud Task](http://cloud.spring.io/spring-cloud-task/) microservice frameworks.
+This makes Spring Cloud Data Flow suitable for a range of data processing use cases,
+from import/export to event streaming and predictive analytics.
 
-Creating an Apigee Edge for PCF service instance and binding it to an app creates an Apigee Edge API proxy that 
-handles requests for the app. This lets developers use the Apigee Edge management console to manage API request 
-handling between clients and the app.
+The Spring Cloud Data Flow server uses [Spring Cloud Deployer](https://github.com/spring-cloud/spring-cloud-deployer/),
+to deploy pipelines onto modern runtimes such as Cloud Foundry,
+Kubernetes, Apache Mesos or Apache YARN.
 
-**Note**: This overview will appear under **OVERVIEW**, combined with the description above in the tile's listing on 
-[Pivotal Network](http://network.pivotal.io).
+A selection of pre-built [stream](http://cloud.spring.io/spring-cloud-stream-app-starters/)
+and [task/batch](http://cloud.spring.io/spring-cloud-task-app-starters/) starter apps for
+various data integration and processing scenarios facilitate learning and experimentation.
+
+[Custom](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#custom-applications)
+stream and task applications, targeting different middleware or data services, can be built
+using the familiar Spring Boot style programming model.
+
+A simple [stream pipeline DSL](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#_stream_dsl)
+makes it easy to specify which apps to deploy and how to connect outputs and inputs. A new
+[composed task DSL](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#_composed_task_dsl)
+was added in v1.2.
+
+The [dashboard](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#dashboard-introduction)
+offers a graphical editor for building new pipelines interactively, as well as views
+of deployable apps and running apps with metrics.
+
+The Spring Could Data Flow server exposes a
+[REST API](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#api-guide-overview)
+for composing and deploying data pipelines. A separate
+[shell](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#getting-started-deploying-spring-cloud-dataflow)
+makes it easy to work with the API from the command line.
 
 ## <a id='features'></a>Key Features
 
-YOUR-PRODUCT-NAME includes the following key features:
+Spring Cloud Data Flow for PCF includes the following key features:
 
-* Feature one.
-* Feature two.
-* Feature three.
+- Adds Spring Cloud Data Flow to the Cloud Foundry Marketplace.
+- Deploys instances of SCDF server.
+- Auto-binds server to MySQL, RabbitMQ, Redis.
+- Integrates into PCF/UAA security model.
 
-**Note**: This feature list will appear under **FEATURES** in the tile's listing on 
-[Pivotal Network](http://network.pivotal.io).
 
 ## <a id="snapshot"></a>Product Snapshot
 
-The following table provides version and version-support information about PRODUCT-NAME.
+The following table provides version and version-support information about Spring Cloud Data Flow.
 
 <table class="nice">
     <th>Element</th>
@@ -89,11 +107,11 @@ The following table provides version and version-support information about PRODU
 
 ## <a id="reqs"></a>Requirements
 
-**Provide any general or specific requirements, prerequisites, or dependencies here. 
-A general requirement might be something like, "An AppDynamics account." 
+**Provide any general or specific requirements, prerequisites, or dependencies here.
+A general requirement might be something like, "An AppDynamics account."
 A specific requirement might be something like, "Packaging Dependencies for Offline Buildpacks."**
 
-YOUR-PRODUCT-NAME has the following requirements:
+Spring Cloud Data Flow for PCF has the following requirements:
 
 + PREREQUISITE-1
 
@@ -105,7 +123,7 @@ YOUR-PRODUCT-NAME has the following requirements:
 
 ## <a id="feedback"></a>Feedback
 
-Please provide any bugs, feature requests, or questions to the 
+Please provide any bugs, feature requests, or questions to the
 [Pivotal Cloud Foundry Feedback](mailto:pivotal-cf-feedback@pivotal.io) list or send an email to YOUR-SUPPORT-EMAIL.
 
 ## <a id='license'></a>License
