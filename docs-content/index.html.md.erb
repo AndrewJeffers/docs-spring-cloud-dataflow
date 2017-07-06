@@ -1,6 +1,6 @@
 ---
 title: Spring Cloud&reg; Data Flow for PCF (Beta)
-owner: Spring Cloud Data Flor for PCF
+owner: Spring Cloud Services
 ---
 <style>
     .note.warning {
@@ -15,119 +15,70 @@ owner: Spring Cloud Data Flor for PCF
 
 <p class="note warning">
 <strong>IMPORTANT: </strong>
-The Spring Cloud Data Flow for PCF tile is currently in beta and is intended for evaluation and test purposes only.
+The Spring Cloud Data Flow tile is currently in beta and is intended for evaluation and test purposes only.
 Do not use this product in a PCF production environment.
 </p>
 
-Spring Cloud Data Flow for Pivotal Cloud Foundry (PCF) automates the deployment of a Spring Cloud Data Flow (SCDF)
-Server and the services it depends on.
-
-Developers use Apps Manager to deploy their own SCDF Server. They can then access the Data Flow Server
-via the SCDF dashboard UI or from the SCDF Shell using PCF credentials.
-
 ## <a id='overview'></a>Overview
 
-Spring Cloud Data Flow is a toolkit for building data integration and real-time data processing pipelines.
+Spring Cloud Data Flow is an open-source Spring Cloud project (see the [project home page](http://cloud.spring.io/spring-cloud-dataflow/)), a toolkit for building data integration and real-time data processing pipelines using the [Spring Cloud Stream](http://cloud.spring.io/spring-cloud-stream/) or [Spring Cloud Task](http://cloud.spring.io/spring-cloud-task/) microservice frameworks. It is suitable for a range of data processing use cases, from import and export to event streaming and predictive analytics.
 
-Pipelines consist of [Spring Boot](http://projects.spring.io/spring-boot/) apps, built using
-the [Spring Cloud Stream](http://cloud.spring.io/spring-cloud-stream/)
-or [Spring Cloud Task](http://cloud.spring.io/spring-cloud-task/) microservice frameworks.
-This makes Spring Cloud Data Flow suitable for a range of data processing use cases,
-from import/export to event streaming and predictive analytics.
+Spring Cloud Data Flow includes a simple [stream pipeline DSL](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#_stream_dsl) for specifying applications to deploy and how to connect outputs and inputs. It also includes a [dashboard](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#dashboard-introduction) with a graphical pipeline editor and views of deployable apps and running apps, a [REST API](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#api-guide-overview) for composing and deploying data pipelines, and a separate [shell](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#getting-started-deploying-spring-cloud-dataflow) for working with the API from the command line.
 
-The Spring Cloud Data Flow server uses [Spring Cloud Deployer](https://github.com/spring-cloud/spring-cloud-deployer/),
-to deploy pipelines onto modern runtimes such as Cloud Foundry,
-Kubernetes, Apache Mesos, or Apache YARN.
-
-A selection of pre-built [stream](http://cloud.spring.io/spring-cloud-stream-app-starters/)
-and [task/batch](http://cloud.spring.io/spring-cloud-task-app-starters/) starter apps for
-various data integration and processing scenarios facilitate learning and experimentation.
-
-[Custom](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#custom-applications)
-stream and task applications, targeting different middleware or data services, can be built
-using the familiar Spring Boot style programming model.
-
-A simple [stream pipeline DSL](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#_stream_dsl)
-makes it easy to specify which apps to deploy and how to connect outputs and inputs. A new
-[composed task DSL](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#_composed_task_dsl)
-was added in v1.2.
-
-The [dashboard](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#dashboard-introduction)
-offers a graphical editor for building new pipelines interactively, as well as views
-of deployable apps and running apps with metrics.
-
-The Spring Could Data Flow server exposes a
-[REST API](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#api-guide-overview)
-for composing and deploying data pipelines. A separate
-[shell](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#getting-started-deploying-spring-cloud-dataflow)
-makes it easy to work with the API from the command line.
-
-For more information about Spring Cloud Data Flow, see the [product documentation](http://cloud.spring.io/spring-cloud-dataflow/).
+Spring Cloud Data Flow for Pivotal Cloud Foundry (PCF) automates the deployment of a Spring Cloud Data Flow (SCDF) server and its dependent services. Developers use Apps Manager to deploy their own SCDF server. They can then access the Data Flow server, either via the SCDF dashboard UI or using their PCF credentials with the SCDF shell.
 
 ## <a id='features'></a>Key Features
 
 Spring Cloud Data Flow for PCF includes the following key features:
 
-- Adds Spring Cloud Data Flow to the Marketplace
-- Deploys instances of SCDF server
-- Auto-binds server to MySQL, RabbitMQ, and Redis
-- Integrates into PCF/UAA security model
-
+- Addition of the Spring Cloud Data Flow server to the marketplace as a managed service
+- Automatic integration of deployed Data Flow server with MySQL for task history storage, RabbitMQ for event messaging, and Redis for analytics store
+- Integration of Data Flow server with PCF's UAA security model
 
 ## <a id="snapshot"></a>Product Snapshot
 
-The following table provides version and version-support information about Spring Cloud Data Flow.
+The following table provides version and version-support information about Spring Cloud Data Flow for PCF.
 
 <table class="nice">
     <th>Element</th>
     <th>Details</th>
     <tr>
         <td>Version</td>
-        <td>vYOUR-VERSION-NUMBER</td>
+        <td>v0.4.0 BETA</td>
     </tr>
     <tr>
         <td>Release date</td>
-        <td>YOUR-RELEASE-DATE (Ex: July 1, 2017)</td>
+        <td>August 1, 2017</td>
     </tr>
     <tr>
         <td>Software component version</td>
-        <td>vYOUR-SOFTWARE-COMPONENT-VERSION-NUMBER</td>
+        <td>v1.2.1.RELEASE</td>
     </tr>
     <tr>
         <td>Compatible Ops Manager version(s)</td>
-        <td>vYOUR-COMPATIBLE-OPS-MAN-VERSION (Ex. v1.8.x, v1.9.x, v1.10.x)</td>
+        <td>v1.9.x, v1.10.x, v1.11.x</td>
     </tr>
     <tr>
         <td>Compatible Elastic Runtime version(s)</td>
-        <td>vYOUR-COMPATIBLE-ELASTIC-RUNTIME-VERSION (Ex. v1.8.x, v1.9.x, v1.10.x)</td>
+        <td>v1.9.x, v1.10.x, v1.11.x</td>
     </tr>
     <tr>
         <td>IaaS support</td>
-        <td>AWS?, Azure?, GCP?, OpenStack?, and vSphere?</td>
+        <td>All supported by PCF</td>
     </tr>
 </table>
 
 ## <a id="reqs"></a>Requirements
 
-**Provide any general or specific requirements, prerequisites, or dependencies here.
-A general requirement might be something like, "An AppDynamics account."
-A specific requirement might be something like, "Packaging Dependencies for Offline Buildpacks."**
-
 Spring Cloud Data Flow for PCF has the following requirements:
 
-+ PREREQUISITE-1
+* [MySQL](https://network.pivotal.io/products/p-mysql)
+* [RabbitMQ](https://network.pivotal.io/products/pivotal-rabbitmq-service)
+* [Redis](https://network.pivotal.io/products/p-redis)
 
-+ PREREQUISITE-2
-
-## <a id="limitations"></a>Limitations
-
-**List any known limitations.**
+For complete details on prerequisites to installation, see the [Prerequisites](/scdf/prerequisites.html) topic.
 
 ## <a id="feedback"></a>Feedback
 
 Please provide any bugs, feature requests, or questions to the
-[Pivotal Cloud Foundry Feedback](mailto:pivotal-cf-feedback@pivotal.io) list or send an email to YOUR-SUPPORT-EMAIL.
-
-## <a id='license'></a>License
-
-**List any license information here.**
+[Pivotal Cloud Foundry Feedback](mailto:pivotal-cf-feedback@pivotal.io) list.
