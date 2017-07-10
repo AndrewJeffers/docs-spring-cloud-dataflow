@@ -21,18 +21,19 @@ Do not use this product in a PCF production environment.
 
 ## <a id='overview'></a>Overview
 
-Spring Cloud Data Flow is an open-source Spring Cloud project (see the [project home page](http://cloud.spring.io/spring-cloud-dataflow/)), a toolkit for building data integration and real-time data processing pipelines using the [Spring Cloud Stream](http://cloud.spring.io/spring-cloud-stream/) or [Spring Cloud Task](http://cloud.spring.io/spring-cloud-task/) microservice frameworks. It is suitable for a range of data processing use cases, from import and export to event streaming and predictive analytics.
+Spring Cloud Data Flow is an open-source toolkit for data integration and real-time data processing (see the [project home page](http://cloud.spring.io/spring-cloud-dataflow/)). The Spring Cloud Data Flow (SCDF) server deploys pipelines composed of [Spring Cloud Stream](http://cloud.spring.io/spring-cloud-stream/) or [Spring Cloud Task](http://cloud.spring.io/spring-cloud-task/) applications. A DSL makes it easy to describe the applications in a pipeline and how they are connected.
 
-Spring Cloud Data Flow includes a simple [stream pipeline DSL](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#_stream_dsl) for specifying applications to deploy and how to connect outputs and inputs. It also includes a [dashboard](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#dashboard-introduction) with a graphical pipeline editor and views of deployable apps and running apps, a [REST API](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#api-guide-overview) for composing and deploying data pipelines, and a separate [shell](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#getting-started-deploying-spring-cloud-dataflow) for working with the API from the command line.
+The SCDF server exposes a [REST API](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#api-guide-overview) for composing and deploying data pipelines and a [dashboard](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#dashboard-introduction) with a graphical pipeline editor. It also includes a
+[shell](http://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#getting-started-deploying-spring-cloud-dataflow) for working with the API from the command line.
 
-Spring Cloud Data Flow for Pivotal Cloud Foundry (PCF) automates the deployment of a Spring Cloud Data Flow (SCDF) server and its dependent services. Developers use Apps Manager to deploy their own SCDF server. They can then access the Data Flow server, either via the SCDF dashboard UI or using their PCF credentials with the SCDF shell.
+Spring Cloud Data Flow for Pivotal Cloud Foundry (PCF) automates the deployment of SCDF and its dependent services so that developers can use Apps Manager to deploy their own SCDF instances. They can then access their Data Flow server, either via the SCDF dashboard UI or using their PCF credentials with the SCDF shell.
 
 ## <a id='features'></a>Key Features
 
 Spring Cloud Data Flow for PCF includes the following key features:
 
 - Addition of the Spring Cloud Data Flow server to the Marketplace as a managed service
-- Automatic integration of deployed Data Flow server with MySQL for task history storage, RabbitMQ for event messaging, and Redis for analytics store
+- Automatic integration with MySQL for apps, pipelines and task history, RabbitMQ for event messaging, and Redis for capturing analytics data
 - Integration of Data Flow server with PCF's UAA security model
 
 ## <a id="snapshot"></a>Product Snapshot
