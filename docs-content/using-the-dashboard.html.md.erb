@@ -1,0 +1,41 @@
+---
+title: Using the Dashboard
+owner: Spring Cloud Services
+---
+
+<strong><%= modified_date %></strong>
+
+To find the dashboard, navigate in <%= vars.scs_platform_name %> Apps Manager to the Data Flow service instance's space, click the listing for the service instance, and then click **Manage**.
+
+<%= image_tag(vars.scdf_using_dashboard_img_manage_link) %>
+
+If you are using version 6.8.0 or later of the Cloud Foundry Command Line Interface tool (cf CLI), you can also use `cf service SERVICE_NAME`, where `SERVICE_NAME` is the name of the Data Flow service instance:
+
+<pre class="terminal">
+$ cf service data-flow
+
+Service instance: data-flow
+Service: p-dataflow
+Bound apps:
+Tags:
+Plan: standard
+Description: Deploys Spring Cloud Data Flow servers to orchestrate data pipelines
+Documentation url: http://cloud.spring.io/spring-cloud-dataflow/
+Dashboard: https://p-dataflow.apps.wise.com/instances/f09e5c77-e526-4f49-86d6-721c6b8e2fd9/dashboard
+
+Last Operation
+Status: create succeeded
+Message: Created
+Started: 2017-07-20T18:24:14Z
+Updated: 2017-07-20T18:26:17Z
+</pre>
+
+Visit the URL given for "Dashboard".
+
+## <a id="dashboard-information"></a>Dashboard Information
+
+The dashboard provides an overview of registered applications, stream and task definitions, and batch jobs. It also provides controls for deploying streams, launching tasks, and restarting batch job executions.
+
+<%= image_tag(vars.scdf_using_dashboard_img_empty_dashboard) %>
+
+For complete information about the dashboard and its provided functionality, see the [OSS Spring Cloud Data Flow project's documentation](http://docs.spring.io/spring-cloud-dataflow/docs/1.2.2.RELEASE/reference/html/dashboard-introduction.html).
