@@ -1,0 +1,20 @@
+<pre class="terminal">
+$ cf marketplace
+Getting services from marketplace in org myorg / space development as user...
+OK
+
+service             plans    description
+p-dataflow          standard Deploys Spring Cloud Data Flow servers to orchestrate data pipelines
+p-dataflow-mysql    proxy    Proxies to the Spring Cloud Data Flow MySQL service instance
+p-dataflow-rabbitmq proxy    Proxies to the Spring Cloud Data Flow RabbitMQ service instance
+p-dataflow-redis    proxy    Proxies to the Spring Cloud Data Flow Redis service instance
+
+TIP:  Use 'cf marketplace -s SERVICE' to view descriptions of individual plans of a given service.
+
+$ cf marketplace -s p-dataflow
+Getting service plan information for service p-dataflow as user...
+OK
+
+service plan   description     free or paid
+standard       Standard Plan   free
+</pre>
