@@ -1,0 +1,70 @@
+---
+title: Using the Shell
+owner: Spring Cloud Services
+---
+
+<strong><%= modified_date %></strong>
+
+The OSS Spring Cloud Data Flow project provides a shell, which can be used to interact locally with a Data Flow service instance deployed on Pivotal Cloud Foundry (PCF). You can [download the shell JAR file from the Spring Releases Maven repository](http://repo.spring.io/release/org/springframework/cloud/spring-cloud-dataflow-shell/1.2.2.RELEASE/spring-cloud-dataflow-shell-1.2.2.RELEASE.jar).
+
+<p class='note'><strong>Note</strong>: To run the Spring Cloud Data Flow shell, you must have a Java Runtime Environment (JRE) installed. You can download the JRE from the <a href="https://java.com/en/">Java website</a>.</p>
+
+To target a Data Flow service instance's server with the shell, you must obtain the server's URL. Run `cf service SERVICE_NAME`, where `SERVICE_NAME` is the name of the service instance:
+
+<pre class="terminal">
+$ cf service data-flow
+
+Service instance: data-flow
+Service: p-dataflow
+Bound apps:
+Tags:
+Plan: standard
+Description: Deploys Spring Cloud Data Flow servers to orchestrate data pipelines
+Documentation url: http://cloud.spring.io/spring-cloud-dataflow/
+Dashboard: https://p-dataflow.apps.wise.com/instances/f09e5c77-e526-4f49-86d6-721c6b8e2fd9/dashboard
+...
+</pre>
+
+Visit the URL given for "Dashboard" and authenticate using your PCF credentials. When redirected to the service instance's dashboard, copy the dashboard's domain name (the URL minus the path following the domain).
+
+For example, given the following URL:
+
+```
+https://dataflow-f09e5c77-e526-4f49-86d6-721c6b8e2fd9.apps.wise.com/dashboard/index.html
+```
+
+Copy the following:
+
+```
+https://dataflow-f09e5c77-e526-4f49-86d6-721c6b8e2fd9.apps.wise.com
+```
+
+From the directory containing the shell JAR file, run the shell from the command line using a command as shown below.
+
+```
+$ java -jar JAR_NAME SKIP_VALIDATION --dataflow.uri=SERVER_URL --dataflow.credentials-provider-command="cf oauth-token"
+```
+
+In this command, replace the following placeholders as shown below.
+
+* `JAR_NAME` with the name of the downloaded Spring Cloud Data Flow shell JAR file
+* `SKIP_VALIDATION` with the flag and value `--dataflow.skip-ssl-validation=true` if your PCF installation is using self-signed SSL certificates; otherwise remove
+* `SERVER_URL` with the Data Flow service instance's server URL (the domain copied above)
+
+The complete command may look something like the following (newlines added for readability):
+
+```
+$ java -jar spring-cloud-dataflow-shell-1.2.2.RELEASE.jar
+      --dataflow.skip-ssl-validation=true
+      --dataflow.uri=https://dataflow-f09e5c77-e526-4f49-86d6-721c6b8e2fd9.apps.wise.com
+      --dataflow.credentials-provider-command="cf oauth-token"
+```
+
+When you run the `java -jar` command, the shell will initialize and give a `dataflow:>` prompt.
+
+<pre class="terminal">
+Welcome to the Spring Cloud Data Flow shell. For assistance hit TAB or type "help".
+dataflow:>
+</pre>
+
+For a list of available shell commands, run `help` from within the shell. For information about the flags which can be provided to the shell on startup, see the [OSS Spring Cloud Data Flow project's documentation](http://docs.spring.io/spring-cloud-dataflow/docs/1.2.2.RELEASE/reference/html/shell-options.html).
