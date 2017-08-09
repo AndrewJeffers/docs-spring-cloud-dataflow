@@ -9,6 +9,8 @@ The OSS Spring Cloud Data Flow project provides a shell, which can be used to in
 
 <p class='note'><strong>Note</strong>: To run the Spring Cloud Data Flow shell, you must have a Java Runtime Environment (JRE) installed. You can download the JRE from the <a href="https://java.com/en/">Java website</a>.</p>
 
+<p class='note'><strong>Note</strong>: Be sure to log in to the PCF deployment using the Cloud Foundry Command Line Interface tool (cf CLI) before targeting a Data Flow service instance with the Spring Cloud Data Flow shell. The Data Flow shell uses the cf CLI to authenticate to PCF.</p>
+
 To target a Data Flow service instance's server with the shell, you must obtain the server's URL. Run `cf service SERVICE_NAME`, where `SERVICE_NAME` is the name of the service instance:
 
 <pre class="terminal">
