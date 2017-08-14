@@ -33,7 +33,7 @@ Spring Cloud Data Flow provides a Spring Cloud Data Flow server as a [Managed Se
 
 The Spring Cloud Data Flow service broker's functionality is contained in the following Spring Boot application instance, which is deployed in the "system" organization to the "p-dataflow" space.
 
-* p-dataflow-[version]: Implements the Service Broker API to act on provision, deprovision, bind, and unbind requests.
+* **p-dataflow-[version]**: Implements the Service Broker API to act on provision, deprovision, bind, and unbind requests.
 
 The broker relies on the [MySQL for Pivotal Cloud Foundry](https://network.pivotal.io/products/p-mysql) product for the following service instance.
 
@@ -69,10 +69,11 @@ For each Spring Cloud Data Flow service instance created, the service broker pro
   * A messaging data service, bound to the Data Flow metrics application.
   <p class='note'><strong>Note</strong>: The messaging data service is a "p-rabbitmq" service instance by default. You can configure an alternate messaging service when you create the service instance.</p>
   * A Redis database service, bound to the Data Flow server application.
-* A "p-dataflow" service instance in the user space.
-* A "p-dataflow" relational database service instance (providing access to the relational database service created in the service instance's space within the "p-dataflow" org).
-* A "p-dataflow" messaging service instance (providing access to the messaging data service created in the service instance's space within the "p-dataflow" org).
-* A "p-dataflow" analytics service instance (providing access to the analytics service created in the service instance's space within the "p-dataflow" org).
+* The following resources are created in the originating user space where the service instance command was targeted at:
+  * A "p-dataflow" service instance.
+  * A "p-dataflow" relational database service instance (providing access to the relational database service created in the service instance's space within the "p-dataflow" org).
+  * A "p-dataflow" messaging service instance (providing access to the messaging data service created in the service instance's space within the "p-dataflow" org).
+  * A "p-dataflow" analytics service instance (providing access to the analytics service created in the service instance's space within the "p-dataflow" org).
 
 ##<a id='capacity-requirements'></a> Capacity Requirements
 
