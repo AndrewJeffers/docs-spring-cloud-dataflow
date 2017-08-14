@@ -1,0 +1,86 @@
+---
+title: Operator Information
+owner: Spring Cloud Services
+---
+
+See below for information about Spring Cloud® Data Flow's deployment model and other information which may be useful in administering Data Flow service instances or deployed applications.
+
+##<a id='tile-configuration-options'></a> Tile Configuration Options
+
+The Spring Cloud Data Flow tile includes settings for various options. You can configure these by visiting the Installation Dashboard of Pivotal Cloud Foundry® Operations Manager and clicking the Spring Cloud Data Flow tile.
+
+###<a id='configure-mysql-service-plan'></a> Configure MySQL Service Plan
+
+By default, the Spring Cloud Data Flow product uses the MySQL for PCF product's `100mb` service plan to provision a database for the Data Flow service broker and service instances. If your MySQL for PCF tile does not have an active `100mb` plan, you can configure the service plan in the **MySQL** pane of the Spring Cloud Data Flow settings.
+
+![Configuring MySQL Service](configure-mysql.png)
+
+In the **MySQL service instance plan** field, enter the name of the MySQL for PCF service plan to be used for the service broker and for service instances. Click **Save**, return to the Installation Dashboard, and apply your changes. The Spring Cloud Data Flow broker and provisioned service instances will now use the specified plan to create backing database service instances.
+
+###<a id='enable-or-disable-marketplace-access'></a> Enable or Disable Global Marketplace Access
+
+By default, the Spring Cloud Data Flow product enables access to its `p-dataflow` service offering across all orgs in the PCF deployment as part of the tile installation process. If you wish to manually grant service access to specific organizations, you can configure the default global access in the **Service Access** pane of the Spring Cloud Data Flow settings.
+
+![Configuring Service Access](configure-service-access.png)
+
+To disable the default of service access enabled for all orgs, clear the **Enable global access to plans of service p_dataflow** checkbox. Click **Save**, return to the Installation Dashboard, and apply your changes. You can now enable or disable access to the Data Flow service offering for specific orgs.
+
+##<a id='service-orchestration'></a> Service Orchestration
+
+Spring Cloud Data Flow provides a Spring Cloud Data Flow server as a [Managed Service](https://docs.cloudfoundry.org/services/) on [Pivotal Cloud Foundry](https://network.pivotal.io/products/pivotal-cf) (PCF). It uses Cloud Foundry's [Service Broker API](https://docs.cloudfoundry.org/services/api.html) to manage this service. See below for information about Spring Cloud Data Flow's broker implementation.
+
+###<a id='the-service-broker'></a> The Service Broker
+
+The Spring Cloud Data Flow service broker's functionality is contained in the following Spring Boot application instance, which is deployed in the "system" organization to the "p-dataflow" space.
+
+* p-dataflow-[version]: Implements the Service Broker API to act on provision, deprovision, bind, and unbind requests.
+
+The broker relies on the [MySQL for Pivotal Cloud Foundry](https://network.pivotal.io/products/p-mysql) product for the following service instance.
+
+* **p_dataflow-p-mysql**: A MySQL database used as a backing store for the service broker.
+
+####<a id='service-broker-upgrades'></a> Service Broker Upgrades
+
+The Spring Cloud Data Flow product upgrade process checks before redeploying the service broker to see whether the product's version has changed. If the version has not changed, the upgrade process will continue without redeploying the service broker.
+
+The service broker application is deployed using a [blue-green deployment strategy](http://martinfowler.com/bliki/BlueGreenDeployment.html). During an upgrade of the service broker, the broker will continue processing requests to provision, deprovision, bind, and unbind service instances, without downtime.
+
+####<a id='access-via-apps-manager'></a> Access Via Apps Manager
+
+To view the broker applications in Pivotal Cloud Foundry&reg; Apps Manager, log into Apps Manager as an admin user and select the "system" org.
+
+![Viewing system Org](viewing-system-org.png)
+
+The applications are deployed in the "p-dataflow" space.
+
+![Viewing p-dataflow Space](viewing-p-dataflow-space.png)
+
+##<a id='service-instance-management'></a> Service Instance Management
+
+![Product Architecture](product-architecture.png)
+
+For each Spring Cloud Data Flow service instance created, the service broker provisions the following resources, all within the space from which the service instance was created ("the user space") unless noted otherwise.
+
+* A new space within the "p-dataflow" org, named using the service instance GUID and containing:
+  * A Data Flow server application.
+  * A Data Flow metrics application.
+  * A relational database service, bound to the Data Flow server application.
+  <p class='note'><strong>Note</strong>: The relational database service is a "p-mysql" service instance by default. You can configure an alternate relational database when you create the service instance.</p>
+  * A messaging data service, bound to the Data Flow metrics application.
+  <p class='note'><strong>Note</strong>: The messaging data service is a "p-rabbitmq" service instance by default. You can configure an alternate messaging service when you create the service instance.</p>
+  * A Redis database service, bound to the Data Flow server application.
+* A "p-dataflow" service instance in the user space.
+* A "p-dataflow" relational database service instance (providing access to the relational database service created in the service instance's space within the "p-dataflow" org).
+* A "p-dataflow" messaging service instance (providing access to the messaging data service created in the service instance's space within the "p-dataflow" org).
+* A "p-dataflow" analytics service instance (providing access to the analytics service created in the service instance's space within the "p-dataflow" org).
+
+##<a id='capacity-requirements'></a> Capacity Requirements
+
+Below are usage requirements of the Data Flow server and metrics applications that back each Spring Cloud Data Flow service instance.
+
+| Backing Application       | Memory Limit / App Instance   | Disk Limit / App Instance  |
+|---------------------------|-------------------------------|----------------------------|
+| Data Flow Server          | 2 GB                          | 2 GB                       |
+| Data Flow Metrics         | 1 GB                          | 1 GB                       |
+
+Spring Cloud Data Flow service instances may be backed by other service instances. These may be either services from PCF data service products or custom services provided to a Data Flow service instance during its creation.
