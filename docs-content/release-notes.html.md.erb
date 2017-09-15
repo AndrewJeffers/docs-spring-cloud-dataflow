@@ -14,7 +14,10 @@ Features included in this release:
 * A Spring Cloud Data Flow service offering is added to the Pivotal Cloud Foundry Apps Manager&reg; Services Marketplace.
 * Creation of a Spring Cloud Data Flow service instance results in creation of a Spring Cloud Data Flow server application, based on Spring Boot.
 * Creation of a Spring Cloud Data Flow service instance results in creation of a Spring Cloud Data Flow metrics collection application, based on Spring Boot.
-* Creation of a Spring Cloud Data Flow service instance results in creation of backing MySQL for PCF and Redis for PCF service instances for use by the Data Flow service instance.
-* Backing service instance types can be overridden with user-provided alternatives (for example, the tile can use an alternative MySQL service offering rather than the default MySQL for PCF).
+* Creation of a Spring Cloud Data Flow service instance results in creation of three backing data service instances made available to the Spring Cloud Data Flow service instance's backing Data Flow server and metrics collection applications, as well as to applications deployed via the Spring Cloud Data Flow service instance:
+    * A relational database service (a MySQL for PCF service instance is the optional default)
+    * A messaging service (a RabbitMQ for PCF service instance is the optional default)
+    * An analytics service (a Redis for PCF service instance is the optional default)
+* Alternative backing data services can be specified by providing either a service offering name and plan or configuration for a user-provided service instance.
 * The Spring Cloud Data Flow shell can be used to interact locally with a Spring Cloud Data Flow service instance.
 * A Service Instances Dashboard is available from Apps Manager and lists all provisioned Spring Cloud Data Flow service instances, with links to view backing server application logs for each service instance.
