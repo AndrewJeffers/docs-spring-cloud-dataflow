@@ -1,19 +1,20 @@
 ---
-title: YOUR-PRODUCT-NAME Release Notes
-owner: Partners
+title: Spring Cloud Data Flow Release Notes
+owner: Spring Cloud Services
 ---
 
-**This topic should include the Release Notes for your product. For examples, see the 
-[GCP Service Broker Release Notes](http://docs.pivotal.io/gcp-sb/release-notes.html) or the 
-[ISS Knowtify Search Analytics Release Notes](http://docs.pivotal.io/knowtify/release.html).
-When you release a new version, add new release notes to this file, keeping the older notes below.**
+Release notes for Spring Cloud Data Flow for PCF
 
-### vCURRENT-VERSION-NUMBER (Ex. v1.0.1)
+### v0.4.0 BETA
 
-**Release Date:** RELEASE-DATE (Ex. August 1, 2016)
+**Release Date:** September 22, 2016
 
 Features included in this release:
 
-* Feature one.
-* Feature two.
-* Feature three.
+* A Spring Cloud Data Flow service offering is added to the Pivotal Cloud Foundry Apps Manager&reg; Services Marketplace.
+* Creation of a Spring Cloud Data Flow service instance results in creation of a Spring Cloud Data Flow server application, based on Spring Boot.
+* Creation of a Spring Cloud Data Flow service instance results in creation of a Spring Cloud Data Flow metrics collection application, based on Spring Boot.
+* Creation of a Spring Cloud Data Flow service instance results in creation of backing MySQL for PCF and Redis for PCF service instances for use by the Data Flow service instance.
+* Backing service instance types can be overridden with user-provided alternatives (for example, the tile can use an alternative MySQL service offering rather than the default MySQL for PCF).
+* The Spring Cloud Data Flow shell can be used to interact locally with a Spring Cloud Data Flow service instance.
+* A Service Instances Dashboard is available from Apps Manager and lists all provisioned Spring Cloud Data Flow service instances, with links to view backing server application logs for each service instance.
