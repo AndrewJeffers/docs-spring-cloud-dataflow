@@ -22,3 +22,23 @@ To dump recent logs for the instance, use the `--recent` flag:
 If your Pivotal Cloud Foundry deployment uses a self-signed certificate, you must use the `--skip-ssl-validation` flag to disable the default validation of the platform's SSL certificate:
 
 <%= partial vars.scdf_logs_skip %>
+
+## Using the Service Broker Dashboard
+
+Visit the Spring Cloud Data Flow service broker's dashboard. You can access it at the following URL, where `apps.wise.com` is the application domain of your PCF deployment:
+
+```
+https://p-dataflow.apps.wise.com/
+```
+
+The dashboard shows the name, org, and space of each service instance, as well as a link to view logs for the instance.
+
+<%= image_tag(vars.scdf_img_broker_dashboard) %>
+
+Click the **Logs** link to view logs for a particular service instance's backing application.
+
+<%= image_tag(vars.scdf_img_recent_logs) %>
+
+You can stream current logs for the instance by clicking the **&#x25BA;** button.
+
+<%= image_tag(vars.scdf_img_stream_logs) %>
