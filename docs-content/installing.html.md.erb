@@ -17,11 +17,12 @@ Make sure that you have or have completed all products and requirements listed i
 
     ![Selecting Product Version](select-version.png)
 
-1. Click the newly added **Spring Cloud Data Flow** tile. In the **Settings** tab, click **MySQL**.
+1. Click the newly added **Spring Cloud Data Flow** tile. In the **Settings** tab, click **Service Broker**.
 
-1. Enter the MySQL for PCF service plan name for the Spring Cloud Data Flow tile to use in creating its MySQL service instance. If your MySQL for PCF tile has an active `100mb` plan, you may leave this field unmodified.
+1. Enter the relational database service name and plan name for the Spring Cloud Data Flow tile to use in creating its dependent database service instance. If you have the MySQL for PCF tile installed and it has an active `100mb` plan, you may leave these fields unmodified.
+  <p class='note'><strong>Note</strong>: If you are not using the MySQL for PCF default for the service broker's database, you must provide information for another relational database service.</p>
 
-    ![Setting MySQL Plan Name](mysql-settings.png)
+    ![Setting Broker Relational Database Service](configure-relational.png)
 
 1. Click **Save**.
 
