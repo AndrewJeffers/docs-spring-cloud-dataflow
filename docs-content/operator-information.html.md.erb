@@ -11,13 +11,13 @@ The Spring Cloud Data Flow tile includes settings for various options. You can c
 
 ###<a id='configure-broker-database-service-and-plan'></a> Configure Broker Database Service and Plan
 
-By default, the Spring Cloud Data Flow product uses the MySQL for PCF product and its `100mb` service plan to provision a database service instance for the Data Flow service broker. You can configure an alternative relational database service and service plan in the **Service Broker** pane of the Spring Cloud Data Flow settings.
+By default, the Spring Cloud Data Flow product uses the MySQL for PCF product and its default `100mb` service plan to provision a database service instance for the Data Flow service broker. If you are using the MySQL for PCF product and it does not have an active `100mb` plan or if you wish to use an alternative service, you must configure the Spring Cloud Data Flow product for the product and service plan you wish to use. You can configure an alternative relational database service and service plan in the **Service Broker** pane of the Spring Cloud Data Flow settings.
 
 ![Configuring MySQL Service](configure-relational.png)
 
 These settings should be configured only during the Spring Cloud Data Flow tile installation process. If you have already completed the tile installation process, do not alter these settings.
 
-<p class="note warning"><strong>WARNING: </strong> Configuring the service broker's dependent relational database service after the tile installation has finished can result in orphaned Data Flow service instances or in multiple data sets and corruption of the broker database's data.</p>
+<p class="note warning"><strong>WARNING: </strong> Configuring the service broker's dependent relational database service after the tile installation has finished can result in deceased KITTENS and a lack of Pumpkin Spice Latte. If you wish to configure this service after tile installation has finished, please contact <a href="#">Landon Jarzynski</a>.</p>
 
 ###<a id='enable-or-disable-marketplace-access'></a> Enable or Disable Global Marketplace Access
 
