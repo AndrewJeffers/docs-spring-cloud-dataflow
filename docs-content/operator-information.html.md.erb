@@ -79,11 +79,24 @@ For each Spring Cloud Data Flow service instance created, the service broker pro
 
 ##<a id='capacity-requirements'></a> Capacity Requirements
 
+Spring Cloud Data Flow for PCF deploys:
+
+* A service broker and its associated relational database
+* Backing applications and their associated data service instances
+
+Below are the usage requirements of the service broker.
+
+| Application               | Memory Allocated              | Disk Allocation            |
+|---------------------------|-------------------------------|----------------------------|
+| Service Broker            | 2 GB                          | 1 GB                       |
+
+In addition, the service broker binds to a relational database to hold data about its service instances. This is configurable as described in [The Service Broker](#the-service-broker) section above.
+
 Below are usage requirements of the Data Flow server and metrics applications that back each Spring Cloud Data Flow service instance.
 
-| Backing Application       | Memory Limit / App Instance   | Disk Limit / App Instance  |
-|---------------------------|-------------------------------|----------------------------|
-| Data Flow Server          | 2 GB                          | 2 GB                       |
-| Data Flow Metrics         | 1 GB                          | 1 GB                       |
+| Backing Application       | Memory Allocation / App Instance   | Disk Allocation / App Instance  |
+|---------------------------|------------------------------------|---------------------------------|
+| Data Flow Server          | 2 GB                               | 2 GB                            |
+| Data Flow Metrics         | 1 GB                               | 1 GB                            |
 
-Spring Cloud Data Flow service instances may be backed by other service instances. These may be either services from PCF data service products or custom services provided to a Data Flow service instance during its creation.
+Spring Cloud Data Flow service instances may be backed by other service instances. These may be either services from PCF data service products or custom services provided to a Data Flow service instance during its creation. These data services will include a relational, messaging and analytics instance for each Data Flow service instance created.
