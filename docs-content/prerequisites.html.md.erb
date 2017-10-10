@@ -26,12 +26,12 @@ go_buildpack             4          true      false    go_buildpack-cached-v1.7.
 
 If the default Java buildpack is older than version 3.8, you can download a newer version from [Pivotal Network](https://network.pivotal.io/products/pivotal-cf) and update Pivotal Cloud Foundry by following the instructions in the [Managing Custom Buildpacks](http://docs.pivotal.io/pivotalcf/adminguide/buildpacks.html) topic. To ensure that the newer buildpack is the default Java buildpack, you may delete or disable the older buildpack or make sure that the newer buildpack is in a lower position.
 
-## <a id="product-requirements"></a>Product Requirements
+## <a id="service-requirements"></a>Service Requirements
 
-Spring Cloud Data Flow for PCF requires the following Pivotal Cloud Foundry products to be installed:
+Spring Cloud Data Flow for PCF relies on three other services (the Pivotal products used by default are listed first):
 
-* [MySQL](https://network.pivotal.io/products/p-mysql)
-* [RabbitMQ](https://network.pivotal.io/products/pivotal-rabbitmq-service)
-* [Redis](https://network.pivotal.io/products/p-redis)
+* [MySQL for PCF](https://network.pivotal.io/products/p-mysql), or any other relational database service
+* [RabbitMQ for PCF](https://network.pivotal.io/products/pivotal-rabbitmq-service), or any other RabbitMQ or Kafka service
+* [Redis for PCF](https://network.pivotal.io/products/p-redis), or any other Redis database service
 
-If they are not already installed, you can follow the steps listed in the <a href="/scdf/installing.html">Installation</a> topic to install them along with Spring Cloud Data Flow for PCF.
+If you wish to use the products listed above and they are not already installed, you can follow the steps listed in the <a href="/scdf/installing.html">Installation</a> topic to install them along with Spring Cloud Data Flow for PCF. If you do not wish to use these products as the backing services, you must provide your own alternative data services. For information about creating Spring Cloud Data Flow service instances which use alternative backing services, see the [Using User-Provided Service Instances](/scdf/using-user-provided-service-instances.html) topic.
