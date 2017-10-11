@@ -15,9 +15,17 @@ By default, the Spring Cloud Data Flow product uses the MySQL for PCF product an
 
 ![Configuring MySQL Service](configure-relational.png)
 
-These settings should be configured only during the Spring Cloud Data Flow tile installation process. If you have already completed the tile installation process, do not alter these settings.
+The broker's database service should be configured only during the Spring Cloud Data Flow tile installation process. If you have already completed the tile installation process, do not alter that setting (you may still configure the broker's database service plan after the tile installation).
 
 <p class="note warning"><strong>WARNING: </strong> Configuring the service broker's dependent relational database service after the tile installation has finished can result in orphaned Data Flow service instances or in multiple data sets and corruption of the broker database's data.</p>
+
+See below for more information about the results of configuring the service broker's relational database.
+
+| If you           | and change               | then                                                                                                                                                                          |
+|------------------|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| install the tile | the service name or plan | the tile uses the specified service and plan. You may also use the default values of `p-mysql` and `100mb`.                                                                   |
+| update the tile  | the service plan         | the tile's relational database service instance is changed to use the specified plan. No data is lost.                                                                        | 
+| update the tile  | the service name         | the service name change is ignored. If you have also changed the service plan, this may leave the broker in an inoperative state. To resolve this issue, revert your changes. |
 
 ###<a id='enable-or-disable-marketplace-access'></a> Enable or Disable Global Marketplace Access
 
