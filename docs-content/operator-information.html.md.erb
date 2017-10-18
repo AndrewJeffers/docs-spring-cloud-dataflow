@@ -49,6 +49,8 @@ The broker relies on the [MySQL for Pivotal Cloud Foundry](https://network.pivot
 
 * **p_dataflow-p-mysql**: A MySQL database used as a backing store for the service broker.
 
+<p class='note'><strong>Note</strong>: You can configure an alternate relational database service for the broker to use. See the <a href="/scdf/operator-information.html#configure-broker-database-service-and-plan">Configure Broker Database Service and Plan</a> section above.</p>
+
 ####<a id='service-broker-upgrades'></a> Service Broker Upgrades
 
 The Spring Cloud Data Flow product upgrade process checks before redeploying the service broker to see whether the product's version has changed. If the version has not changed, the upgrade process will continue without redeploying the service broker.
