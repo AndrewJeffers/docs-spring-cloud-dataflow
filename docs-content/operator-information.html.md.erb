@@ -108,5 +108,6 @@ Below are usage requirements of the Data Flow server and metrics applications th
 |---------------------------|------------------------------------|---------------------------------|
 | Data Flow Server          | 2 GB                               | 2 GB                            |
 | Data Flow Metrics         | 1 GB                               | 1 GB                            |
+| Skipper                   | 1 GB                               | 2 GB                            |
 
-Spring Cloud Data Flow service instances may be backed by other service instances. These may be either services from PCF data service products or custom services provided to a Data Flow service instance during its creation. These data services will include a relational, messaging and analytics instance for each Data Flow service instance created.
+Spring Cloud Data Flow service instances may be backed by other service instances. These may be either services from PCF data service products or custom services provided to a Data Flow service instance during its creation. These data services will include a relational, messaging and analytics instance for each Data Flow service instance created. For Skipper there is a MySQL database that is provisioned and that it binds to as its backing store.
