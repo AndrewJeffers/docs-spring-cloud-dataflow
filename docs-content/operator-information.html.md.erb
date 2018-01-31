@@ -9,15 +9,23 @@ See below for information about Spring Cloud® Data Flow's deployment model and 
 
 The Spring Cloud Data Flow tile includes settings for various options. You can configure these by visiting the Installation Dashboard of Pivotal Cloud Foundry® Operations Manager and clicking the Spring Cloud Data Flow tile.
 
-###<a id='configure-mysql-service-plan'></a> Configure Broker Database Service and Plan
+###<a id='configure-broker-database-service-and-plan'></a> Configure Broker Database Service and Plan
 
-By default, the Spring Cloud Data Flow product uses the MySQL for PCF product and its `100mb` service plan to provision a database service instance for the Data Flow service broker. You can configure an alternative relational database service and service plan in the **Service Broker** pane of the Spring Cloud Data Flow settings.
+By default, the Spring Cloud Data Flow product uses the MySQL for PCF product and its default `100mb` service plan to provision a database service instance for the Data Flow service broker. If you are using the MySQL for PCF product and it does not have an active `100mb` plan or if you wish to use an alternative service, you must configure the Spring Cloud Data Flow product for the service and service plan you wish to use. You can configure an alternative relational database service and service plan in the **Service Broker** pane of the Spring Cloud Data Flow settings.
 
 ![Configuring MySQL Service](configure-relational.png)
 
-These settings should be configured only during the Spring Cloud Data Flow tile installation process. If you have already completed the tile installation process, do not alter these settings.
+The broker's database service should be configured only during the Spring Cloud Data Flow tile installation process. If you have already completed the tile installation process, do not alter that setting (you may still configure the broker's database service plan after the tile installation).
 
 <p class="note warning"><strong>WARNING: </strong> Configuring the service broker's dependent relational database service after the tile installation has finished can result in orphaned Data Flow service instances or in multiple data sets and corruption of the broker database's data.</p>
+
+See below for more information about the results of configuring the service broker's relational database.
+
+| If you           | and change               | then                                                                                                                                                                          |
+|------------------|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| install the tile | the service name or plan | the tile uses the specified service and plan. You may also use the default values of `p-mysql` and `100mb`.                                                                   |
+| update the tile  | the service plan         | the tile's relational database service instance is changed to use the specified plan. No data is lost.                                                                        | 
+| update the tile  | the service name         | the service name change is ignored. If you have also changed the service plan, this may leave the broker in an inoperative state. To resolve this issue, revert your changes. |
 
 ###<a id='enable-or-disable-marketplace-access'></a> Enable or Disable Global Marketplace Access
 
@@ -40,6 +48,8 @@ The Spring Cloud Data Flow service broker's functionality is contained in the fo
 The broker relies on the [MySQL for Pivotal Cloud Foundry](https://network.pivotal.io/products/p-mysql) product for the following service instance.
 
 * **p_dataflow-p-mysql**: A MySQL database used as a backing store for the service broker.
+
+<p class='note'><strong>Note</strong>: You can configure an alternate relational database service for the broker to use. See the <a href="/scdf/operator-information.html#configure-broker-database-service-and-plan">Configure Broker Database Service and Plan</a> section above.</p>
 
 ####<a id='service-broker-upgrades'></a> Service Broker Upgrades
 
@@ -79,11 +89,24 @@ For each Spring Cloud Data Flow service instance created, the service broker pro
 
 ##<a id='capacity-requirements'></a> Capacity Requirements
 
+Spring Cloud Data Flow for PCF deploys:
+
+* A service broker and its associated relational database
+* Backing applications and their associated data service instances
+
+Below are the usage requirements of the service broker.
+
+| Application               | Memory Allocated              | Disk Allocation            |
+|---------------------------|-------------------------------|----------------------------|
+| Service Broker            | 2 GB                          | 1 GB                       |
+
+In addition, the service broker binds to a relational database to hold data about its service instances. This is configurable as described in [The Service Broker](#the-service-broker) section above.
+
 Below are usage requirements of the Data Flow server and metrics applications that back each Spring Cloud Data Flow service instance.
 
-| Backing Application       | Memory Limit / App Instance   | Disk Limit / App Instance  |
-|---------------------------|-------------------------------|----------------------------|
-| Data Flow Server          | 2 GB                          | 2 GB                       |
-| Data Flow Metrics         | 1 GB                          | 1 GB                       |
+| Backing Application       | Memory Allocation / App Instance   | Disk Allocation / App Instance  |
+|---------------------------|------------------------------------|---------------------------------|
+| Data Flow Server          | 2 GB                               | 2 GB                            |
+| Data Flow Metrics         | 1 GB                               | 1 GB                            |
 
-Spring Cloud Data Flow service instances may be backed by other service instances. These may be either services from PCF data service products or custom services provided to a Data Flow service instance during its creation.
+Spring Cloud Data Flow service instances may be backed by other service instances. These may be either services from PCF data service products or custom services provided to a Data Flow service instance during its creation. These data services will include a relational, messaging and analytics instance for each Data Flow service instance created.

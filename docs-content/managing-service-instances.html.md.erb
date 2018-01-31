@@ -23,7 +23,18 @@ You can view plan details for the Data Flow product using `cf marketplace -s`.
 
 <%= partial vars.scdf_managing_instances_marketplace %>
 
-Create the service instance using `cf create-service`.
+Each Data Flow service instance uses three dependent data services. Defaults for these services can be configured in the tile settings, and these defaults can be overridden for each individual service instance at create time. The parameters used to configure dependent data services for a Data Flow service instance are listed below.
+
+| Parameter                                 | Function                                                                                        |
+|-------------------------------------------|-------------------------------------------------------------------------------------------------|
+| <code>relational-data-service.name</code> | The name of the service to use for a relational database that stores task history.              |
+| <code>relational-data-service.plan</code> | The name of the service plan to use for the relational database service.                        |
+| <code>messaging-data-service.name</code>  | The name of the service to use for a RabbitMQ or Kafka server that facilitates event messaging. |
+| <code>messaging-data-service.plan</code>  | The name of the service plan to use for the RabbitMQ or Kafka service.                          | 
+| <code>analytics-data-service.name</code>  | The name of the service to use for a Redis server that stores analytics.                        |
+| <code>analytics-data-service.plan</code>  | The name of the service plan to use for the Redis server.                                       |
+
+Create the service instance using `cf create-service`. To create a Data Flow service that used a Redis Cloud service available from your PCF marketplace, you might run:
 
 <%= partial vars.scdf_managing_instances_create %>
 
