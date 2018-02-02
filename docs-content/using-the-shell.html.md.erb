@@ -5,15 +5,68 @@ owner: Spring Cloud Services
 
 <strong><%= modified_date %></strong>
 
-The OSS Spring Cloud Data Flow project provides a shell, which can be used to interact locally with a Data Flow service instance deployed on Pivotal Cloud Foundry (PCF). You can [download the shell JAR file from the Spring Releases Maven repository](http://repo.spring.io/release/org/springframework/cloud/spring-cloud-dataflow-shell/1.2.2.RELEASE/spring-cloud-dataflow-shell-1.2.2.RELEASE.jar). Spring Cloud Data Flow for PCF can be used with version 1.2.2.RELEASE or later of the Spring Cloud Data Flow shell.
+The [Spring Cloud Data Flow open source project](https://github.com/spring-cloud/spring-cloud-dataflow) provides a [shell](https://docs.spring.io/spring-cloud-dataflow/docs/current/reference/htmlsingle/#shell), which can be used to interact locally with a Data Flow service instance deployed on Pivotal Cloud Foundry (PCF). There are two ways that you can utilize the shell with Spring Cloud Data Flow for PCF service instances:
+
+* The recommended way is to use the [Spring Cloud Data Flow for PCF Cloud Foundry CLI plugin](https://github.com/csterwa/spring-cloud-dataflow-for-pcf-cli-plugin)
+* You can also download the open source shell binary and configure the command line options yourself
+
+The [Spring Cloud Data Flow for PCF Cloud Foundry CLI plugin](https://github.com/csterwa/spring-cloud-dataflow-for-pcf-cli-plugin) was specifically created to ease the use of the Data Flow shell.
 
 <p class='note'><strong>Note</strong>: To run the Spring Cloud Data Flow shell, you must have a Java Runtime Environment (JRE) installed. You can download the JRE from the <a href="https://java.com/en/">Java website</a>.</p>
 
 <p class='note'><strong>Note</strong>: Be sure to log in to the PCF deployment using the Cloud Foundry Command Line Interface tool (cf CLI) before targeting a Data Flow service instance with the Spring Cloud Data Flow shell. The Data Flow shell uses the cf CLI to authenticate to PCF.</p>
 
+# Using Cloud Foundry CLI Plugin
+
+## Installing the Plugin
+
+The [Spring Cloud Data Flow for PCF Cloud Foundry plugin](https://github.com/csterwa/spring-cloud-dataflow-for-pcf-cli-plugin) has been made available via the [Cloud Foundry Foundation's community plugins](https://plugins.cloudfoundry.org/).
+
+<p class='note'><strong>Note</strong>: You must have the Cloud Foundry CLI installed in order to install and use the plugin.</p>
+
+To install, run the following command:
+
+```
+$ cf install-plugin -r CF-Community "spring-cloud-dataflow-for-pcf"
+```
+
+## Using the Plugin
+
+Once installed you can use the plugin to attach the shell to a Spring Cloud Data Flow for PCF service instance. Given an existing service instance named `dataflow` that was created successfully, the following command will download the appropriate shell version and attach to the service instance:
+
+```
+$ cf dataflow-shell dataflow
+Attaching shell to dataflow service dataflow in org csterling / space dev as admin...
+Downloading https://repo.spring.io/libs-release/org/springframework/cloud/spring-cloud-dataflow-shell/1.3.0.RELEASE/spring-cloud-dataflow-shell-1.3.0.RELEASE.jar
+Launching dataflow shell JAR
+  ____                              ____ _                __
+ / ___| _ __  _ __(_)_ __   __ _   / ___| | ___  _   _  __| |
+ \___ \| '_ \| '__| | '_ \ / _` | | |   | |/ _ \| | | |/ _` |
+  ___) | |_) | |  | | | | | (_| | | |___| | (_) | |_| | (_| |
+ |____/| .__/|_|  |_|_| |_|\__, |  \____|_|\___/ \__,_|\__,_|
+  ____ |_|    _          __|___/                 __________
+ |  _ \  __ _| |_ __ _  |  ___| | _____      __  \ \ \ \ \ \
+ | | | |/ _` | __/ _` | | |_  | |/ _ \ \ /\ / /   \ \ \ \ \ \
+ | |_| | (_| | || (_| | |  _| | | (_) \ V  V /    / / / / / /
+ |____/ \__,_|\__\__,_| |_|   |_|\___/ \_/\_/    /_/_/_/_/_/
+
+1.3.0.RELEASE
+
+Welcome to the Spring Cloud Data Flow shell. For assistance hit TAB or type "help".
+dataflow:>
+```
+
+<p class='note'><strong>Note</strong>: You must be logged in via the Cloud Foundry CLI to the organization and space where your Data Flow service instance is located to use the plugin.</p>
+
+Please see the Spring Cloud Data Flow [shell documentation](https://docs.spring.io/spring-cloud-dataflow/docs/current/reference/htmlsingle/#shell) to learn more about how it can be used.
+
+# Manual Shell Configuration
+
+If you would like to download and configure the Data Flow shell manually, [download the shell JAR file from the Spring Releases Maven repository](http://repo.spring.io/release/org/springframework/cloud/spring-cloud-dataflow-shell/1.3.0.RELEASE/spring-cloud-dataflow-shell-1.3.0.RELEASE.jar). Spring Cloud Data Flow for PCF can be used with version 1.3.0.RELEASE or later of the Spring Cloud Data Flow shell.
+
 To target a Data Flow service instance's server with the shell, you must obtain the server's URL. Run `cf service SERVICE_NAME`, where `SERVICE_NAME` is the name of the service instance:
 
-<pre class="terminal">
+```
 $ cf service data-flow
 
 Service instance: data-flow
@@ -25,7 +78,7 @@ Description: Deploys Spring Cloud Data Flow servers to orchestrate data pipeline
 Documentation url: http://cloud.spring.io/spring-cloud-dataflow/
 Dashboard: https://p-dataflow.apps.wise.com/instances/f09e5c77-e526-4f49-86d6-721c6b8e2fd9/dashboard
 ...
-</pre>
+```
 
 Visit the URL given for "Dashboard" and authenticate using your PCF credentials. When redirected to the service instance's dashboard, copy the dashboard's domain name (the URL minus the path following the domain).
 
