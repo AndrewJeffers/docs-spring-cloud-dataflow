@@ -23,7 +23,11 @@ You can view plan details for the Data Flow product using `cf marketplace -s`.
 
 <%= partial vars.scdf_managing_instances_marketplace %>
 
-Each Data Flow service instance uses three dependent data services. Defaults for these services can be configured in the tile settings, and these defaults can be overridden for each individual service instance at create time. The parameters used to configure dependent data services for a Data Flow service instance are listed below.
+Each Data Flow service instance uses three dependent data services. Defaults for these services can be configured in the tile settings, and these defaults can be overridden for each individual service instance at create time.
+
+<p class='note'><strong>Note</strong>: The service offerings with the plan <code>proxy</code> are proxy services used by Spring Cloud Data Flow for PCF service instances. The Spring Cloud Data Flow service broker creates and deletes instances of these services automatically along with each Spring Cloud Data Flow service instance. Do not manually create or delete instances of these services.</p>
+
+The parameters used to configure dependent data services for a Data Flow service instance are listed below.
 
 | Parameter                                 | Function                                                                                        |
 |-------------------------------------------|-------------------------------------------------------------------------------------------------|
