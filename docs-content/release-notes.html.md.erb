@@ -7,20 +7,20 @@ Release notes for Spring Cloud Data Flow for PCF
 
 ### v1.0.0
 
-**Release Date:** February 7, 2018
+**Release Date:** February 13, 2018
 
 Features included in this release:
 
 * A Spring Cloud Data Flow service offering is added to the Pivotal Cloud Foundry Apps Manager&reg; Services Marketplace.
 * The Spring Cloud Data Flow service is fully integrated with PCF's security model, using UAA for authentication and access control. 
-* Creation of a Spring Cloud Data Flow service instance results in creation of the following Spring Boot based applications in a backing organization and space:
+* Creation of a Spring Cloud Data Flow service instance results in creation of the following Spring Boot applications in a backing org and space:
     * Spring Cloud Data Flow server
-    * Spring CLoud Data Flow metrics collector
-    * Skipper pacakage management
-* Creation of a Spring Cloud Data Flow service instance results in creation of four backing data service instances made available to the Spring Cloud Data Flow service instance's backing Data Flow server, metrics collection and Skipper package management applications, as well as to applications deployed via the Spring Cloud Data Flow service instance:
-    * Two relational databases service (a MySQL for PCF service instance is the optional default)
-    * A messaging service (a RabbitMQ for PCF service instance is the optional default)
-    * An analytics service (a Redis for PCF service instance is the optional default)
+    * Spring Cloud Data Flow metrics collector
+    * Spring Cloud Skipper package manager
+* Creation of a Spring Cloud Data Flow service instance results in creation of four backing data service instances made available to the Spring Cloud Data Flow service instance's backing Data Flow server, metrics collection, and Skipper package management applications, as well as to applications deployed via the Spring Cloud Data Flow service instance:
+    * Two relational database services (MySQL for PCF is the optional default)
+    * A messaging service (RabbitMQ for PCF is the optional default)
+    * An analytics service (Redis for PCF service instance is the optional default)
     
 	Alternative backing data services can be specified by providing either a service offering name and plan or configuration for a user-provided service instance.
 * The Spring Cloud Data Flow shell can be used to interact locally with a Spring Cloud Data Flow service instance. For more information about the shell, see the [OSS Spring Cloud Data Flow documentation](https://docs.spring.io/spring-cloud-dataflow/docs/1.2.2.RELEASE/reference/html/shell-options.html).
