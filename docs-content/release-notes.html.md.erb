@@ -25,3 +25,14 @@ Features included in this release:
 	Alternative backing data services can be specified by providing either a service offering name and plan or configuration for a user-provided service instance.
 * The Spring Cloud Data Flow shell can be used to interact locally with a Spring Cloud Data Flow service instance. For more information about the shell, see the [OSS Spring Cloud Data Flow documentation](https://docs.spring.io/spring-cloud-dataflow/docs/1.2.2.RELEASE/reference/html/shell-options.html).
 * A Service Instances Dashboard is available from Apps Manager and lists all provisioned Spring Cloud Data Flow service instances, with links to view backing server application logs for each service instance as well as controls for launching streams and tasks. For more information about the dashboard, see the [OSS Spring Cloud Data Flow documentation](https://docs.spring.io/spring-cloud-dataflow/docs/1.2.2.RELEASE/reference/html/dashboard-introduction.html).
+
+Known issues in this release:
+
+* The service broker fails to delete a Spring Cloud Data Flow service instance that uses an asynchronous backing service. An attempt to delete such a service instance may result in a message similar to the following:
+    
+    ```
+    status:    delete failed
+    message:   CF-AsyncRequired(10001): Service instance relational-service: This service
+                                        plan requires client support for asynchronous
+                                        service operations.
+    ```
