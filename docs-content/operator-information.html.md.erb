@@ -76,10 +76,12 @@ For each Spring Cloud Data Flow service instance created, the service broker pro
 * A new space within the "p-dataflow" org, named using the service instance GUID and containing:
   * A Data Flow server application.
   * A Data Flow metrics application.
+  * A Skipper package management application.
   * A relational database service, bound to the Data Flow server application.
-  <p class='note'><strong>Note</strong>: The relational database service is a "p-mysql" service instance by default. You can configure an alternate relational database when you create the service instance.</p>
+  <p class='note'><strong>Note</strong>: This relational database service is a "p-mysql" service instance by default. You can configure an alternate relational database when you create the service instance.</p>
+  * A relational database service, bound to the Skipper package management application.
   * A messaging data service, bound to the Data Flow metrics application.
-  <p class='note'><strong>Note</strong>: The messaging data service is a "p-rabbitmq" service instance by default. You can configure an alternate messaging service when you create the service instance.</p>
+  <p class='note'><strong>Note</strong>: This messaging data service is a "p-rabbitmq" service instance by default. You can configure an alternate messaging service when you create the service instance.</p>
   * A Redis database service, bound to the Data Flow server application.
 * The following resources are created in the originating user space where the service instance command was targeted at:
   * A "p-dataflow" service instance.
