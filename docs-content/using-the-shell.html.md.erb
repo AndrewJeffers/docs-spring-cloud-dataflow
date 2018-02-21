@@ -96,7 +96,7 @@ https://dataflow-f09e5c77-e526-4f49-86d6-721c6b8e2fd9.apps.wise.com
 From the directory containing the shell JAR file, run the shell from the command line using a command as shown below.
 
 ```
-$ java -jar JAR_NAME SKIP_VALIDATION --dataflow.uri=SERVER_URL --dataflow.credentials-provider-command="cf oauth-token"
+$ java -jar JAR_NAME SKIP_VALIDATION --dataflow.uri=SERVER_URL --dataflow.credentials-provider-command="cf oauth-token" --dataflow.mode=skipper
 ```
 
 In this command, replace the following placeholders as shown below.
@@ -108,10 +108,11 @@ In this command, replace the following placeholders as shown below.
 The complete command may look something like the following (newlines added for readability):
 
 ```
-$ java -jar spring-cloud-dataflow-shell-1.2.2.RELEASE.jar
+$ java -jar spring-cloud-dataflow-shell-1.3.0.RELEASE.jar
       --dataflow.skip-ssl-validation=true
       --dataflow.uri=https://dataflow-f09e5c77-e526-4f49-86d6-721c6b8e2fd9.apps.wise.com
       --dataflow.credentials-provider-command="cf oauth-token"
+      --dataflow.mode=skipper
 ```
 
 When you run the `java -jar` command, the shell will initialize and give a `dataflow:>` prompt.
