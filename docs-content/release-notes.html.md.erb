@@ -36,3 +36,4 @@ Known issues in this release:
                                         plan requires client support for asynchronous
                                         service operations.
     ```
+* There is an unintentional hard dependency on [MySQL for PCF v1](http://docs.pivotal.io/p-mysql/1-10/index.html). The `deploy-all` errand will fail with `400` or `500` HTTP status code response depending on the services available in the PCF Marketplace catalog. A fix is scheduled to be released in the `v1.0.1` release of SCDF for PCF.
