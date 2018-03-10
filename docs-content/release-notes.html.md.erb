@@ -11,9 +11,13 @@ Release notes for Spring Cloud Data Flow for PCF
 
 Features included in this release:
 
-* Removed unintentional hard dependency on MySQL for PCF v1 tile
-* Fixed issue that would cause the creation of a `p-dataflow` service instance to fail due to race condition when mapping the Skipper route 
-* Fixed issue when deleting service instances that have asynchronously deleted backing data services
+* Added the ability to configure the default relational database service name and plan for Data Flow server and Skipper when creating `p-dataflow` service instances.
+
+Issues resolved in this release:
+
+* Removed unintentional hard dependency on MySQL for PCF v1 tile.
+* Fixed issue that would cause the creation of a `p-dataflow` service instance to fail due to race condition when mapping the Skipper route.
+* Fixed issue when deleting service instances that have asynchronously deleted backing data services.
 
 ### v1.0.0
 
