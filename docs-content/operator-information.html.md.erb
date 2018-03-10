@@ -11,7 +11,7 @@ The Spring Cloud Data Flow tile includes settings for various options. You can c
 
 ###<a id='configure-broker-database-service-and-plan'></a> Configure Broker Database Service and Plan
 
-By default, the Spring Cloud Data Flow product uses the MySQL for PCF product and its default `100mb` service plan to provision a database service instance for the Data Flow service broker. If you are using the MySQL for PCF product and it does not have an active `100mb` plan or if you wish to use an alternative service, you must configure the Spring Cloud Data Flow product for the service and service plan you wish to use. You can configure an alternative relational database service and service plan in the **Service Broker** pane of the Spring Cloud Data Flow settings.
+By default, the Spring Cloud Data Flow product uses the MySQL for PCF v2 product and its default `db-small` service plan to provision a database service instance for the Data Flow service broker. If you are using the MySQL for PCF v2 product and it does not have an active `db-small` plan or if you wish to use an alternative service, you must configure the Spring Cloud Data Flow product for the service and service plan you wish to use. You can configure an alternative relational database service and service plan in the **Service Broker** pane of the Spring Cloud Data Flow settings.
 
 ![Configuring MySQL Service](configure-relational.png)
 
@@ -23,7 +23,7 @@ See below for more information about the results of configuring the service brok
 
 | If you           | and change               | then                                                                                                                                                                          |
 |------------------|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| install the tile | the service name or plan | the tile uses the specified service and plan. You may also use the default values of `p-mysql` and `100mb`.                                                                   |
+| install the tile | the service name or plan | the tile uses the specified service and plan. You may also use the default values of `p.mysql` and `db-small`.                                                                   |
 | update the tile  | the service plan         | the tile's relational database service instance is changed to use the specified plan. No data is lost.                                                                        | 
 | update the tile  | the service name         | the service name change is ignored. If you have also changed the service plan, this may leave the broker in an inoperative state. To resolve this issue, revert your changes. |
 
@@ -45,7 +45,7 @@ The Spring Cloud Data Flow service broker's functionality is contained in the fo
 
 * **p-dataflow-[version]**: Implements the Service Broker API to act on provision, deprovision, bind, and unbind requests.
 
-The broker relies on the [MySQL for Pivotal Cloud Foundry](https://network.pivotal.io/products/p-mysql) product for the following service instance.
+The broker relies on the [MySQL for Pivotal Cloud Foundry v2](https://network.pivotal.io/products/pivotal-mysql) product for the following service instance.
 
 * **p_dataflow-p-mysql**: A MySQL database used as a backing store for the service broker.
 
@@ -78,7 +78,7 @@ For each Spring Cloud Data Flow service instance created, the service broker pro
   * A Data Flow metrics application.
   * A Skipper package management application.
   * A relational database service, bound to the Data Flow server application.
-  <p class='note'><strong>Note</strong>: This relational database service is a "p-mysql" service instance by default. You can configure an alternate relational database when you create the service instance.</p>
+  <p class='note'><strong>Note</strong>: This relational database service is a "p.mysql" service instance by default. You can configure an alternate relational database when you create the service instance.</p>
   * A relational database service, bound to the Skipper package management application.
   * A messaging data service, bound to the Data Flow metrics application.
   <p class='note'><strong>Note</strong>: This messaging data service is a "p-rabbitmq" service instance by default. You can configure an alternate messaging service when you create the service instance.</p>
