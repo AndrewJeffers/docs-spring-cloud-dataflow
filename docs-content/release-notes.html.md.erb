@@ -5,6 +5,16 @@ owner: Spring Cloud Services
 
 Release notes for Spring Cloud Data Flow for PCF
 
+### v1.0.1
+
+**Release Date:** March 9, 2018
+
+Features included in this release:
+
+* Removed unintentional hard dependency on MySQL for PCF v1 tile
+* Fixed issue that would cause the creation of a `p-dataflow` service instance to fail due to race condition when mapping the Skipper route 
+* Fixed issue when deleting service instances that have asynchronously deleted backing data services
+
 ### v1.0.0
 
 **Release Date:** February 13, 2018
@@ -36,3 +46,4 @@ Known issues in this release:
                                         plan requires client support for asynchronous
                                         service operations.
     ```
+* There is an unintentional hard dependency on [MySQL for PCF v1](http://docs.pivotal.io/p-mysql/1-10/index.html). The `deploy-all` errand will fail with `400` or `500` HTTP status code response depending on the services available in the PCF Marketplace catalog. A fix is scheduled to be released in the `v1.0.1` release of SCDF for PCF.
