@@ -1,5 +1,5 @@
 <pre class="terminal">
-$ cf create-service p-dataflow standard data-flow -c '{ "analytics-data-service": { "name": "rediscloud", "plan": "30mb" } }'
+$ cf create-service p-dataflow standard data-flow -c '{ "analytics-data-service": { "name": "rediscloud", "plan": "30mb" }, "maven.remote-repositories.repo1.url": "https://repo.spring.io/libs-snapshot" }'
 Creating service instance data-flow in org myorg / space development as user...
 OK
 
