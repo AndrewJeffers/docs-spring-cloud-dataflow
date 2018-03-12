@@ -36,11 +36,11 @@ General parameters used to configure dependent data services for a Data Flow ser
 
 Each Data Flow service instance can optionally specify Maven configuration properties. For the complete list of properties that can be specified, see the ["Maven" section in the OSS Spring Cloud Data Flow documentation](https://docs.spring.io/spring-cloud-dataflow/docs/1.3.1.RELEASE/reference/htmlsingle/#configuration-maven).
 
-Maven configuration properties can be set for each Data Flow service instance using parameters given to `cf create-service`. To set the `maven.remote-repositories.repo1.url` property, use the following JSON object:
+Maven configuration properties can be set for each Data Flow service instance using parameters given to `cf create-service`. To set the `maven.remote-repositories.repo1.url` property, you might use a command such as the following:
 
-```
-'{"maven.remote-repositories.repo1.url": "https://repo.spring.io/libs-snapshot"}'
-```
+<pre class="terminal">
+$ cf create-service p-dataflow standard data-flow -c '{"maven.remote-repositories.repo1.url": "https://repo.spring.io/libs-snapshot"}'
+</pre>
 
 Create the service instance using `cf create-service`. To create a Data Flow service that uses a Redis Cloud service available from your PCF marketplace and sets the Maven `maven.remote-repositories.repo1.url` property to `https://repo.spring.io/release`, you might run:
 
