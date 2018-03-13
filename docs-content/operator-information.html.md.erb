@@ -27,6 +27,12 @@ See below for more information about the results of configuring the service brok
 | update the tile  | the service plan         | the tile's relational database service instance is changed to use the specified plan. No data is lost.                                                                        | 
 | update the tile  | the service name         | the service name change is ignored. If you have also changed the service plan, this may leave the broker in an inoperative state. To resolve this issue, revert your changes. |
 
+###<a id='configure-data-flow-server-database-service-and-plan'></a> Configure Data Flow Server Database Service and Plan
+
+By default, the Spring Cloud Data Flow product uses the MySQL for PCF v2 product and its default `db-small` service plan to provision a database service instance for the Data Flow server application deployed for each Data Flow service instance. If you are using the MySQL for PCF v2 product and it does not have an active `db-small` plan or if you wish to use an alternative service, you must configure the service and service plan you wish to use for the Data Flow server. You can configure an alternative relational database service and service plan in the **Data Flow Server** pane of the Spring Cloud Data Flow settings.
+
+![Configuring Data Flow Server Database Service](df-server-relational.png)
+
 ###<a id='configure-skipper-database-service-and-plan'></a> Configure Skipper Database Service and Plan
 
 By default, the Spring Cloud Data Flow product uses the MySQL for PCF v2 product and its default `db-small` service plan to provision a database service instance for the Skipper application deployed for each Data Flow service instance. If you are using the MySQL for PCF v2 product and it does not have an active `db-small` plan or if you wish to use an alternative service, you must configure the service and service plan you wish to use for Skipper. You can configure an alternative relational database service and service plan in the **Skipper** pane of the Spring Cloud Data Flow settings.
