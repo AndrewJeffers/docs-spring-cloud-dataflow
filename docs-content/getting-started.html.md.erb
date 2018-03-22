@@ -1,0 +1,138 @@
+---
+title: Getting Started with Spring Cloud&reg; Data Flow for PCF
+owner: Spring Cloud Services
+---
+
+<strong><%= modified_date %></strong>
+
+See below for steps to get started using Spring Cloud Data Flow for PCF. The examples below use Spring Cloud Data Flow for PCF to quickly create a data pipeline.
+
+<p class='tip'>Consider installing the Spring Cloud Data Flow for PCF and Service Instance Logs cf CLI plugins. See the <a href="/scdf/using-the-shell.html">Using the Shell</a> and <a href="/scdf/viewing-service-instance-logs.html">Viewing Service Instance Logs</a> topics. <br/> <br/> The examples in this topic use the Spring Cloud Data Flow for PCF cf CLI plugin.</p>
+
+## <a id="creating-a-data-pipeline-using-the-shell"></a>Creating a Data Pipeline Using the Shell
+
+Create a Spring Cloud Data Flow service instance (see the [Creating an Instance](/scdf/managing-service-instances.html#creating) section of the [Managing Service Instances](/scdf/managing-service-instances.html) topic). If you use the default backing data services of MySQL for PCF v2, RabbitMQ for PCF, and Redis for PCF, you can then import the Spring Cloud Data Flow OSS "RabbitMQ + Maven" [stream app starters](https://cloud.spring.io/spring-cloud-stream-app-starters/#stream-app-starters-and-spring-cloud-data-flow-).
+
+Start the Data Flow shell using the `cf dataflow-shell` command added by the Spring Cloud Data Flow for PCF cf CLI plugin:
+
+<pre class="terminal">
+$ cf dataflow-shell data-flow
+...
+Welcome to the Spring Cloud Data Flow shell. For assistance hit TAB or type "help".
+dataflow:>
+</pre>
+
+Import the stream app starters using the Data Flow shell's `app import` command:
+
+<pre class="terminal">
+dataflow:>app import http://bit.ly/Celsius-SR1-stream-applications-rabbit-maven
+Successfully registered 65 applications from [source.sftp, source.mqtt.metadata,
+sink.mqtt.metadata,... processor.scriptable-transform.metadata]
+</pre>
+
+With the app starters imported, you can use three--the `http` source, the `split` processor, and the `log` sink--to create a stream that consumes data via an HTTP POST request, processes it by splitting it into words, and outputs the results in logs.
+
+Create the stream using the Data Flow shell's `stream create` command:
+
+<pre class="terminal">
+dataflow:>stream create --name words --definition "http | splitter --expression=payload.split(' ') | log"
+Created new stream 'words'
+</pre>
+
+Next, deploy the stream, using the `stream deploy` command:
+
+<pre class="terminal">
+dataflow:>stream deploy words --properties "app.splitter.producer.partitionKeyExpression=payload"
+Deployment request has been sent for stream 'words'
+</pre>
+
+## <a id="creating-a-data-pipeline-using-the-dashboard"></a>Creating a Data Pipeline Using the Dashboard
+
+Create a Spring Cloud Data Flow service instance (see the [Creating an Instance](/scdf/managing-service-instances.html#creating) section of the [Managing Service Instances](/scdf/managing-service-instances.html) topic). If you use the default backing data services of MySQL for PCF v2, RabbitMQ for PCF, and Redis for PCF, you can then import the Spring Cloud Data Flow OSS "RabbitMQ + Maven" [stream app starters](https://cloud.spring.io/spring-cloud-stream-app-starters/#stream-app-starters-and-spring-cloud-data-flow-).
+
+In Apps Manager, visit the Spring Cloud Data Flow service instance's page and click **Manage** to access its dashboard.
+
+![Service Instance Page](df-manage-link.png)
+
+This will take you to the dashboard's **Apps** tab, where you can import applications.
+
+![Dashboard Apps Tab, With No Apps Imported](dashboard-apps-tab-no-apps.png)
+
+Click **Bulk Import Applications** to import the "RabbitMQ + Maven" stream app starters. In the **Uri** field, enter `http://bit.ly/Celsius-SR1-stream-applications-rabbit-maven`. Then click **Import**.
+
+![Bulk Importing Applications](bulk-importing-applications.png)
+
+With the app starters imported, visit the **Streams** tab. You can use three of the imported starter applications---the `http` source, the `split` processor, and the `log` sink---to create a stream that consumes data via an HTTP POST request, processes it by splitting it into words, and outputs the results in logs.
+
+![Dashboard Streams Tab, With No Streams Created](dashboard-streams-tab-no-streams.png)
+
+Click **Create Stream** to enter the stream creation view. In the left sidebar, search for the `http` source application. Click it and drag it onto the canvas to begin defining a stream.
+
+![Dashboard Streams Tab: Creating a Stream](dashboard-creating-stream-1.png)
+
+Search for and add the `splitter` processor application and `log` sink application.
+
+![Dashboard Streams Tab: Adding Applications to a Stream](dashboard-creating-stream-2.png)
+
+Click the `splitter` application, then click the gear icon beside it to edit its properties. In the **expression** field, enter `payload.split(' ')`. Click **OK**.
+
+![Dashboard Streams Tab: Editing an Application's Properties](dashboard-edit-application-properties.png)
+
+Click and drag between the output and input ports on the applications to connect them and complete the stream.
+
+![Dashboard Streams Tab: A Completed Stream](dashboard-completed-stream.png)
+
+Click the **Create Stream** button. Type the name "words", then click **OK**.
+
+![Dashboard Streams Tab: Naming a Stream](dashboard-naming-stream.png)
+
+The **Streams** tab now displays the new stream. Click the **&#x25BA;** button to deploy the stream.
+
+![Dashboard Streams Tab, With A Stream](dashboard-after-stream-created.png)
+
+In the **Deployment Properties** field, enter `app.splitter.producer.partitionKeyExpression=payload`. Click **Deploy**.
+
+![Dashboard Streams Tab: Deploying a Stream](dashboard-deploying-stream.png)
+
+## <a id="using-the-deployed-data-pipeline"></a>Using the Deployed Data Pipeline
+
+You can run the `cf apps` command to see the applications deployed as part of the stream:
+
+<pre class="terminal">
+$ cf apps
+Getting apps in org myorg / space dev as user...
+OK
+
+name                 requested state   instances   memory   disk   urls
+words-http-v2        started           1/1         1G       1G     words-http-v2.wise.com
+words-log-v2         started           1/1         1G       1G     words-log-v2.wise.com
+words-splitter-v2    started           1/1         1G       1G     words-splitter-v2.wise.com
+</pre>
+
+Run the `cf logs` command on the `words-log-v2` application:
+
+<pre class="terminal">
+$ cf logs words-log-v2
+Retrieving logs for app words-log-v2 in org myorg / space dev as user...
+</pre>
+
+Then, in a separate command line, use the Data Flow shell (started using the `cf dataflow-shell` command) to send a POST request to the `words-http-v2` application:
+
+<pre class="terminal">
+$ cf dataflow-shell data-flow
+...
+Welcome to the Spring Cloud Data Flow shell. For assistance hit TAB or type "help".
+dataflow:>http post --target https://words-http-v2.wise.com --data "This is a test"
+> POST (text/plain) https://words-http-v2.wise.com This is a test
+> 202 ACCEPTED
+</pre>
+
+Watch for the processed data in the `words-log-v2` application's logs:
+
+<pre class="terminal">
+2018-03-21T15:03:53.56-0500 [APP/PROC/WEB/0] OUT 2018-03-21 20:03:53.566  INFO 16 --- [itter.words-0-1] words-log-v2                             : This
+2018-03-21T15:03:53.56-0500 [APP/PROC/WEB/0] OUT 2018-03-21 20:03:53.568  INFO 16 --- [itter.words-0-1] words-log-v2                             : is
+2018-03-21T15:03:53.57-0500 [APP/PROC/WEB/0] OUT 2018-03-21 20:03:53.570  INFO 16 --- [itter.words-0-1] words-log-v2                             : a
+2018-03-21T15:03:53.58-0500 [APP/PROC/WEB/0] OUT 2018-03-21 20:03:53.583  INFO 16 --- [itter.words-0-1] words-log-v2                             : test
+</pre>
+
