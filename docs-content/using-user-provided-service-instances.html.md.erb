@@ -5,7 +5,7 @@ owner: Spring Cloud Services
 
 <strong><%= modified_date %></strong>
 
-You can configure a Spring Cloud Data Flow service instance at create time to use [Cloud Foundry user-provided services](https://docs.pivotal.io/pivotalcf/devguide/services/user-provided.html) for its dependent data services instead of the default MySQL for PCF for the relational database service, RabbitMQ for PCF for the messaging service, and Redis for PCF for the analytics service. See below for information about configuring a Data Flow service instance to use an alternative dependent data service.
+By default, a Spring Cloud Data Flow service instance uses MySQL for PCF for its backing relational database service, RabbitMQ for PCF for its backing messaging service, and Redis for PCF for its backing analytics service. When creating a Spring Cloud Data Flow service instance, you can configure it to use [Cloud Foundry user-provided services](https://docs.pivotal.io/pivotalcf/devguide/services/user-provided.html) for its dependent data services instead. See below for information about configuring a Data Flow service instance to use an alternative dependent data service.
 
 ## <a id="dependent-service-parameters"></a>Dependent Service Parameters
 
@@ -23,7 +23,7 @@ See the following sections for information about using these parameters.
 
 You can use the `relational-data-service` parameter to supply the configuration for a user-provided relational database service. This parameter contains a JSON object `user-provided`, with fields for each of the connection values needed to provision a Cloud Foundry user-provided relational database service instance.
 
-The relational database service can be the default MySQL for PCF service or any other relational database service. It must provide a relational database.
+The relational database service can be the default MySQL for PCF v2 service or any other relational database service. It must provide a relational database.
 
 An example of fields contained in the `user-provided` object for a relational database service is shown below.
 
@@ -42,7 +42,7 @@ An example of fields contained in the `user-provided` object for a relational da
 To create a Spring Cloud Data Flow service instance using these connection values for the service instance's relational database service instance:
 
 <pre class="terminal">
-$ cf cs p-dataflow standard data-flow -c {"relational-data-service": { "user-provided": {"uri":"mysql://kempercrabb:fake-password@123.234.456.879:3306/vigil","username":"kempercrabb","password":"fake-password","dbname":"vigil","host":"123.234.456.879","port":3306,"tags":["mysql"]} }}
+$ cf create-service p-dataflow standard data-flow -c {"relational-data-service": { "user-provided": {"uri":"mysql://kempercrabb:fake-password@123.234.456.879:3306/vigil","username":"kempercrabb","password":"fake-password","dbname":"vigil","host":"123.234.456.879","port":3306,"tags":["mysql"]} }}
 </pre>
 
 ## <a id="messaging-service"></a>User-Provided Messaging Service
@@ -70,7 +70,7 @@ An example of fields contained in the `user-provided` object for a messaging ser
 To create a Spring Cloud Data Flow service instance using these connection values for the service instance's messaging service instance:
 
 <pre class="terminal">
-$ cf cs p-dataflow standard dataflow -c {"messaging-data-service": { "user-provided": {"dashboard_url":"https://api.cloudamqp.com/console/a-GUID-would-go-here/details","username":"buckstorm","vhost":"buckstorm","password":"fake-password","ssl":false,"hostname":"stonehill.rmq.cloudamqp.com","uri":"amqp://buckstorm:fake-password@stonehill.rmq.cloudamqp.com/buckstorm","http_api_uri":"http://buckstorm:fake-password@stonehill.rmq.cloudamqp.com:1883/api","tags":["rabbitmq"]} }}
+$ cf create-service p-dataflow standard dataflow -c {"messaging-data-service": { "user-provided": {"dashboard_url":"https://api.cloudamqp.com/console/a-GUID-would-go-here/details","username":"buckstorm","vhost":"buckstorm","password":"fake-password","ssl":false,"hostname":"stonehill.rmq.cloudamqp.com","uri":"amqp://buckstorm:fake-password@stonehill.rmq.cloudamqp.com/buckstorm","http_api_uri":"http://buckstorm:fake-password@stonehill.rmq.cloudamqp.com:1883/api","tags":["rabbitmq"]} }}
 </pre>
 
 ## <a id="analytics-service"></a>User-Provided Analytics Service
@@ -95,5 +95,5 @@ An example of fields contained in the `user-provided` object for an analytics se
 To create a Spring Cloud Data Flow service instance using these connection values for the service instance's analytics service instance:
 
 <pre class="terminal">
-$ cf cs p-dataflow standard dataflow -c {"analytics-data-service": { "user-provided": {"host":"garrels.gce.cloud.redislabs.com","uri":"redis://:fake-password@garrels.gce.cloud.redislabs.com:11781/boars-head","port":11781,"dbname":"boars-head","password":"fake-password","tags":["redis"]} }}
+$ cf create-service p-dataflow standard dataflow -c {"analytics-data-service": { "user-provided": {"host":"garrels.gce.cloud.redislabs.com","uri":"redis://:fake-password@garrels.gce.cloud.redislabs.com:11781/boars-head","port":11781,"dbname":"boars-head","password":"fake-password","tags":["redis"]} }}
 </pre>

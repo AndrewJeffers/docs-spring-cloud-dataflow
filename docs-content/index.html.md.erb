@@ -3,9 +3,9 @@ title: Spring Cloud&reg; Data Flow for PCF
 owner: Spring Cloud Services
 ---
 
-## <a id='overview-oss'></a>Overview of Spring Cloud Data Flow
+## <a id='about-oss'></a>About Spring Cloud Data Flow
 
-Spring Cloud Data Flow is an open-source toolkit for data integration and real-time data processing (see the [project home page](http://cloud.spring.io/spring-cloud-dataflow/)). The Spring Cloud Data Flow (SCDF) server deploys pipelines composed of [Spring Cloud Stream](http://cloud.spring.io/spring-cloud-stream/) or [Spring Cloud Task](http://cloud.spring.io/spring-cloud-task/) applications. A DSL makes it easy to describe the applications in a pipeline and how they are connected.
+Spring Cloud Data Flow is an open-source toolkit for data integration and real-time data processing (see the [project home page](http://cloud.spring.io/spring-cloud-dataflow/)). The Spring Cloud Data Flow (SCDF) server deploys pipelines composed of [Spring Cloud Stream](http://cloud.spring.io/spring-cloud-stream/) or [Spring Cloud Task](http://cloud.spring.io/spring-cloud-task/) applications. A domain-specific language (DSL) makes it easy to describe the applications in a pipeline and how they are connected.
 
 The SCDF server exposes a REST API for composing and deploying data pipelines and a dashboard with a graphical pipeline editor. It also includes a shell for working with the API from the command line.
 
@@ -19,9 +19,9 @@ Spring Cloud Data Flow for PCF includes the following key features:
 
 - Addition of the Spring Cloud Data Flow server to the Marketplace as a managed service
 - Automatic integration with dependent PCF services:
-  - MySQL for apps, pipelines and task history
-  - RabbitMQ for event messaging
-  - Redis for capturing analytics data
+  - MySQL for PCF for apps, pipelines and task history
+  - RabbitMQ for PCF for event messaging
+  - Redis for PCF for capturing analytics data
 - Integration of Data Flow server with PCF's UAA security model
 
 ## <a id="snapshot"></a>Product Snapshot
@@ -61,11 +61,27 @@ The following table provides version and version-support information about Sprin
 
 Spring Cloud Data Flow for PCF has the following requirements:
 
+* [Java Cloud Foundry buildpack](https://github.com/cloudfoundry/java-buildpack) version 3.8 or later (see the [Prerequisites](/scdf/installing.html#prerequisites) section of [Installation](/scdf/installing.html) for more information)
 * [MySQL for PCF v2](https://network.pivotal.io/products/pivotal-mysql), or an alternative relational database service
 * [RabbitMQ for PCF](https://network.pivotal.io/products/pivotal-rabbitmq-service), or an alternative RabbitMQ or Kafka service
 * [Redis for PCF](https://network.pivotal.io/products/p-redis), or an alternative Redis service
+* [Cloud Foundry Command Line Interface](https://github.com/cloudfoundry/cli) (cf CLI)
 
-For complete details on prerequisites to installation, see the [Prerequisites](/scdf/prerequisites.html) topic.
+### <a id="optional"></a>Optional
+
+To use the Spring Cloud Data Flow shell interface with Spring Cloud Data Flow for PCF service instances, install the following cf CLI plugins:
+
+* [Spring Cloud Data Flow for PCF cf CLI plugin](https://github.com/pivotal-cf/spring-cloud-dataflow-for-pcf-cli-plugin). To install the plugin, run the following command:
+
+    ```
+    $ cf install-plugin -r CF-Community "spring-cloud-dataflow-for-pcf"
+    ```
+  * [Java Runtime Environment](https://java.com/en/) (JRE). Required to run the Data Flow shell. You can download the JRE from the <a href="https://java.com/en/">Java website</a>.
+* [Service Instance Logging cf CLI plugin](https://github.com/pivotal-cf/service-instance-logs-cli-plugin). To install the plugin, run the following command:
+
+    ```
+    $ cf install-plugin -r CF-Community "Service Instance Logging"
+    ```
 
 ## <a id="feedback"></a>Feedback
 
