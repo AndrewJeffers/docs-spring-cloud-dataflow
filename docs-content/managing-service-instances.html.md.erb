@@ -82,8 +82,8 @@ Begin by targeting the correct org and space.
 
 <%= partial vars.scdf_managing_instances_target %>
 
-Upgrade the Data Flow service instance using `cf update-service`.
+Upgrade the Data Flow service instance using the `cf update-service` command, passing the `-c` flag with the parameter `upgrade` set to `true`.
 
 <pre class="terminal">
-$ cf update-service data-flow
+$ cf update-service data-flow -c '{"upgrade": true}'
 </pre>
