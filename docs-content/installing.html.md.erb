@@ -22,7 +22,13 @@ nodejs_buildpack         3          true      false    nodejs_buildpack-cached-v
 go_buildpack             4          true      false    go_buildpack-cached-v1.7.10.zip
 </pre>
 
-If the default Java buildpack is older than version 3.8, you can download a newer version from [Pivotal Network](https://network.pivotal.io/products/pivotal-cf) and update Pivotal Cloud Foundry by following the instructions in the [Managing Custom Buildpacks](http://docs.pivotal.io/pivotalcf/adminguide/buildpacks.html) topic. To ensure that the newer buildpack is the default Java buildpack, you may delete or disable the older buildpack or make sure that the newer buildpack is in a lower position.
+If the default Java buildpack is older than version 3.8, you can download a newer version from [Pivotal Network](https://network.pivotal.io/products/buildpacks) and update Pivotal Cloud Foundry by following the instructions in the [Managing Custom Buildpacks](http://docs.pivotal.io/pivotalcf/adminguide/buildpacks.html) topic. To ensure that the newer buildpack is the default Java buildpack, you may delete or disable the older buildpack or make sure that the newer buildpack is in a lower position.
+
+## <a id="dependent-services"></a>Dependent Services
+
+Spring Cloud Data Flow relies on other PCF services for its service broker, for the Data Flow server created for each service instance, and for the Spring Cloud Skipper application created for each service instance. You can configure these in the tile settings. When following the installation steps below, review all of these settings, ensuring that you have previously installed the specified services and that the specified service plans are active.
+
+<p class='note important'><strong>Important</strong>: If any of the services or service plans configured in the Data Flow tile settings are not available in your PCF deployment, the tile installation may fail.</p>
 
 ##<a id='install'></a> Installation Steps
 
@@ -42,22 +48,19 @@ If the default Java buildpack is older than version 3.8, you can download a newe
 
     ![Setting Broker Relational Database Service](configure-relational.png)
 
-    Enter the relational database service name and plan name for the Spring Cloud Data Flow tile to use for storing its service broker's service instance data. If you have the MySQL for PCF v2 tile installed and it has an active `db-small` plan, you may leave these fields unmodified.
-<p class='note'><strong>Note</strong>: If you are not using the MySQL for PCF v2 default for the service broker's database, you must provide information for another relational database service from your PCF marketplace (see the <a href="https://docs.pivotal.io/pivotalcf/devguide/services/">PCF documentation</a>).<br/ ><br/>
-Spring Cloud Data Flow for PCF supports MySQL for PCF v1. If you wish to use it, set this service name to <code>p-mysql</code> and set the plan name to an active MySQL for PCF v1 plan.
-</p>
+    Enter the relational database service name and plan name for the Spring Cloud Data Flow tile to use for storing its service broker's service instance data.
 
 1. In the **Settings** tab, click **Data Flow Server**.
 
-    ![Setting Data Flow Server Relational Database Service](df-server-relational.png)
+    ![Setting Data Flow Server Relational Database Service](df-server-settings.png)
 
-    Configure the relational database service name and plan used by the Data Flow server application deployed for each Data Flow service instance. If you have the MySQL for PCF v2 tile installed and it has an active `db-small` plan, you can leave these fields unmodified.
+    Configure the default services and service plans used by the Spring Cloud Data Flow server that is deployed for each Data Flow service instance. These values can be overridden when creating a Data Flow service instance.
 
 1. Still in the **Settings** tab, click **Skipper**.
 
     ![Setting Skipper Relational Database Service](skipper-relational.png)
 
-    Configure the relational database service name and plan used by the Skipper application deployed for each Data Flow service instance. If you have the MySQL for PCF v2 tile installed and it has an active `db-small` plan, you can leave these fields unmodified.
+    Configure the relational database service name and plan used by the Spring Cloud Skipper application deployed for each Data Flow service instance.
 
 1. Still in the **Settings** tab, click **Errands**.
 
