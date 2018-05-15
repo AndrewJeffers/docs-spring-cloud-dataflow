@@ -19,9 +19,9 @@ Spring Cloud Data Flow for PCF includes the following key features:
 
 - Addition of the Spring Cloud Data Flow server to the Marketplace as a managed service
 - Automatic integration with dependent PCF services:
-  - MySQL for PCF for apps, pipelines and task history
-  - RabbitMQ for PCF for event messaging
-  - Redis for PCF for capturing analytics data
+  - MySQL for PCF (or a user-provided relational database service) for apps, pipelines, and task history
+  - RabbitMQ for PCF (or a user-provided RabbitMQ or Kafka service) for event messaging
+  - Redis for PCF (or a user-provided Redis service) for capturing analytics data
 - Integration of Data Flow server with PCF's UAA security model
 
 ## <a id="snapshot"></a>Product Snapshot
@@ -33,23 +33,23 @@ The following table provides version and version-support information about Sprin
     <th>Details</th>
     <tr>
         <td>Version</td>
-        <td>v1.0.0</td>
+        <td>v1.1.0</td>
     </tr>
     <tr>
         <td>Release date</td>
-        <td>February 13, 2018</td>
+        <td>May 15, 2018</td>
     </tr>
     <tr>
         <td>Software component version</td>
-        <td>v1.3.0.RELEASE</td>
+        <td>v1.4.1.RELEASE</td>
     </tr>
     <tr>
         <td>Compatible Ops Manager version(s)</td>
-        <td>v1.10.x, v1.11.x, v1.12.x and v2.0.x</td>
+        <td>v1.10.x, v1.11.x, v1.12.x, v2.0.x, and v2.1.x</td>
     </tr>
     <tr>
         <td>Compatible Elastic Runtime version(s)</td>
-        <td>v1.10.x, v1.11.x, v1.12.x and v2.0.x</td>
+        <td>v1.10.x, v1.11.x, v1.12.x, v2.0.x, and v2.1.x</td>
     </tr>
     <tr>
         <td>IaaS support</td>
