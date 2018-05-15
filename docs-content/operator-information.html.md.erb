@@ -29,15 +29,15 @@ See below for more information about the results of configuring the service brok
 | update the tile  | the service plan         | the tile's relational database service instance is changed to use the specified plan. No data is lost.                                                                        | 
 | update the tile  | the service name         | the service name change is ignored. If you have also changed the service plan, this may leave the broker in an inoperative state. To resolve this issue, revert your changes. |
 
-###<a id='configure-data-flow-server-database-service-and-plan'></a> Configure Data Flow Server Database Service and Plan
+###<a id='configure-data-flow-server-dependent-services'></a> Configure Data Flow Server Dependent Services
 
-By default, the Spring Cloud Data Flow product uses the MySQL for PCF v2 product and its default `db-small` service plan to provision a database service instance for the Data Flow server application deployed for each Data Flow service instance. If you are using the MySQL for PCF v2 product and it does not have an active `db-small` plan or if you wish to use an alternative service, you must configure the service and service plan you wish to use for the Data Flow server. You can configure an alternative relational database service and service plan in the **Data Flow Server** pane of the Spring Cloud Data Flow settings.
+By default, the Spring Cloud Data Flow product uses the MySQL for PCF v2, RabbitMQ for PCF, and Redis for PCF products to provision dependent service instances for the Data Flow server application deployed for each Data Flow service instance. If you wish to use other services or to change the service plans used, you must configure the services and service plans you wish to use for the Data Flow server. You can configure alternate services or service plans in the **Data Flow Server** pane of the Spring Cloud Data Flow settings.
 
-![Configuring Data Flow Server Database Service](df-server-relational.png)
+![Configuring Data Flow Server Database Service](df-server-settings.png)
 
 ###<a id='configure-skipper-database-service-and-plan'></a> Configure Skipper Database Service and Plan
 
-By default, the Spring Cloud Data Flow product uses the MySQL for PCF v2 product and its default `db-small` service plan to provision a database service instance for the Skipper application deployed for each Data Flow service instance. If you are using the MySQL for PCF v2 product and it does not have an active `db-small` plan or if you wish to use an alternative service, you must configure the service and service plan you wish to use for Skipper. You can configure an alternative relational database service and service plan in the **Skipper** pane of the Spring Cloud Data Flow settings.
+By default, the Spring Cloud Data Flow product uses the MySQL for PCF v2 product and its default `db-small` service plan to provision a database service instance for the Spring Cloud Skipper application deployed for each Data Flow service instance. If you are using the MySQL for PCF v2 product and it does not have an active `db-small` plan or if you wish to use an alternative service, you must configure the service and service plan you wish to use for Skipper. You can configure an alternative relational database service and service plan in the **Skipper** pane of the Spring Cloud Data Flow settings.
 
 ![Configuring Skipper Database Service](skipper-relational.png)
 
@@ -59,7 +59,7 @@ The Spring Cloud Data Flow service broker's functionality is contained in the fo
 
 The broker relies on the [MySQL for Pivotal Cloud Foundry v2](https://network.pivotal.io/products/pivotal-mysql) product for the following service instance.
 
-* **p_dataflow-p-mysql**: A MySQL database used as a backing store for the service broker.
+* **p-dataflow-db**: A MySQL database used as a backing store for the service broker.
 
 <p class='note'><strong>Note</strong>: You can configure an alternate relational database service for the broker to use. See the <a href="operator-information.html#configure-broker-database-service-and-plan">Configure Broker Database Service and Plan</a> section above.</p>
 
@@ -88,13 +88,14 @@ For each Spring Cloud Data Flow service instance created, the service broker pro
 * A new space within the "p-dataflow" org, named using the service instance GUID and containing:
   * A Data Flow server application.
   * A Data Flow metrics application.
-  * A Skipper package management application.
+  * A Spring Cloud Skipper package management application.
   * A relational database service, bound to the Data Flow server application.
   <p class='note'><strong>Note</strong>: This relational database service is a "p.mysql" service instance by default. You can configure an alternate relational database when you create the service instance.</p>
   * A relational database service, bound to the Skipper package management application.
   * A messaging data service, bound to the Data Flow metrics application.
   <p class='note'><strong>Note</strong>: This messaging data service is a "p-rabbitmq" service instance by default. You can configure an alternate messaging service when you create the service instance.</p>
   * A Redis database service, bound to the Data Flow server application.
+  <p class='note'><strong>Note</strong>: This Redis database service is a "p-redis" service instance by default. You can configure an alternate Redis database when you create the service instance.</p>
 * The following resources are created in the originating user space where the service instance command was targeted at:
   * A "p-dataflow" service instance.
   * A "p-dataflow" relational database service instance (providing access to the relational database service created in the service instance's space within the "p-dataflow" org).
@@ -117,6 +118,6 @@ Below are the usage requirements of the Data Flow server and metrics application
 |---------------------------|------------------------------------|---------------------------------|
 | Data Flow Server          | 2 GB                               | 2 GB                            |
 | Data Flow Metrics         | 1 GB                               | 1 GB                            |
-| Skipper                   | 1 GB                               | 2 GB                            |
+| Spring Cloud Skipper      | 1 GB                               | 2 GB                            |
 
 Spring Cloud Data Flow service instances are also backed by instances of other PCF services. These are either services from PCF data service products or custom services provided to a Data Flow service instance at create time. These data services include a relational database service, a messaging service, and an analytics database service instance for each Data Flow service instance created. The Skipper backing application uses a MySQL database service for its backing store.
