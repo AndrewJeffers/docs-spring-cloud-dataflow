@@ -79,6 +79,47 @@ The application is deployed in the "p-dataflow" space.
 
 ![Viewing p-dataflow Space](viewing-p-dataflow-space.png)
 
+###<a id='get-broker-build-information'></a> Get Broker Build Information
+
+The Spring Cloud Data Flow broker provides build information using the Spring Boot Actuator `info` endpoint, which is mapped to `/info`. You can access this endpoint by appending `/info` to the path of the Spring Cloud Data Flow broker.
+
+If the Spring Cloud Data Flow service broker application is located at the following URL:
+
+```
+https://p-dataflow.apps.wise.com
+```
+
+then you can access the `info` endpoint by visiting:
+
+```
+https://p-dataflow.apps.wise.com/info
+```
+
+The service broker returns a JSON response, as in the following example.
+
+```
+{
+	"git": {
+		"commit": {
+			"time": 1526673193000,
+			"id": "740fb80"
+		},
+		"branch": "740fb80a6e1d83de033a4b81bf29c8b4cfa83b74"
+	},
+	"build": {
+		"version": "1.1.0-build.19",
+		"artifact": "scdf-for-pcf-service-broker",
+		"name": "scdf-for-pcf-service-broker",
+		"group": "io.pivotal.springcloud.dataflow",
+		"time": 1526673593000
+	}
+}
+```
+
+The response contains information about the build of the service broker application, including the Maven project coordinates and build time. It also contains information about the Git repository for Spring Cloud Data Flow for PCF at build time.
+
+<p class='note'><strong>Note</strong>: Fields such as those for Git repository information are for diagnostic purposes and intended to provide <a href="https://pivotal.io/support">Pivotal Support</a> with information to help in troubleshooting.</p>
+
 ##<a id='service-instance-architecture'></a> Service Instance Architecture
 
 ![Product Architecture](product-architecture.png)
