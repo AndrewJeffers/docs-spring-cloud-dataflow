@@ -1,0 +1,50 @@
+---
+title: Tile Configuration
+owner: Spring Cloud Services
+---
+
+See below for information about Spring Cloud® Data Flow's deployment model and other information which may be useful in administering Data Flow service instances or deployed applications.
+
+<p class='note'><strong>Note</strong>: Ops Manager administrators can use Role-Based Access Control (RBAC) to manage which operators can make deployment changes, view credentials, and manage user roles in Ops Manager. Therefore, your role permissions might not allow you to perform every procedure in this operator guide. For more information about roles in Ops Manager, see <a href="https://docs.pivotal.io/pivotalcf/2-0/opsguide/config-rbac.html#about">Understand Roles in Ops Manager</a>.</p>
+
+##<a id='tile-configuration-options'></a> Tile Configuration Options
+
+The Spring Cloud Data Flow tile includes settings for various options. You can configure these by visiting the Installation Dashboard of Pivotal Cloud Foundry® Operations Manager and clicking the Spring Cloud Data Flow tile.
+
+###<a id='configure-broker-database-service-and-plan'></a> Configure Broker Database Service and Plan
+
+By default, the Spring Cloud Data Flow product uses the MySQL for PCF v2 product and its default `db-small` service plan to provision a database service instance for the Data Flow service broker. If you are using the MySQL for PCF v2 product and it does not have an active `db-small` plan or if you wish to use an alternative service, you must configure the Spring Cloud Data Flow product for the service and service plan you wish to use. You can configure an alternative relational database service and service plan in the **Service Broker** pane of the Spring Cloud Data Flow settings.
+
+![Configuring MySQL Service](configure-relational.png)
+
+The broker's database service should be configured only during the Spring Cloud Data Flow tile installation process. If you have already completed the tile installation process, do not alter that setting (you may still configure the broker's database service plan after the tile installation).
+
+<p class="note warning"><strong>WARNING: </strong> Configuring the service broker's dependent relational database service after the tile installation has finished can result in orphaned Data Flow service instances or in multiple data sets and corruption of the broker database's data.</p>
+
+See below for more information about the results of configuring the service broker's relational database.
+
+| If you           | and change               | then                                                                                                                                                                          |
+|------------------|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| install the tile | the service name or plan | the tile uses the specified service and plan. You may also use the default values of `p.mysql` and `db-small`.                                                                   |
+| update the tile  | the service plan         | the tile's relational database service instance is changed to use the specified plan. No data is lost.                                                                        | 
+| update the tile  | the service name         | the service name change is ignored. If you have also changed the service plan, this may leave the broker in an inoperative state. To resolve this issue, revert your changes. |
+
+###<a id='configure-data-flow-server-dependent-services'></a> Configure Data Flow Server Dependent Services
+
+By default, the Spring Cloud Data Flow product uses the MySQL for PCF v2, RabbitMQ for PCF, and Redis for PCF products to provision dependent service instances for the Data Flow server application deployed for each Data Flow service instance. If you wish to use other services or to change the service plans used, you must configure the services and service plans you wish to use for the Data Flow server. You can configure alternate services or service plans in the **Data Flow Server** pane of the Spring Cloud Data Flow settings.
+
+![Configuring Data Flow Server Database Service](df-server-settings.png)
+
+###<a id='configure-skipper-database-service-and-plan'></a> Configure Skipper Database Service and Plan
+
+By default, the Spring Cloud Data Flow product uses the MySQL for PCF v2 product and its default `db-small` service plan to provision a database service instance for the Spring Cloud Skipper application deployed for each Data Flow service instance. If you are using the MySQL for PCF v2 product and it does not have an active `db-small` plan or if you wish to use an alternative service, you must configure the service and service plan you wish to use for Skipper. You can configure an alternative relational database service and service plan in the **Skipper** pane of the Spring Cloud Data Flow settings.
+
+![Configuring Skipper Database Service](skipper-relational.png)
+
+###<a id='enable-or-disable-marketplace-access'></a> Enable or Disable Global Marketplace Access
+
+By default, the Spring Cloud Data Flow product enables access to its service offering, called `p-dataflow`, across all orgs in the PCF deployment as part of the tile installation process. If you wish to manually grant service access to specific organizations, you can configure the default global access in the **Service Access** pane of the Spring Cloud Data Flow settings.
+
+![Configuring Service Access](configure-service-access.png)
+
+To disable the default of service access enabled for all orgs, clear the **Enable global access to plans of service p_dataflow** checkbox. Click **Save**, return to the Installation Dashboard, and apply your changes. You can now enable or disable access to the Data Flow service offering for specific orgs.
