@@ -5,49 +5,12 @@ owner: Spring Cloud Services
 
 Release notes for Spring Cloud Data Flow for PCF
 
-### v1.0.1
+### v1.1.0
 
-**Release Date:** March 9, 2018
-
-Features included in this release:
-
-* Operators can now configure the default relational database service name and plan for the Data Flow server and Skipper applications when creating Spring Cloud Data Flow service instances.
-
-Issues resolved in this release:
-
-* Removed unintentional hard dependency on MySQL for PCF v1 tile.
-* Fixed race condition that could cause service instance creation to fail when mapping the Skipper application route.
-* Fixed issue when deleting service instances that use asynchronously-deleted backing data services.
-
-### v1.0.0
-
-**Release Date:** February 13, 2018
+**Release Date:** June 13, 2018
 
 Features included in this release:
 
-* A Spring Cloud Data Flow service offering is added to the Pivotal Cloud Foundry Apps Manager&reg; Services Marketplace.
-* The Spring Cloud Data Flow service is fully integrated with PCF's security model, using UAA for authentication and access control. 
-* Creation of a Spring Cloud Data Flow service instance results in creation of the following Spring Boot applications in a backing org and space:
-    * Spring Cloud Data Flow server
-    * Spring Cloud Data Flow metrics collector
-    * Spring Cloud Skipper package manager
-* Creation of a Spring Cloud Data Flow service instance results in creation of four backing data service instances made available to the Spring Cloud Data Flow service instance's backing Data Flow server, metrics collection, and Skipper package management applications, as well as to applications deployed via the Spring Cloud Data Flow service instance:
-    * Two relational database services (MySQL for PCF is the optional default)
-    * A messaging service (RabbitMQ for PCF is the optional default)
-    * An analytics service (Redis for PCF service instance is the optional default)
-    
-	Alternative backing data services can be specified by providing either a service offering name and plan or configuration for a user-provided service instance.
-* The Spring Cloud Data Flow shell can be used to interact locally with a Spring Cloud Data Flow service instance. For more information about the shell, see the [OSS Spring Cloud Data Flow documentation](https://docs.spring.io/spring-cloud-dataflow/docs/1.3.0.RELEASE/reference/htmlsingle/#shell).
-* A Service Instances Dashboard is available from Apps Manager and lists all provisioned Spring Cloud Data Flow service instances, with links to view backing server application logs for each service instance as well as controls for launching streams and tasks. For more information about the dashboard, see the [OSS Spring Cloud Data Flow documentation](https://docs.spring.io/spring-cloud-dataflow/docs/1.3.0.RELEASE/reference/htmlsingle/#dashboard).
-
-Known issues in this release:
-
-* The service broker fails to delete a Spring Cloud Data Flow service instance that uses an asynchronous backing service. An attempt to delete such a service instance may result in a message similar to the following:
-    
-    ```
-    status:    delete failed
-    message:   CF-AsyncRequired(10001): Service instance relational-service: This service
-                                        plan requires client support for asynchronous
-                                        service operations.
-    ```
-* There is an unintentional hard dependency on [MySQL for PCF v1](http://docs.pivotal.io/p-mysql/1-10/index.html). The `deploy-all` errand will fail with `400` or `500` HTTP status code response depending on the services available in the PCF Marketplace catalog. A fix is scheduled to be released in the `v1.0.1` release of SCDF for PCF.
+* Service instances are now based on Spring Cloud Data Flow 1.5.1.RELEASE.
+* Service instances now accept Maven configuration properties provided by Spring Cloud Data Flow OSS.
+* The "run-tests" lifecycle errand no longer requires access to the Internet.
