@@ -25,7 +25,7 @@ dataflow:>
 Import the stream app starters using the Data Flow shell's `app import` command:
 
 <pre class="terminal">
-dataflow:>app import http://bit.ly/Celsius-SR1-stream-applications-rabbit-maven
+dataflow:>app import https://bit.ly/Celsius-SR2-stream-applications-rabbit-maven
 Successfully registered 65 applications from [source.sftp, source.mqtt.metadata,
 sink.mqtt.metadata,... processor.scriptable-transform.metadata]
 </pre>
@@ -42,7 +42,7 @@ Created new stream 'words'
 Next, deploy the stream, using the `stream deploy` command:
 
 <pre class="terminal">
-dataflow:>stream deploy words --properties "app.splitter.producer.partitionKeyExpression=payload"
+dataflow:>stream deploy words
 Deployment request has been sent for stream 'words'
 </pre>
 
@@ -58,7 +58,7 @@ This will take you to the dashboard's **Apps** tab, where you can import applica
 
 ![Dashboard Apps Tab, With No Apps Imported](dashboard-apps-tab-no-apps.png)
 
-Click **Bulk Import Application(s)** to import the "RabbitMQ + Maven" stream app starters. In the **Uri** field, enter `http://bit.ly/Celsius-SR1-stream-applications-rabbit-maven`. Then click **Import The Application(s)**.
+Click **Bulk Import Application(s)** to import the "RabbitMQ + Maven" stream app starters. In the **Uri** field, enter `https://bit.ly/Celsius-SR2-stream-applications-rabbit-maven`. Then click **Import The Application(s)**.
 
 ![Bulk Importing Applications](bulk-importing-applications.png)
 
@@ -103,36 +103,36 @@ $ cf apps
 Getting apps in org myorg / space dev as user...
 OK
 
-name                 requested state   instances   memory   disk   urls
-words-http-v2        started           1/1         1G       1G     words-http-v2.wise.com
-words-log-v2         started           1/1         1G       1G     words-log-v2.wise.com
-words-splitter-v2    started           1/1         1G       1G     words-splitter-v2.wise.com
+name                        requested state   instances   memory   disk   urls
+RWSDZgk-words-http-v1       started           1/1         1G       1G     RWSDZgk-words-http-v1.apps.wise.com
+RWSDZgk-words-log-v1        started           1/1         1G       1G     RWSDZgk-words-log-v1.apps.wise.com
+RWSDZgk-words-splitter-v1   started           1/1         1G       1G     RWSDZgk-words-splitter-v1.apps.wise.com
 </pre>
 
-Run the `cf logs` command on the `words-log-v2` application:
+Run the `cf logs` command on the `RWSDZgk-words-log-v1` application:
 
 <pre class="terminal">
-$ cf logs words-log-v2
-Retrieving logs for app words-log-v2 in org myorg / space dev as user...
+$ cf logs RWSDZgk-words-log-v1
+Retrieving logs for app RWSDZgk-words-log-v1 in org myorg / space dev as user...
 </pre>
 
-Then, in a separate command line, use the Data Flow shell (started using the `cf dataflow-shell` command) to send a POST request to the `words-http-v2` application:
+Then, in a separate command line, use the Data Flow shell (started using the `cf dataflow-shell` command) to send a POST request to the `RWSDZgk-words-http-v1` application:
 
 <pre class="terminal">
-$ cf dataflow-shell data-flow
+$ cf dataflow-shell dataflow
 ...
 Welcome to the Spring Cloud Data Flow shell. For assistance hit TAB or type "help".
-dataflow:>http post --target https://words-http-v2.wise.com --data "This is a test"
-> POST (text/plain) https://words-http-v2.wise.com This is a test
+dataflow:>http post --target http://RWSDZgk-words-http-v1.apps.wise.com --data "This is a test"
+> POST (text/plain) http://RWSDZgk-words-http-v1.apps.wise.com This is a test
 > 202 ACCEPTED
 </pre>
 
-Watch for the processed data in the `words-log-v2` application's logs:
+Watch for the processed data in the `RWSDZgk-words-log-v1` application's logs:
 
 <pre class="terminal">
-2018-03-21T15:03:53.56-0500 [APP/PROC/WEB/0] OUT 2018-03-21 20:03:53.566  INFO 16 --- [itter.words-0-1] words-log-v2                             : This
-2018-03-21T15:03:53.56-0500 [APP/PROC/WEB/0] OUT 2018-03-21 20:03:53.568  INFO 16 --- [itter.words-0-1] words-log-v2                             : is
-2018-03-21T15:03:53.57-0500 [APP/PROC/WEB/0] OUT 2018-03-21 20:03:53.570  INFO 16 --- [itter.words-0-1] words-log-v2                             : a
-2018-03-21T15:03:53.58-0500 [APP/PROC/WEB/0] OUT 2018-03-21 20:03:53.583  INFO 16 --- [itter.words-0-1] words-log-v2                             : test
+2018-06-07T16:47:08.80-0500 [APP/PROC/WEB/0] OUT 2018-06-07 21:47:08.808  INFO 16 --- [plitter.words-1] RWSDZgk-words-log-v1                     : This
+2018-06-07T16:47:08.81-0500 [APP/PROC/WEB/0] OUT 2018-06-07 21:47:08.810  INFO 16 --- [plitter.words-1] RWSDZgk-words-log-v1                     : is
+2018-06-07T16:47:08.82-0500 [APP/PROC/WEB/0] OUT 2018-06-07 21:47:08.820  INFO 16 --- [plitter.words-1] RWSDZgk-words-log-v1                     : a
+2018-06-07T16:47:08.82-0500 [APP/PROC/WEB/0] OUT 2018-06-07 21:47:08.822  INFO 16 --- [plitter.words-1] RWSDZgk-words-log-v1                     : test
 </pre>
 
