@@ -52,6 +52,26 @@ As the command output suggests, you can use the `cf services` or `cf service` co
 
 <%= partial vars.scdf_managing_instances_service %>
 
+## <a id="upgrading"></a>Upgrading an Instance
+
+After an upgrade of the Spring Cloud Data Flow for PCF product, you can use the `cf update-service` command to upgrade individual Data Flow service instances.
+
+Begin by targeting the correct org and space.
+
+<%= partial vars.scdf_managing_instances_target %>
+
+You can view all service instances in the space using `cf services`.
+
+<%= partial vars.scdf_managing_instances_services %>
+
+Upgrade the Data Flow service instance using `cf upgrade-service`, passing the `-c` flag to set the `upgrade` parameter to `true`.
+
+<%= partial vars.scdf_managing_instances_upgrade %>
+
+As the output from the `cf update-service` command suggests, you can use the `cf services` or `cf service` commands to check the status of the service instance. When the Data Flow service instance has been upgraded, the `cf service` command will give a status of `update succeeded`:
+
+<%= partial vars.scdf_managing_instances_upgrade_finished %>
+
 ## <a id="deleting"></a>Deleting an Instance
 
 Deleting a Data Flow service instance will result in deletion of all of its dependent service instances.
