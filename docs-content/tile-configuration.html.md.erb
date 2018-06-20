@@ -29,6 +29,14 @@ See below for more information about the results of configuring the service brok
 | update the tile  | the service plan         | the tile's relational database service instance is changed to use the specified plan. No data is lost.                                                                        | 
 | update the tile  | the service name         | the service name change is ignored. If you have also changed the service plan, this may leave the broker in an inoperative state. To resolve this issue, revert your changes. |
 
+###<a id='configure-broker-buildpack'></a> Configure Buildpack for Service Instances
+
+By default, the Spring Cloud Data Flow service broker application and service instance backing applications use the buildpack chosen by the platform's buildpack detection; normally, this will be the highest-priority Java buildpack. To cause these applications to use a particular Java buildpack regardless of priority, you can set the name of the buildpack to use in the **Service Broker** pane of the Spring Cloud Data Flow tile settings.
+
+![Configuring Java Buildpack](configure-buildpack.png)
+
+In the **Buildpack** field, enter the name of the desired Java buildpack. Click **Save**, return to the Installation Dashboard, and apply your changes. The broker application and service instance applications will now use the selected buildpack.
+
 ###<a id='configure-data-flow-server-dependent-services'></a> Configure Data Flow Server Dependent Services
 
 By default, the Spring Cloud Data Flow product uses the MySQL for PCF v2, RabbitMQ for PCF, and Redis for PCF products to provision dependent service instances for the Data Flow server application deployed for each Data Flow service instance. If you wish to use other services or to change the service plans used, you must configure the services and service plans you wish to use for the Data Flow server. You can configure alternate services or service plans in the **Data Flow Server** pane of the Spring Cloud Data Flow settings.
