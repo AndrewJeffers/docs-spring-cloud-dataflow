@@ -29,7 +29,7 @@ See below for more information about the results of configuring the service brok
 | update the tile  | the service plan         | the tile's relational database service instance is changed to use the specified plan. No data is lost.                                                                        | 
 | update the tile  | the service name         | the service name change is ignored. If you have also changed the service plan, this may leave the broker in an inoperative state. To resolve this issue, revert your changes. |
 
-###<a id='configure-broker-buildpack'></a> Configure Buildpack for Service Instances
+###<a id='configure-buildpack'></a> Configure Buildpack for Broker and Service Instances
 
 By default, the Spring Cloud Data Flow service broker application and service instance backing applications use the buildpack chosen by the platform's buildpack detection; normally, this will be the highest-priority Java buildpack. To cause these applications to use a particular Java buildpack regardless of priority, you can set the name of the buildpack to use in the **Service Broker** pane of the Spring Cloud Data Flow tile settings.
 
