@@ -19,6 +19,16 @@ You can view plan details for the Data Flow product using `cf marketplace -s`.
 
 <%= partial vars.scdf_managing_instances_marketplace %>
 
+### <a id="setting-the-buildpack"></a>Setting the Buildpack
+
+Each Data Flow service instance can be given the name of a buildpack to use for deploying stream and task apps. You can set the buildpack for the service instance using a `buildpack` parameter given to `cf create-service`. To create a service instance that uses a buildpack named `custom-java-buildpack` to deploy apps, you might run:
+
+<pre class="terminal">
+$ cf create-service p-dataflow standard data-flow -c '{"buildpack": "custom-java-buildpack"}'
+</pre>
+
+### <a id="setting-dependent-services"></a>Setting Dependent Services
+ 
 Each Data Flow service instance uses three dependent data services. Defaults for these services can be configured in the tile settings, and these defaults can be overridden for each individual service instance at create time.
 
 <p class='note'><strong>Note</strong>: The service offerings with the plan <code>proxy</code> are proxy services used by Spring Cloud Data Flow for PCF service instances. The Spring Cloud Data Flow service broker creates and deletes instances of these services automatically along with each Spring Cloud Data Flow service instance. Do not manually create or delete instances of these services.</p>
@@ -36,6 +46,8 @@ General parameters used to configure dependent data services for a Data Flow ser
 | <code>skipper-relational.name</code>      | The name of the service to use for a relational database used by the Skipper application.                              |
 | <code>skipper-relational.plan</code>      | The name of the service plan to use for a relational database used by the Skipper application.                         |
 
+### <a id="setting-maven-properties"></a>Setting Maven Properties
+
 Each Data Flow service instance can optionally specify Maven configuration properties. For the complete list of properties that can be specified, see the ["Maven" section in the OSS Spring Cloud Data Flow documentation](https://docs.spring.io/spring-cloud-dataflow/docs/1.5.0.RELEASE/reference/htmlsingle/#configuration-maven).
 
 Maven configuration properties can be set for each Data Flow service instance using parameters given to `cf create-service`. To set the `maven.remote-repositories.repo1.url` property, you might use a command such as the following:
@@ -43,6 +55,8 @@ Maven configuration properties can be set for each Data Flow service instance us
 <pre class="terminal">
 $ cf create-service p-dataflow standard data-flow -c '{"maven.remote-repositories.repo1.url": "https://repo.spring.io/libs-snapshot"}'
 </pre>
+
+### <a id="creating-the-instance"></a>Creating the Instance
 
 Create the service instance using `cf create-service`. To create a Data Flow service that uses a Redis Cloud service available from your PCF marketplace and sets the Maven `maven.remote-repositories.repo1.url` property to `https://repo.spring.io/release`, you might run:
 
