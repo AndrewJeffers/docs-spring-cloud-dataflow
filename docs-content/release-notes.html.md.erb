@@ -5,49 +5,15 @@ owner: Spring Cloud Services
 
 Release notes for Spring Cloud Data Flow for PCF
 
-## <a id="1-1-4"></a>v1.1.4
+## <a id="1-2-0"></a>v1.2.0
 
-**Release Date:** September 7, 2018
-
-Fixes included in this release:
-
-* Fixed an issue that prevented the "run-tests" errand from completing when the Spring Cloud Data Flow tile was configured to not allow internet access.
-
-## <a id="1-1-3"></a>v1.1.3
-
-**Release Date:** August 6, 2018
+**Release Date:** September 12, 2018
 
 Enhancements included in this release:
 
-* A new "Do not allow public Internet access from service instances" option in the Data Flow tile configuration prevents service instances from accessing the Internet.
-* The "run-tests" errand now complies with the UAA password policy when creating its temporary test user.
+* Service instances are now based on Spring Cloud Data Flow 1.6.1.RELEASE.
+* Service instances can now be configured at create time to use the PCF Scheduler service.
 
 Fixes included in this release:
 
-* The Java buildpack setting configured in the Data Flow tile or for a particular service instance is now honored.
-
-## <a id="1-1-2"></a>v1.1.2
-
-**Release Date:** July 16, 2018
-
-Enhancements included in this release:
-
-* Service instances now allow `spring.cloud.dataflow.applicationProperties.*` to be set via `-c` properties to `cf` create and update commands
-
-## <a id="1-1-1"></a>v1.1.1
-
-**Release Date:** June 25, 2018
-
-Fixes included in this release:
-
-* The broker now proceeds with an update operation for a service instance that previously failed to update.
-
-## <a id="1-1-0"></a>v1.1.0
-
-**Release Date:** June 18, 2018
-
-Features included in this release:
-
-* Service instances are now based on Spring Cloud Data Flow 1.5.1.RELEASE.
-* Service instances now accept Maven configuration properties provided by Spring Cloud Data Flow OSS.
-* The "run-tests" lifecycle errand no longer requires access to the Internet.
+* A service instance configured to use a particular Java buildpack will now use that buildpack in deploying task applications.
