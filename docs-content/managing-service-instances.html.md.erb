@@ -48,6 +48,14 @@ Maven configuration properties can be set for each Data Flow service instance us
 $ cf create-service p-dataflow standard data-flow -c '{"maven.remote-repositories.repo1.url": "https://repo.spring.io/libs-snapshot"}'
 </pre>
 
+### <a id="enable-tasks-only"></a>Enable Task Support Only (No Streams)
+
+Each Data Flow service instance can be configured to run tasks only (with stream support disabled). You can configure the service instance to enable only task support using a `task-only` parameter given to `cf create-service` or `cf update-service`:
+
+<pre class="terminal">
+$ cf create-service p-dataflow standard data-flow -c '{"task-only": true}'
+</pre>
+
 ### <a id="using-scheduler-for-pcf"></a>Using Scheduler for PCF
 
 You can use the Scheduler for PCF service with Spring Cloud Data Flow for PCF to schedule task executions. If you configure a Data Flow service instance to use Scheduler for PCF, the Data Flow broker will create a new Scheduler service instance in the Data Flow service instance's backing space. This Scheduler service instance will be bound to the Data Flow server's backing application.
