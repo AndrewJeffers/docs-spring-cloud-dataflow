@@ -58,6 +58,16 @@ $ cf create-service p-dataflow standard data-flow -c '{"task-only": true}'
 
 With `task-only` set to `true`, the service instance's dashboard (see [Using the Dashboard](/scdf/using-the-dashboard.html)) will not display the **Streams** tab.
 
+### <a id="enable-streams-only"></a>Enable Stream Support Only (No Tasks)
+
+Each Data Flow service instance can be configured to run streams only (with task support disabled). You can configure the service instance to enable only stream support using a `stream-only` parameter given to `cf create-service` or `cf update-service`:
+
+<pre class="terminal">
+$ cf create-service p-dataflow standard data-flow -c '{"stream-only": true}'
+</pre>
+
+With `stream-only` set to `true`, the service instance's dashboard (see [Using the Dashboard](/scdf/using-the-dashboard.html)) will not display the **Tasks** tab.
+
 ### <a id="using-scheduler-for-pcf"></a>Using Scheduler for PCF
 
 You can use the Scheduler for PCF service with Spring Cloud Data Flow for PCF to schedule task executions. If you configure a Data Flow service instance to use Scheduler for PCF, the Data Flow broker will create a new Scheduler service instance in the Data Flow service instance's backing space. This Scheduler service instance will be bound to the Data Flow server's backing application.
