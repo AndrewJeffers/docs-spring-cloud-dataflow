@@ -56,7 +56,7 @@ Each Data Flow service instance can be configured to run tasks only (with stream
 $ cf create-service p-dataflow standard data-flow -c '{"task-only": true}'
 </pre>
 
-With `task-only` set to `true`, the service instance's dashboard (see [Using the Dashboard](/scdf/using-the-dashboard.html)) will not display the **Streams** tab.
+With `task-only` set to `true`, the Data Flow metrics and Spring Cloud Skipper backing apps (with their associated relational database and messaging backing service instances) will not be deployed for the service instance, and the service instance's dashboard (see [Using the Dashboard](/scdf/using-the-dashboard.html)) will not display the **Streams** tab.
 
 ### <a id="enable-streams-only"></a>Enable Stream Support Only (No Tasks)
 
