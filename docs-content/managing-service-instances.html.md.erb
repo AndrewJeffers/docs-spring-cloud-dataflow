@@ -48,7 +48,17 @@ Maven configuration properties can be set for each Data Flow service instance us
 $ cf create-service p-dataflow standard data-flow -c '{"maven.remote-repositories.repo1.url": "https://repo.spring.io/libs-snapshot"}'
 </pre>
 
-### <a id="enable-tasks-only"></a>Enable Task Support Only (No Streams)
+### <a id="limiting-concurrent-tasks"></a>Limiting Concurrent Tasks
+
+Each Data Flow service instance can optionally specify a maximum number of concurrently-running tasks. You can configure the concurrent task limit using a `concurrent-task-limit` parameter given to `cf create-service` or `cf update-service`:
+
+<pre class="terminal">
+$ cf create-service p-dataflow standard data-flow -c '{"concurrent-task-limit": 30}'
+</pre>
+
+When the number of concurrent tasks reaches the specified limit, the Data Flow service instance will no longer launch new tasks until the number of running tasks is again below the limit.
+
+### <a id="enabling-tasks-only"></a>Enabling Task Support Only (No Streams)
 
 Each Data Flow service instance can be configured to run tasks only (with stream support disabled). You can configure the service instance to enable only task support using a `task-only` parameter given to `cf create-service` or `cf update-service`:
 
@@ -58,7 +68,7 @@ $ cf create-service p-dataflow standard data-flow -c '{"task-only": true}'
 
 With `task-only` set to `true`, the Data Flow metrics and Spring Cloud Skipper backing apps (with their associated relational database and messaging backing service instances) will not be deployed for the service instance, and the service instance's dashboard (see [Using the Dashboard](/scdf/using-the-dashboard.html)) will not display the **Streams** tab.
 
-### <a id="enable-streams-only"></a>Enable Stream Support Only (No Tasks)
+### <a id="enabling-streams-only"></a>Enabling Stream Support Only (No Tasks)
 
 Each Data Flow service instance can be configured to run streams only (with task support disabled). You can configure the service instance to enable only stream support using a `stream-only` parameter given to `cf create-service` or `cf update-service`:
 
