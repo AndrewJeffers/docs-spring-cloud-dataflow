@@ -78,7 +78,11 @@ The response contains information about the build of the service broker applicat
 
 <p class='note'><strong>Note</strong>: Fields such as those for Git repository information are for diagnostic purposes and intended to provide <a href="https://pivotal.io/support">Pivotal Support</a> with information to help in troubleshooting.</p>
 
-##<a id='service-instance-architecture'></a> Service Instance Architecture
+##<a id='service-instances'></a> Service Instances
+
+See the following sections for information about service instances deployed by the Spring Cloud Data Flow for PCF service broker.
+
+###<a id='service-instance-architecture'></a> Service Instance Architecture
 
 ![Product Architecture](product-architecture.png)
 
@@ -100,6 +104,15 @@ For each Spring Cloud Data Flow service instance created, the service broker pro
   * A "p-dataflow" relational database service instance (providing access to the relational database service created in the service instance's space within the "p-dataflow" org).
   * A "p-dataflow" messaging service instance (providing access to the messaging data service created in the service instance's space within the "p-dataflow" org).
   * A "p-dataflow" analytics service instance (providing access to the analytics service created in the service instance's space within the "p-dataflow" org).
+
+###<a id='set-domain-for-service-instance-backing-apps'></a> Set a Domain for Service Instance Backing Apps
+
+When deploying a backing app for a Data Flow service instance, the Spring Cloud Data Flow service broker uses the following strategy to select a domain for the app:
+
+1. The broker looks for a private domain shared with the `p-dataflow` org. If it finds one or more, the broker uses the first for the app.
+1. If the broker finds no private domain shared with the `p-dataflow` org, it looks for a shared domain. If it finds one or more, the broker uses the first for the app.
+
+To cause the service broker to use a particular domain for service instance backing apps, configure the domain as a private domain and share it with the `p-dataflow` org. This will not affect the choice of domain for apps deployed by a Data Flow service instance.
 
 ###<a id='capacity-requirements'></a> Capacity Requirements
 
