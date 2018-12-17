@@ -20,6 +20,10 @@ The Spring Cloud Data Flow for PCF Cloud Foundry CLI plugin was created to ease 
 
 ## <a id="using-cf-cli-plugin"></a>Using the Cloud Foundry CLI Plugin
 
+You can install the CLI plugin for the Cloud Foundry shell using the following command:
+
+`cf install-plugin -r CF-Community "spring-cloud-dataflow-for-pcf"`
+
 The plugin adds a `dataflow-shell` command, which attaches the Data Flow shell to a Spring Cloud Data Flow for PCF service instance. Given an existing service instance named `data-flow`, the following command will download the appropriate shell version and attach it to the service instance:
 
 ```
