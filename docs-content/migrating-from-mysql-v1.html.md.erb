@@ -1,0 +1,38 @@
+---
+title: Migrating Data from MySQL for PCF v1 to v2
+owner: Spring Cloud Services
+---
+
+<strong><%= modified_date %></strong>
+
+The MySQL for PCF v1 tile has been deprecated. Although Spring Cloud Data Flow for PCF v1.3 supports MySQL for PCF v1, Pivotal recommends that operators now switch to MySQL for PCF v2 for use with Spring Cloud Data Flow. See below for information about migrating your installation of Spring Cloud Data Flow for PCF from use of the MySQL for PCF v1 tile.
+
+<p class='note'><strong>Note</strong>: Ops Manager administrators can use Role-Based Access Control (RBAC) to manage which operators can make deployment changes, view credentials, and manage user roles in Ops Manager. Therefore, your role permissions might not allow you to perform every procedure in this operator guide. For more information about roles in Ops Manager, see <a href="https://docs.pivotal.io/pivotalcf/2-0/opsguide/config-rbac.html#about">Understand Roles in Ops Manager</a>.</p>
+
+<p class='note'><strong>Important</strong>: Migration of MySQL for PCF service instances will incur downtime for users of Spring Cloud Data Flow (during the migration, the Spring Cloud Data Flow service broker cannot service requests). Be sure to take this into account when planning the migration.</p>
+
+The Spring Cloud Data Flow broker, the Spring Cloud Data Flow server created for each service instance, and the Spring Cloud Skipper server created for each service instance each use a MySQL service instance for storing information about service instances and their streams and tasks.
+
+1. Install the [MySQL for PCF v2](https://network.pivotal.io/products/pivotal-mysql) tile.
+
+1. In the Spring Cloud Data Flow [tile configuration](./tile-configuration.html), update the [settings for the service broker's backing MySQL service](./tile-configuration.html#configure-broker-database-service-and-plan), the [settings for the Data Flow server's backing MySQL service](./tile-configuration.html#configure-data-flow-server-dependent-services), and the [settings for the Spring Cloud Skipper server's backing MySQL service](./tile-configuration.html#configure-skipper-database-service-and-plan), using MySQL for PCF v2 values.
+
+1. Return to the Installation Dashboard.
+
+1. If you are using Ops Manager v2.3 or later, click **Review Pending Changes**. For more information about this Ops Manager page, see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
+
+1. Click **Apply Changes**.
+
+1. For each existing Spring Cloud Data Flow for PCF service instance:
+
+  1. Create a new Data Flow service instance.
+
+  1. Disable any scheduled stream or task executions on the original service instance.
+
+  1. Deploy the original service instance's streams and tasks on the new service instance.
+
+  1. Enable any scheduled stream or task executions on the new service instance.
+
+  1. Delete the original service instance.
+
+The Spring Cloud Data Flow service broker and service instances will now use MySQL for PCF v2.
