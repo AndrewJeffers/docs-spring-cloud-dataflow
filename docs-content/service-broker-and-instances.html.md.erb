@@ -11,7 +11,7 @@ See below for information about Spring Cloud® Data Flow's deployment model and 
 
 Spring Cloud Data Flow provides a Spring Cloud Data Flow server as a [Managed Service](https://docs.cloudfoundry.org/services/) on [Pivotal Cloud Foundry](https://network.pivotal.io/products/pivotal-cf) (PCF). It uses Cloud Foundry's [Service Broker API](https://docs.cloudfoundry.org/services/api.html) to manage this service. See below for information about Spring Cloud Data Flow's broker implementation.
 
-The Spring Cloud Data Flow service broker's functionality is contained in the following Spring Boot application instance, which is deployed in the "system" organization to the "p-dataflow" space.
+The Spring Cloud Data Flow service broker's functionality is contained in the following Spring Boot application instance, which is deployed in the ``system`` org to the `p-dataflow` space.
 
 * **p-dataflow-[version]**: Implements the Service Broker API to act on provision, deprovision, bind, and unbind requests.
 
@@ -29,11 +29,11 @@ The service broker application is deployed using a [blue-green deployment strate
 
 ###<a id='access-via-apps-manager'></a> Access Via Apps Manager
 
-To view the broker application in Pivotal Cloud Foundry&reg; Apps Manager, log into Apps Manager as an admin user and select the "system" org.
+To view the broker application in Pivotal Cloud Foundry&reg; Apps Manager, log into Apps Manager as an admin user and select the `system` org.
 
 ![Viewing system Org](viewing-system-org.png)
 
-The application is deployed in the "p-dataflow" space.
+The application is deployed in the `p-dataflow` space.
 
 ![Viewing p-dataflow Space](viewing-p-dataflow-space.png)
 
@@ -88,7 +88,7 @@ See the following sections for information about service instances deployed by t
 
 For each Spring Cloud Data Flow service instance created, the service broker provisions the following resources, all within the space from which the service instance was created ("the user space") unless noted otherwise.
 
-* A new space within the "p-dataflow" org, named using the service instance GUID and containing:
+* A new space within the `p-dataflow` org, named using the service instance GUID and containing:
   * A Data Flow server application.
   * A Data Flow metrics application.
   * A Spring Cloud Skipper package management application.
@@ -101,9 +101,9 @@ For each Spring Cloud Data Flow service instance created, the service broker pro
   <p class='note'><strong>Note</strong>: This Redis database service is a "p-redis" service instance by default. You can configure an alternate Redis database when you create the service instance.</p>
 * The following resources are created in the originating user space where the service instance command was targeted at:
   * A "p-dataflow" service instance.
-  * A "p-dataflow" relational database service instance (providing access to the relational database service created in the service instance's space within the "p-dataflow" org).
-  * A "p-dataflow" messaging service instance (providing access to the messaging data service created in the service instance's space within the "p-dataflow" org).
-  * A "p-dataflow" analytics service instance (providing access to the analytics service created in the service instance's space within the "p-dataflow" org).
+  * A "p-dataflow" relational database service instance (providing access to the relational database service created in the service instance's space within the `p-dataflow` org).
+  * A "p-dataflow" messaging service instance (providing access to the messaging data service created in the service instance's space within the `p-dataflow` org).
+  * A "p-dataflow" analytics service instance (providing access to the analytics service created in the service instance's space within the `p-dataflow` org).
 
 ###<a id='set-domain-for-service-instance-backing-apps'></a> Set a Domain for Service Instance Backing Apps
 
