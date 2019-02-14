@@ -30,6 +30,26 @@ Spring Cloud Data Flow relies on other PCF services for its service broker, for 
 
 <p class='note important'><strong>Important</strong>: If any of the services or service plans configured in the Data Flow tile settings are not available in your PCF deployment, the tile installation may fail.</p>
 
+## <a id="using-tls-with-mysql-v2-4-x"></a>Using TLS with MySQL for PCF v2.4.x
+
+If you have configured Spring Cloud Data Flow for PCF to use MySQL for PCF v2.4.x for the Data Flow service broker's backing MySQL database service instance and you are using TLS with MySQL for PCF, the installation of Spring Cloud Data Flow will fail. This is because a MySQL for PCF v2.4.x service instance cannot be created with TLS encryption enabled; instead, after creating the service instance, you must update it in order to enable TLS.
+
+Pivotal recommends using MySQL for PCF v2.5.x with Spring Cloud Data Flow for PCF. If you must use MySQL for PCF v2.4.x, follow the below steps to complete the installation of Spring Cloud Data Flow.
+
+1. Begin the installation as described in [Installation Steps](#install). The installation will fail on the "deploy-all" errand with a message similar to the following:
+
+		cf bind-service p-dataflow-1.3.2-build.1 p-dataflow-db
+		Binding service p-dataflow-db to app p-dataflow-1.3.2-build.1 in org system / space
+			p-dataflow as system_services...
+		Service broker error: This service instance can only be used with TLS enabled. In
+			order to enable TLS for this service instance run "cf update-service
+			SERVICE_INSTANCE -c '{"enable_tls": [HOSTNAME]}'"
+		FAILED
+
+1. Following the procedure in the [Enable TLS](https://docs.pivotal.io/p-mysql/2-4/using-tls.html#enable-tls) section of the MySQL for PCF documentation, enable TLS on the `p-dataflow-db` MySQL for PCF service instance, which is located in the `system` org and `p-dataflow` space.
+
+1. Restart the installation of Spring Cloud Data Flow for PCF.
+
 ##<a id='install'></a> Installation Steps
 
 1. Download the product file from [Pivotal Network](https://network.pivotal.io/).
