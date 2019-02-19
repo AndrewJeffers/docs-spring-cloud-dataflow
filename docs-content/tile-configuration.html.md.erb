@@ -13,7 +13,7 @@ The Spring Cloud Data Flow tile includes settings for various options. You can c
 
 ###<a id='configure-broker-database-service-and-plan'></a> Configure Broker Database Service and Plan
 
-By default, the Spring Cloud Data Flow product uses the MySQL for PCF v2 product and its default `db-small` service plan to provision a database service instance for the Data Flow service broker. If you are using the MySQL for PCF v2 product and it does not have an active `db-small` plan or if you wish to use an alternative service, you must configure the Spring Cloud Data Flow product for the service and service plan you wish to use. You can configure an alternative relational database service and service plan in the **Service Broker** pane of the Spring Cloud Data Flow settings.
+By default, the Spring Cloud Data Flow product uses the MySQL for PCF product and its default `db-small` service plan to provision a database service instance for the Data Flow service broker. If you are using the MySQL for PCF product and it does not have an active `db-small` plan or if you wish to use an alternative service, you must configure the Spring Cloud Data Flow product for the service and service plan you wish to use. You can configure an alternative relational database service and service plan in the **Service Broker** pane of the Spring Cloud Data Flow settings.
 
 ![Configuring MySQL Service](configure-relational.png)
 
@@ -39,7 +39,7 @@ In the **Buildpack** field, enter the name of the desired Java buildpack. Click 
 
 ###<a id='configure-data-flow-server-dependent-services'></a> Configure Data Flow Server Dependent Services
 
-By default, the Spring Cloud Data Flow product uses the MySQL for PCF v2, RabbitMQ for PCF, and Redis for PCF products to provision dependent service instances for the Data Flow server application deployed for each Data Flow service instance. If you wish to use other services or to change the service plans used, you must configure the services and service plans you wish to use for the Data Flow server. You can configure alternate services or service plans in the **Data Flow Server** pane of the Spring Cloud Data Flow settings.
+By default, the Spring Cloud Data Flow product uses the MySQL for PCF, RabbitMQ for PCF, and Redis for PCF products to provision dependent service instances for the Data Flow server application deployed for each Data Flow service instance. If you wish to use other services or to change the service plans used, you must configure the services and service plans you wish to use for the Data Flow server. You can configure alternate services or service plans in the **Data Flow Server** pane of the Spring Cloud Data Flow settings.
 
 ![Configuring Data Flow Server Database Service](df-server-settings.png)
 
@@ -51,7 +51,7 @@ You can disable internet access for all Spring Cloud Data Flow service instances
 
 ###<a id='configure-skipper-database-service-and-plan'></a> Configure Skipper Database Service and Plan
 
-By default, the Spring Cloud Data Flow product uses the MySQL for PCF v2 product and its default `db-small` service plan to provision a database service instance for the Spring Cloud Skipper application deployed for each Data Flow service instance. If you are using the MySQL for PCF v2 product and it does not have an active `db-small` plan or if you wish to use an alternative service, you must configure the service and service plan you wish to use for Skipper. You can configure an alternative relational database service and service plan in the **Skipper** pane of the Spring Cloud Data Flow settings.
+By default, the Spring Cloud Data Flow product uses the MySQL for PCF product and its default `db-small` service plan to provision a database service instance for the Spring Cloud Skipper application deployed for each Data Flow service instance. If you are using the MySQL for PCF product and it does not have an active `db-small` plan or if you wish to use an alternative service, you must configure the service and service plan you wish to use for Skipper. You can configure an alternative relational database service and service plan in the **Skipper** pane of the Spring Cloud Data Flow settings.
 
 ![Configuring Skipper Database Service](skipper-relational.png)
 
