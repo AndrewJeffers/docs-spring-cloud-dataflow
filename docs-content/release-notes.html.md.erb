@@ -7,7 +7,16 @@ Release notes for Spring Cloud Data Flow for PCF.
 
 ## <a id="known-issues"></a>Known Issues
 
-* If you are using MySQL for PCF 2.4.x to provide the Spring Cloud Data Flow service broker's backing MySQL database service instance, and you have enabled TLS support for MySQL for PCF, the installation of Spring Cloud Data Flow for PCF will fail. Pivotal recommends using MySQL for PCF 2.5.x with Spring Cloud Data Flow for PCF. If you must use TLS with MySQL for PCF 2.4.x, see [Using TLS with MySQL for PCF v2.4.x](installing.html#using-tls-with-mysql-v2-4-x).
+* Prior to Spring Cloud Data Flow for PCF version 1.3.2, if you are using MySQL for PCF 2.4.x to provide the Spring Cloud Data Flow service broker's backing MySQL database service instance, and you have enabled TLS support for MySQL for PCF, the installation of Spring Cloud Data Flow for PCF will fail. Pivotal recommends using MySQL for PCF 2.5.x with Spring Cloud Data Flow for PCF. If you must use TLS with MySQL for PCF 2.4.x, see [Using TLS with MySQL for PCF v2.4.x](installing.html#using-tls-with-mysql-v2-4-x).
+
+## <a id="1-3-2"></a>v1.3.2
+
+**Release Date:** February 27, 2019
+
+Enhancements included in this release:
+
+* Upgraded to Spring Cloud Data Flow OSS v1.7.4.RELEASE. For more information and to view a list of resolved issues, see [[1.7.4.RELEASE](https://github.com/spring-cloud/spring-cloud-dataflow/milestone/66?closed=1)] on GitHub.
+* Upgraded MariaDB Java client to version 2.4.0 to resolve issue with using TLS enabled MySQL for PCF service instances.
 
 ## <a id="1-3-1"></a>v1.3.1
 
