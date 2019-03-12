@@ -1,0 +1,133 @@
+---
+title: API Access
+owner: Spring Cloud Services
+---
+
+<strong><%= modified_date %></strong>
+
+See below for information about accessing the Data Flow server and Spring Cloud Skipper backing apps deployed for each Spring Cloud Data Flow for PCF service instance.
+
+## <a id="credentials-for-access"></a> Credentials for Access
+
+When creating or updating a Spring Cloud Data Flow service instance, you can configure the service instance using parameters passed to the cf CLI commands. See the following sections for information about the supported parameters.
+
+### <a id="setting-the-buildpack"></a>Using a Client App
+
+You can obtain credentials to use in an app for accessing a Data Flow service instance's Data Flow server and Spring Cloud Skipper backing apps by binding the app to the service instance.
+
+1. List apps and services in the current space.
+
+	<pre class="terminal">
+	$ cf apps; cf services
+	Getting apps in org myorg / space dev as user...
+	OK
+
+	name      requested state   instances   memory   disk   urls
+	example   started           1/1         1G       1G     example.apps.wise.com
+	Getting services in org myorg / space dev as user...
+
+	name                                              service                 plan       bound apps   last operation
+	analytics-4f124186-ad62-405f-be25-d8afa95b885f    p-dataflow-analytics    proxy                   create succeeded
+	data-flow                                         p-dataflow              standard   example      create succeeded
+	messaging-4f124186-ad62-405f-be25-d8afa95b885f    p-dataflow-messaging    proxy                   create succeeded
+	mysql                                             p.mysql                 db-small   example      create succeeded
+	relational-4f124186-ad62-405f-be25-d8afa95b885f   p-dataflow-relational   proxy
+	</pre>
+
+1. Bind the app to the service instance.
+
+	<pre class="terminal">
+	$ cf bind-service example data-flow
+	Getting apps in org myorg / space dev as user...
+	OK
+
+	name      requested state   instances   memory   disk   urls
+	example   started           1/1         1G       1G     example.apps.wise.com
+	Getting services in org myorg / space dev as user...
+
+	name                                              service                 plan       bound apps   last operation
+	analytics-4f124186-ad62-405f-be25-d8afa95b885f    p-dataflow-analytics    proxy                   create succeeded
+	data-flow                                         p-dataflow              standard   example      create succeeded
+	messaging-4f124186-ad62-405f-be25-d8afa95b885f    p-dataflow-messaging    proxy                   create succeeded
+	mysql                                             p.mysql                 db-small   example      create succeeded
+	relational-4f124186-ad62-405f-be25-d8afa95b885f   p-dataflow-relational   proxy
+	</pre>
+
+1. Use the `cf env` command to print the environment variables for the app.
+
+	<pre class="terminal">
+	$ cf env example
+	Getting env variables for app example in org myorg / space dev as user...
+	OK
+
+	System-Provided:
+	{
+	 "VCAP_SERVICES": {
+		"p-dataflow": [
+		 {
+			"binding_name": null,
+			"credentials": {
+			 "access-token-url": "https://uaa.sys.wise.com/oauth/token",
+			 "client-id": "p-dataflow-binding-56b0d6b9-b9c6-4085-9513-c51081535517",
+			 "client-secret": "placeholder_client_secret",
+			 "dataflow-url": "https://dataflow-423914c6-78bc-445a-a91b-96a3bfe8708e.apps.wise.com",
+			 "skipper-url": "https://skipper-423914c6-78bc-445a-a91b-96a3bfe8708e.apps.wise.com"
+			},
+			"instance_name": "data-flow",
+			"label": "p-dataflow",
+			"name": "data-flow",
+			"plan": "standard",
+			"provider": null,
+			"syslog_drain_url": null,
+			"tags": [
+			 "data-flow",
+			 "spring-cloud"
+			],
+			"volume_mounts": []
+		 }
+		],
+		...
+	</pre>
+
+	The credentials needed to access the Data Flow server and Spring Cloud Skipper backing apps, as well as the URLs for each of these apps, are in the `credentials` object.
+
+### <a id="setting-dependent-services"></a>Using a Service Key
+ 
+You can obtain credentials to use in an app for accessing a Data Flow service instance's Data Flow server and Spring Cloud Skipper backing apps by creating a service key for the service instance.
+
+1. List services in the current space.
+
+	<pre class="terminal">
+	$ cf services
+	Getting services in org myorg / space dev as user...
+
+	name                                              service                 plan       bound apps   last operation
+	analytics-4f124186-ad62-405f-be25-d8afa95b885f    p-dataflow-analytics    proxy                   create succeeded
+	data-flow                                         p-dataflow              standard   example      create succeeded
+	messaging-4f124186-ad62-405f-be25-d8afa95b885f    p-dataflow-messaging    proxy                   create succeeded
+	mysql                                             p.mysql                 db-small   example      create succeeded
+	relational-4f124186-ad62-405f-be25-d8afa95b885f   p-dataflow-relational   proxy
+	</pre>
+
+1. Create a service key for the service instance.
+
+	<pre class="terminal">
+	$ cf create-service-key data-flow my-service-key
+	</pre>
+
+1. Use the `cf service-key` command to print the details for the service key.
+
+	<pre class="terminal">
+	$ cf service-key data-flow my-service-key
+	Getting key my-service-key for service instance data-flow as user...
+
+	{
+	 "access-token-url": "https://uaa.sys.wise.com/oauth/token",
+	 "client-id": "p-dataflow-binding-82856547-33f8-4e0d-8101-67e56b95b7e8",
+	 "client-secret": "made-up_client_secret",
+	 "dataflow-url": "https://dataflow-423914c6-78bc-445a-a91b-96a3bfe8708e.apps.wise.com",
+	 "skipper-url": "https://skipper-423914c6-78bc-445a-a91b-96a3bfe8708e.apps.wise.com"
+	}
+	</pre>
+
+	The service key contains the credentials needed to access the Data Flow server and Spring Cloud Skipper backing apps, as well as the URLs for each of these apps.

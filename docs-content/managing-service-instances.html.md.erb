@@ -7,6 +7,8 @@ owner: Spring Cloud Services
 
 See below for information about managing Data Flow service instances using the Cloud Foundry Command Line Interface tool (cf CLI). You can also manage Data Flow service instances using <%= vars.scdf_platform_name %> Apps Manager.
 
+<p class='note'><strong>Note</strong>: In order to have read and write access to a Spring Cloud Data Flow for PCF service instance, you must have the <code>SpaceDeveloper</code> role in the space where the service instance was created. If you have only the <code>SpaceAuditor</code> role in the space where the service instance was created, you have only read (not write) access to the service instance.</p>
+
 ## <a id="available-parameters"></a> Available Parameters
 
 When creating or updating a Spring Cloud Data Flow service instance, you can configure the service instance using parameters passed to the cf CLI commands. See the following sections for information about the supported parameters.
@@ -52,6 +54,36 @@ To configure a private Maven repository that requires authentication, you can pr
 <pre class="terminal">
 $ cf create-service p-dataflow standard data-flow -c '{"maven.remote-repositories.repo1.url":"http://my.private.maven/repo","maven.remote-repositories.repo1.auth.username":"user","maven.remote-repositories.repo1.auth.password":"password"}'
 </pre>
+
+### <a id="limiting-concurrent-tasks"></a>Limiting Concurrent Tasks
+
+Each Data Flow service instance can execute a maximum number of concurrently-running tasks (the default limit is 10). You can configure the concurrent task limit using a `concurrent-task-limit` parameter given to `cf create-service` or `cf update-service`:
+
+<pre class="terminal">
+$ cf create-service p-dataflow standard data-flow -c '{"concurrent-task-limit": 30}'
+</pre>
+
+When the number of concurrent tasks reaches the specified limit, the Data Flow service instance will no longer launch new tasks until the number of running tasks is again below the limit.
+
+### <a id="enabling-tasks-only"></a>Enabling Task Support Only (No Streams)
+
+Each Data Flow service instance can be configured to run tasks only (with stream support disabled). You can configure the service instance to enable only task support using a `task-only` parameter given to `cf create-service` or `cf update-service`:
+
+<pre class="terminal">
+$ cf create-service p-dataflow standard data-flow -c '{"task-only": true}'
+</pre>
+
+With `task-only` set to `true`, the Data Flow metrics and Spring Cloud Skipper backing apps (with their associated relational database and messaging backing service instances) will not be deployed for the service instance, and the service instance's dashboard (see [Using the Dashboard](/scdf/using-the-dashboard.html)) will not display the **Streams** tab.
+
+### <a id="enabling-streams-only"></a>Enabling Stream Support Only (No Tasks)
+
+Each Data Flow service instance can be configured to run streams only (with task support disabled). You can configure the service instance to enable only stream support using a `stream-only` parameter given to `cf create-service` or `cf update-service`:
+
+<pre class="terminal">
+$ cf create-service p-dataflow standard data-flow -c '{"stream-only": true}'
+</pre>
+
+With `stream-only` set to `true`, the service instance's dashboard (see [Using the Dashboard](/scdf/using-the-dashboard.html)) will not display the **Tasks** tab.
 
 ### <a id="using-scheduler-for-pcf"></a>Using Scheduler for PCF
 

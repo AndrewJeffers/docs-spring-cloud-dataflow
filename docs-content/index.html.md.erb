@@ -33,15 +33,15 @@ The following table provides version and version-support information about Sprin
     <th>Details</th>
     <tr>
         <td>Version</td>
-        <td>v1.2.0</td>
+        <td>v1.3.0</td>
     </tr>
     <tr>
         <td>Release date</td>
-        <td>September 19, 2018</td>
+        <td>November 20, 2018</td>
     </tr>
     <tr>
         <td>Software component version</td>
-        <td>v1.6.3.RELEASE</td>
+        <td>v1.7.1.RELEASE</td>
     </tr>
     <tr>
         <td>Compatible Ops Manager version(s)</td>
@@ -57,12 +57,43 @@ The following table provides version and version-support information about Sprin
     </tr>
 </table>
 
+## <a id="tile-oss-versions"></a> Tile and OSS Versions
+
+The following table provides information about the OSS versions used in each version of Spring Cloud Data Flow for PCF.
+
+<table class="nice">
+    <th>SCDF Tile</th>
+    <th>SCDF OSS</th>
+    <th>Spring Cloud Skipper OSS</th>
+    <tr>
+        <td>v1.0.x</td>
+        <td>v1.5.2.RELEASE</td>
+        <td>v1.0.7.RELEASE</td>
+    </tr>
+    <tr>
+        <td>v1.1.x</td>
+        <td>v1.5.2.RELEASE</td>
+        <td>v1.0.7.RELEASE</td>
+    </tr>
+    <tr>
+        <td>v1.2.x</td>
+        <td>v1.6.2.RELEASE</td>
+        <td>v1.0.10.RELEASE</td>
+    </tr>
+    <tr>
+        <td>v1.3.x</td>
+        <td>v1.7.1.RELEASE</td>
+        <td>v1.1.1.RELEASE</td>
+    </tr>
+</table>
+
 ## <a id="reqs"></a>Requirements
 
 Spring Cloud Data Flow for PCF has the following requirements:
 
 * [Java Cloud Foundry buildpack](https://github.com/cloudfoundry/java-buildpack) version 3.8 or later (see the [Prerequisites](installing.html#prerequisites) section of [Installation](installing.html) for more information)
-* [MySQL for PCF v2](https://network.pivotal.io/products/pivotal-mysql), or an alternative relational database service
+* [MySQL for PCF](https://network.pivotal.io/products/pivotal-mysql), or an alternative relational database service
+* If using TLS with MySQL for PCF, Pivotal recommends using MySQL for PCF v2.5.x. If using MySQL for PCF v2.4.x, you must manually enable TLS on the Data Flow broker's backing MySQL for PCF service instance when installing Spring Cloud Data Flow for PCF (see [Using TLS with MySQL for PCF v2.4.x](installing.html#using-tls-with-mysql-v2-4-x)).
 * [RabbitMQ for PCF](https://network.pivotal.io/products/pivotal-rabbitmq-service), or an alternative RabbitMQ or Kafka service
 * [Redis for PCF](https://network.pivotal.io/products/p-redis), or an alternative Redis service
 * [Cloud Foundry Command Line Interface](https://github.com/cloudfoundry/cli) (cf CLI)
