@@ -51,6 +51,7 @@ $ cf create-service p-dataflow standard data-flow -c '{"maven.remote-repositorie
 </pre>
 
 To configure a private Maven repository that requires authentication, you can provide a username and password, such as the following:
+
 <pre class="terminal">
 $ cf create-service p-dataflow standard data-flow -c '{"maven.remote-repositories.repo1.url":"http://my.private.maven/repo","maven.remote-repositories.repo1.auth.username":"user","maven.remote-repositories.repo1.auth.password":"password"}'
 </pre>
@@ -84,6 +85,16 @@ $ cf create-service p-dataflow standard data-flow -c '{"stream-only": true}'
 </pre>
 
 With `stream-only` set to `true`, the service instance's dashboard (see [Using the Dashboard](/scdf/using-the-dashboard.html)) will not display the **Tasks** tab.
+
+### <a id="configuring-skipper-memory-allocation"></a>Configuring Skipper Memory Allocation
+
+When creating or updating a Data Flow service instance, you can set the memory allocation for the associated Spring Cloud Skipper server deployed to Pivotal Application Service (PAS). The default memory allocation for Skipper is 2 GB.
+
+To configure a value for Skipper's memory allocation, you can pass a `skipper` parameter--a JSON object with a single `memory` key--to the `cf create-service` or `cf update-service` command:
+
+<pre class="terminal">
+$ cf create-service p-dataflow standard data-flow -c '{"skipper": { "memory": "8G" }}'
+</pre>
 
 ### <a id="using-scheduler-for-pcf"></a>Using Scheduler for PCF
 
