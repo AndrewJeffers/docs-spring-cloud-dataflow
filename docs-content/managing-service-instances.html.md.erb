@@ -133,9 +133,11 @@ As the command output suggests, you can use the `cf services` or `cf service` co
 
 <%= partial vars.scdf_managing_instances_service %>
 
-## <a id="upgrading"></a>Upgrading an Instance
+## <a id="updating"></a>Updating an Instance
 
-After an upgrade of the Spring Cloud Data Flow for PCF product, you can use the `cf update-service` command to upgrade individual Data Flow service instances.
+You can update settings on a Data Flow service instance using the cf CLI. The `cf update-service` command can be given a `-c` flag with a JSON object containing parameters used to configure the service instance.
+
+<p class='note'><strong>Note</strong>: If you upgrade a Data Flow service instance created using Spring Cloud Data Flow for PCF v1.3.x to the version included in v1.4.0, the upgrade will delete the Metrics app and Redis analytics backing service instance for the Data Flow service instance. The Metrics app and Redis service are no longer used in Spring Cloud Data Flow for PCF v1.4.0.</p>
 
 Begin by targeting the correct org and space.
 
@@ -145,11 +147,11 @@ You can view all service instances in the space using `cf services`.
 
 <%= partial vars.scdf_managing_instances_services %>
 
-Upgrade the Data Flow service instance using `cf update-service`, passing the `-c` flag to set the `upgrade` parameter to `true`.
+Run `cf update-service SERVICE_NAME -c '{ "PARAMETER": "VALUE" }'`, where `SERVICE_NAME` is the name of the service instance, `PARAMETER` is a supported parameter (see [Available Parameters](#available-parameters)), and `VALUE` is the value for the parameter. To upgrade a service instance to the latest version included in the tile, include the parameter `upgrade` with value `true`.
 
 <%= partial vars.scdf_managing_instances_upgrade %>
 
-As the output from the `cf update-service` command suggests, you can use the `cf services` or `cf service` commands to check the status of the service instance. When the Data Flow service instance has been upgraded, the `cf service` command will give a status of `update succeeded`:
+As the output from the `cf update-service` command suggests, you can use the `cf services` or `cf service` commands to check the status of the service instance. When the Data Flow service instance has been updated, the `cf service` command will give a status of `update succeeded`:
 
 <%= partial vars.scdf_managing_instances_upgrade_finished %>
 
