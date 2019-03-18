@@ -5,7 +5,7 @@ owner: Spring Cloud Services
 
 <strong><%= modified_date %></strong>
 
-By default, a Spring Cloud Data Flow service instance uses MySQL for PCF for its backing relational database service, RabbitMQ for PCF for its backing messaging service, and Redis for PCF for its backing analytics service. When creating a Spring Cloud Data Flow service instance, you can configure it to use [Cloud Foundry user-provided services](https://docs.pivotal.io/pivotalcf/devguide/services/user-provided.html) for its dependent data services instead. See below for information about configuring a Data Flow service instance to use an alternative dependent data service.
+By default, a Spring Cloud Data Flow service instance uses MySQL for PCF for its backing relational database service and RabbitMQ for PCF for its backing messaging service. When creating a Spring Cloud Data Flow service instance, you can configure it to use [Cloud Foundry user-provided services](https://docs.pivotal.io/pivotalcf/devguide/services/user-provided.html) for its dependent data services instead. See below for information about configuring a Data Flow service instance to use an alternative dependent data service.
 
 ## <a id="dependent-service-parameters"></a>Dependent Service Parameters
 
@@ -15,7 +15,6 @@ You can specify that a Data Flow service instance should use a user-provided ser
 |----------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
 | <code>relational-data-service.user-provided</code> | A JSON object containing connection information for the relational database service used to store task history.                          |
 | <code>messaging-data-service.user-provided</code>  | A JSON object containing connection information for the messaging service used for event messaging.                                      | 
-| <code>analytics-data-service.user-provided</code>  | A JSON object containing connection information for the Redis service used for an analytics store.                                       |
 
 See the following sections for information about using these parameters.
 
@@ -71,29 +70,4 @@ To create a Spring Cloud Data Flow service instance using these connection value
 
 <pre class="terminal">
 $ cf create-service p-dataflow standard data-flow -c '{"messaging-data-service": { "user-provided": {"dashboard_url":"https://api.cloudamqp.com/console/a-GUID-would-go-here/details","username":"buckstorm","vhost":"buckstorm","password":"fake-password","ssl":false,"hostname":"stonehill.rmq.cloudamqp.com","uri":"amqp://buckstorm:fake-password@stonehill.rmq.cloudamqp.com/buckstorm","http_api_uri":"http://buckstorm:fake-password@stonehill.rmq.cloudamqp.com:1883/api","tags":["rabbitmq"]} }}'
-</pre>
-
-## <a id="analytics-service"></a>User-Provided Analytics Service
-
-You can use the `analytics-data-service` parameter to supply the configuration for a user-provided analytics service. This parameter contains a JSON object `user-provided`, with fields for each of the connection values needed to provision a Cloud Foundry user-provided Redis service instance.
-
-The analytics service can be the default Redis for PCF service or any other Redis service. It must provide a Redis database.
-
-An example of fields contained in the `user-provided` object for an analytics service is shown below.
-
-```
-{
-  "host": "garrels.gce.cloud.redislabs.com", 
-  "uri": "redis://:fake-password@garrels.gce.cloud.redislabs.com:11781/boars-head", 
-  "port": 11781,
-  "dbname": "boars-head", 
-  "password": "fake-password", 
-  "tags": ["redis"]
-}
-```
-
-To create a Spring Cloud Data Flow service instance using these connection values for the service instance's analytics service instance:
-
-<pre class="terminal">
-$ cf create-service p-dataflow standard data-flow -c '{"analytics-data-service": { "user-provided": {"host":"garrels.gce.cloud.redislabs.com","uri":"redis://:fake-password@garrels.gce.cloud.redislabs.com:11781/boars-head","port":11781,"dbname":"boars-head","password":"fake-password","tags":["redis"]} }}'
 </pre>

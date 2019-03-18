@@ -35,8 +35,6 @@ General parameters used to configure dependent data services for a Data Flow ser
 | <code>relational-data-service.plan</code> | The name of the service plan to use for the relational database service.                                               |
 | <code>messaging-data-service.name</code>  | The name of the service to use for a RabbitMQ or Kafka server that facilitates event messaging.                        |
 | <code>messaging-data-service.plan</code>  | The name of the service plan to use for the RabbitMQ or Kafka service.                                                 |
-| <code>analytics-data-service.name</code>  | The name of the service to use for a Redis server that stores analytics.                                               |
-| <code>analytics-data-service.plan</code>  | The name of the service plan to use for the Redis server.                                                              |
 | <code>skipper-relational.name</code>      | The name of the service to use for a relational database used by the Skipper application.                              |
 | <code>skipper-relational.plan</code>      | The name of the service plan to use for a relational database used by the Skipper application.                         |
 
@@ -74,7 +72,7 @@ Each Data Flow service instance can be configured to run tasks only (with stream
 $ cf create-service p-dataflow standard data-flow -c '{"task-only": true}'
 </pre>
 
-With `task-only` set to `true`, the Data Flow metrics and Spring Cloud Skipper backing apps (with their associated relational database and messaging backing service instances) will not be deployed for the service instance, and the service instance's dashboard (see [Using the Dashboard](/scdf/using-the-dashboard.html)) will not display the **Streams** tab.
+With `task-only` set to `true`, the Spring Cloud Skipper backing app (with its associated relational database backing service instance and the messaging backing service instance) will not be deployed for the service instance, and the service instance's dashboard (see [Using the Dashboard](/scdf/using-the-dashboard.html)) will not display the **Streams** tab.
 
 ### <a id="enabling-streams-only"></a>Enabling Stream Support Only (No Tasks)
 
@@ -115,8 +113,6 @@ $ cf create-service p-dataflow standard data-flow -c '{"scheduler": {"name": "sc
 
 ## <a id="creating"></a>Creating an Instance
 
-<p class='note'><strong>Important</strong>: If you are using the <a href="https://network.pivotal.io/products/p-redis/">Redis for PCF</a> product for the Spring Cloud Data Flow analytics store, you cannot create more Data Flow service instances than the setting of the Redis product's Service Instance Limit (the default Service Instance Limit for Redis for PCF is 5). See the <a href="http://docs.pivotal.io/redis/installing.html#shared-vm-config">Shared-VM Plan</a> section of the <a href="http://docs.pivotal.io/redis/installing.html">Installing and Upgrading Redis for PCF</a> topic in the <a href="http://docs.pivotal.io/redis/">Redis for PCF documentation</a> for information about configuring this limit.</p>
-
 Begin by targeting the correct org and space.
 
 <%= partial vars.scdf_managing_instances_target %>
@@ -125,7 +121,7 @@ You can view plan details for the Data Flow product using `cf marketplace -s`.
 
 <%= partial vars.scdf_managing_instances_marketplace %>
 
-Create the service instance using `cf create-service`. To create a Data Flow service that uses a Redis Cloud service available from your PCF marketplace and sets the Maven `maven.remote-repositories.repo1.url` property to `https://repo.spring.io/release`, you might run:
+Create the service instance using `cf create-service`. To create a Data Flow service that sets the Maven `maven.remote-repositories.repo1.url` property to `https://repo.spring.io/release`, you might run:
 
 <%= partial vars.scdf_managing_instances_create %>
 
@@ -137,7 +133,7 @@ As the command output suggests, you can use the `cf services` or `cf service` co
 
 You can update settings on a Data Flow service instance using the cf CLI. The `cf update-service` command can be given a `-c` flag with a JSON object containing parameters used to configure the service instance.
 
-<p class='note'><strong>Note</strong>: If you upgrade a Data Flow service instance created using Spring Cloud Data Flow for PCF v1.3.x to the version included in v1.4.0, the upgrade will delete the Metrics app and Redis analytics backing service instance for the Data Flow service instance. The Metrics app and Redis service are no longer used in Spring Cloud Data Flow for PCF v1.4.0.</p>
+<p class='note'><strong>Note</strong>: If you upgrade a Data Flow service instance created using Spring Cloud Data Flow for PCF v1.3.x to the version included in v1.4.0, the upgrade will delete the metrics app and Redis analytics backing service instance for the Data Flow service instance. The metrics app and Redis service are no longer used in Spring Cloud Data Flow for PCF v1.4.0.</p>
 
 Begin by targeting the correct org and space.
 

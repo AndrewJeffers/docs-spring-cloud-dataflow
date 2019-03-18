@@ -90,20 +90,16 @@ For each Spring Cloud Data Flow service instance created, the service broker pro
 
 * A new space within the `p-dataflow` org, named using the service instance GUID and containing:
   * A Data Flow server application.
-  * A Data Flow metrics application.
   * A Spring Cloud Skipper package management application.
   * A relational database service, bound to the Data Flow server application.
   <p class='note'><strong>Note</strong>: This relational database service is a "p.mysql" service instance by default. You can configure an alternate relational database when you create the service instance.</p>
   * A relational database service, bound to the Skipper package management application.
-  * A messaging data service, bound to the Data Flow metrics application.
+  * A messaging data service.
   <p class='note'><strong>Note</strong>: This messaging data service is a "p-rabbitmq" service instance by default. You can configure an alternate messaging service when you create the service instance.</p>
-  * A Redis database service, bound to the Data Flow server application.
-  <p class='note'><strong>Note</strong>: This Redis database service is a "p-redis" service instance by default. You can configure an alternate Redis database when you create the service instance.</p>
 * The following resources are created in the originating user space where the service instance command was targeted at:
   * A "p-dataflow" service instance.
   * A "p-dataflow" relational database service instance (providing access to the relational database service created in the service instance's space within the `p-dataflow` org).
   * A "p-dataflow" messaging service instance (providing access to the messaging data service created in the service instance's space within the `p-dataflow` org).
-  * A "p-dataflow" analytics service instance (providing access to the analytics service created in the service instance's space within the `p-dataflow` org).
 
 ###<a id='set-domain-for-service-instance-backing-apps'></a> Set a Domain for Service Instance Backing Apps
 
@@ -124,12 +120,11 @@ Below are the usage requirements of the Spring Cloud Data Flow service broker.
 
 The service broker is bound to a relational database service instance, which stores data relating to the broker's service instances. The relational database service to use is configurable, as described in [The Service Broker](#the-service-broker) section above.
 
-Below are the usage requirements of the Data Flow server and metrics applications that back each Spring Cloud Data Flow service instance.
+Below are the usage requirements of the Data Flow server and Skipper applications that back each Spring Cloud Data Flow service instance.
 
 | Backing Application       | Memory Allocation / App Instance   | Disk Allocation / App Instance  |
 |---------------------------|------------------------------------|---------------------------------|
 | Data Flow Server          | 2 GB                               | 2 GB                            |
-| Data Flow Metrics         | 1 GB                               | 1 GB                            |
 | Spring Cloud Skipper      | 2 GB                               | 2 GB                            |
 
-Spring Cloud Data Flow service instances are also backed by instances of other PCF services. These are either services from PCF data service products or custom services provided to a Data Flow service instance at create time. These data services include a relational database service, a messaging service, and an analytics database service instance for each Data Flow service instance created. The Skipper backing application uses a MySQL database service for its backing store.
+Spring Cloud Data Flow service instances are also backed by instances of other PCF services. These are either services from PCF data service products or custom services provided to a Data Flow service instance at create time. These data services include a relational database service and a messaging service for each Data Flow service instance created. The Skipper backing application uses a MySQL database service for its backing store.
