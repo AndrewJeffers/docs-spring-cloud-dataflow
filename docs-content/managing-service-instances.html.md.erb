@@ -52,7 +52,7 @@ $ cf create-service p-dataflow standard data-flow -c '{"maven.remote-repositorie
 
 To configure a private Maven repository that requires authentication, you can provide a username and password, such as the following:
 <pre class="terminal">
-$ cf create-service p-dataflow standard data-flow -c '{"maven.remote-repositories.repo1.url":"http://my.private.maven/repo","maven.remote-repositories.repo1.auth.username":"user","maven.remote-repositories.repo1.auth.password":"password"}'
+$ cf create-service p-dataflow standard data-flow -c '{"maven.remote-repositories.repo1.url":"https://my.private.maven/repo","maven.remote-repositories.repo1.auth.username":"user","maven.remote-repositories.repo1.auth.password":"password"}'
 </pre>
 
 ### <a id="limiting-concurrent-tasks"></a>Limiting Concurrent Tasks
@@ -104,7 +104,7 @@ $ cf create-service p-dataflow standard data-flow -c '{"scheduler": {"name": "sc
 
 ## <a id="creating"></a>Creating an Instance
 
-<p class='note'><strong>Important</strong>: If you are using the <a href="https://network.pivotal.io/products/p-redis/">Redis for PCF</a> product for the Spring Cloud Data Flow analytics store, you cannot create more Data Flow service instances than the setting of the Redis product's Service Instance Limit (the default Service Instance Limit for Redis for PCF is 5). See the <a href="http://docs.pivotal.io/redis/installing.html#shared-vm-config">Shared-VM Plan</a> section of the <a href="http://docs.pivotal.io/redis/installing.html">Installing and Upgrading Redis for PCF</a> topic in the <a href="http://docs.pivotal.io/redis/">Redis for PCF documentation</a> for information about configuring this limit.</p>
+<p class='note'><strong>Important</strong>: If you are using the <a href="https://network.pivotal.io/products/p-redis/">Redis for PCF</a> product for the Spring Cloud Data Flow analytics store, you cannot create more Data Flow service instances than the setting of the Redis product's Service Instance Limit (the default Service Instance Limit for Redis for PCF is 5). See the <a href="https://docs.pivotal.io/redis/installing.html#shared-vm-config">Shared-VM Plan</a> section of the <a href="https://docs.pivotal.io/redis/installing.html">Installing and Upgrading Redis for PCF</a> topic in the <a href="https://docs.pivotal.io/redis/">Redis for PCF documentation</a> for information about configuring this limit.</p>
 
 Begin by targeting the correct org and space.
 
