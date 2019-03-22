@@ -5,7 +5,7 @@ owner: Spring Cloud Services
 
 <strong><%= modified_date %></strong>
 
-The open-source [Spring Cloud Data Flow](https://cloud.spring.io/spring-cloud-dataflow/) project provides a [shell](https://docs.spring.io/spring-cloud-dataflow/docs/1.5.0.RELEASE/reference/htmlsingle/#shell), which can be used to interact locally with a Data Flow service instance deployed on Pivotal Cloud Foundry (PCF).
+The open-source [Spring Cloud Data Flow](https://cloud.spring.io/spring-cloud-dataflow/) project provides a [shell](https://docs.spring.io/spring-cloud-dataflow/docs/1.7.4.RELEASE/reference/htmlsingle/#shell), which can be used to interact locally with a Data Flow service instance deployed on Pivotal Cloud Foundry (PCF).
 
 <p class='note'><strong>Note</strong>: In order to have read and write access to a Spring Cloud Data Flow for PCF service instance, you must have the <code>SpaceDeveloper</code> role in the space where the service instance was created. If you have only the <code>SpaceAuditor</code> role in the space where the service instance was created, you have only read (not write) access to the service instance.</p>
 
@@ -31,6 +31,7 @@ The plugin adds a `dataflow-shell` command, which attaches the Data Flow shell t
 ```
 $ cf dataflow-shell data-flow
 Attaching shell to dataflow service data-flow in org myorg / space dev as user...
+...
 Launching dataflow shell JAR
   ____                              ____ _                __
  / ___| _ __  _ __(_)_ __   __ _   / ___| | ___  _   _  __| |
@@ -43,17 +44,17 @@ Launching dataflow shell JAR
  | |_| | (_| | || (_| | |  _| | | (_) \ V  V /    / / / / / /
  |____/ \__,_|\__\__,_| |_|   |_|\___/ \_/\_/    /_/_/_/_/_/
 
-1.5.0.RELEASE
+1.7.4.RELEASE
 
 Welcome to the Spring Cloud Data Flow shell. For assistance hit TAB or type "help".
 dataflow:>
 ```
 
-For more information about the Spring Cloud Data Flow shell, see its [documentation](https://docs.spring.io/spring-cloud-dataflow/docs/1.5.0.RELEASE/reference/htmlsingle/#shell).
+For more information about the Spring Cloud Data Flow shell, see its [documentation](https://docs.spring.io/spring-cloud-dataflow/docs/1.7.4.RELEASE/reference/htmlsingle/#shell).
 
 ## <a id="using-shell-manually"></a>Using the Shell Manually
 
-If you would like to download and configure the Data Flow shell manually, [download the shell JAR file from the Spring Releases Maven repository](http://repo.spring.io/release/org/springframework/cloud/spring-cloud-dataflow-shell/1.5.0.RELEASE/spring-cloud-dataflow-shell-1.5.0.RELEASE.jar). Spring Cloud Data Flow for PCF can be used with version 1.5.0.RELEASE or later of the Spring Cloud Data Flow shell.
+If you would like to download and configure the Data Flow shell manually, [download the shell JAR file from the Spring Releases Maven repository](http://repo.spring.io/release/org/springframework/cloud/spring-cloud-dataflow-shell/1.7.4.RELEASE/spring-cloud-dataflow-shell-1.7.4.RELEASE.jar). Spring Cloud Data Flow for PCF can be used with version 1.5.0.RELEASE or later of the Spring Cloud Data Flow shell.
 
 To target a Data Flow service instance's server with the shell, you must obtain the server's URL. Run `cf service SERVICE_NAME`, where `SERVICE_NAME` is the name of the service instance:
 
@@ -109,7 +110,7 @@ In this command, replace the following placeholders as shown below.
 The complete command may look something like the following:
 
 <pre class="terminal">
-$ java -jar spring-cloud-dataflow-shell-1.5.0.RELEASE.jar \
+$ java -jar spring-cloud-dataflow-shell-1.7.4.RELEASE.jar \
 --dataflow.skip-ssl-validation=true \
 --dataflow.uri=https://dataflow-2f6ec0c6-c828-45bb-905a-4779ce50552b.apps.wise.com \
 --dataflow.credentials-provider-command="cf oauth-token" --dataflow.mode=skipper
@@ -122,4 +123,4 @@ Welcome to the Spring Cloud Data Flow shell. For assistance hit TAB or type "hel
 dataflow:>
 </pre>
 
-For a list of available shell commands, run `help` from within the shell. For information about the flags which can be provided to the shell on startup, see the [OSS Spring Cloud Data Flow project's documentation](https://docs.spring.io/spring-cloud-dataflow/docs/1.5.0.RELEASE/reference/htmlsingle/#shell-options).
+For a list of available shell commands, run `help` from within the shell. For information about the flags which can be provided to the shell on startup, see the [OSS Spring Cloud Data Flow project's documentation](https://docs.spring.io/spring-cloud-dataflow/docs/1.7.4.RELEASE/reference/htmlsingle/#shell-options).

@@ -19,6 +19,7 @@ Start the Data Flow shell using the `cf dataflow-shell` command added by the Spr
 
 <pre class="terminal">
 $ cf dataflow-shell data-flow
+Attaching shell to dataflow service data-flow in org myorg / space development as user...
 ...
 Welcome to the Spring Cloud Data Flow shell. For assistance hit TAB or type "help".
 dataflow:>
@@ -27,9 +28,9 @@ dataflow:>
 Import the stream app starters using the Data Flow shell's `app import` command:
 
 <pre class="terminal">
-dataflow:>app import https://bit.ly/Celsius-SR2-stream-applications-rabbit-maven
-Successfully registered 65 applications from [source.sftp, source.mqtt.metadata,
-sink.mqtt.metadata,... processor.scriptable-transform.metadata]
+dataflow:>app import http://bit.ly/Darwin-SR3-stream-applications-rabbit-maven
+Successfully registered 64 applications from [source.sftp, source.mqtt.metadata,...
+processor.scriptable-transform.metadata, processor.object-detection]
 </pre>
 
 With the app starters imported, you can use three--the `http` source, the `split` processor, and the `log` sink--to create a stream that consumes data via an HTTP POST request, processes it by splitting it into words, and outputs the results in logs.
@@ -60,15 +61,21 @@ This will take you to the dashboard's **Apps** tab, where you can import applica
 
 ![Dashboard Apps Tab, With No Apps Imported](dashboard-apps-tab-no-apps.png)
 
-Click **Bulk Import Application(s)** to import the "RabbitMQ + Maven" stream app starters. In the **Uri** field, enter `https://bit.ly/Celsius-SR2-stream-applications-rabbit-maven`. Then click **Import The Application(s)**.
+Click **Add Application(s)**.
+
+![Select Import Option](select-import-option.png)
+
+To import the "RabbitMQ + Maven" stream app starters, select the **Bulk import application coordinates from an HTTP URI location** option.
 
 ![Bulk Importing Applications](bulk-importing-applications.png)
+
+In the **URI** field, enter `http://bit.ly/Darwin-SR3-stream-applications-rabbit-maven`. Then click **Import the application(s)**.
 
 With the app starters imported, visit the **Streams** tab. You can use three of the imported starter applications---the `http` source, the `split` processor, and the `log` sink---to create a stream that consumes data via an HTTP POST request, processes it by splitting it into words, and outputs the results in logs.
 
 ![Dashboard Streams Tab, With No Streams Created](dashboard-streams-tab-no-streams.png)
 
-Click **Create A Stream** to enter the stream creation view. In the left sidebar, search for the `http` source application. Click it and drag it onto the canvas to begin defining a stream.
+Click **Create stream(s)** to enter the stream creation view. In the view's left sidebar, search for the `http` source application. Click it and drag it onto the canvas to begin defining a stream.
 
 ![Dashboard Streams Tab: Creating a Stream](dashboard-creating-stream-1.png)
 
@@ -84,7 +91,7 @@ Click and drag between the output and input ports on the applications to connect
 
 ![Dashboard Streams Tab: A Completed Stream](dashboard-completed-stream.png)
 
-Click the **Create Stream** button. Type the name "words", then click **Create The Stream**.
+Click the **Create Stream** button. Type the name "words", then click **Create the stream**.
 
 ![Dashboard Streams Tab: Naming a Stream](dashboard-naming-stream.png)
 
@@ -92,7 +99,7 @@ The **Streams** tab now displays the new stream. Click the **&#x25BA;** button t
 
 ![Dashboard Streams Tab, With A Stream](dashboard-after-stream-created.png)
 
-Click **Deploy The Stream**.
+Click **Deploy the stream**.
 
 ![Dashboard Streams Tab: Deploying a Stream](dashboard-deploying-stream.png)
 
@@ -102,39 +109,35 @@ You can run the `cf apps` command to see the applications deployed as part of th
 
 <pre class="terminal">
 $ cf apps
-Getting apps in org myorg / space dev as user...
+Getting apps in org myorg / space development as user...
 OK
 
-name                        requested state   instances   memory   disk   urls
-RWSDZgk-words-http-v1       started           1/1         1G       1G     RWSDZgk-words-http-v1.apps.wise.com
-RWSDZgk-words-log-v1        started           1/1         1G       1G     RWSDZgk-words-log-v1.apps.wise.com
-RWSDZgk-words-splitter-v1   started           1/1         1G       1G     RWSDZgk-words-splitter-v1.apps.wise.com
+name                                   requested state   instances   memory   disk   urls
+QiK4v3p-words-log-v1                   started           1/1         1G       1G     QiK4v3p-words-log-v1.apps.example.com
+QiK4v3p-words-splitter-v1              started           1/1         1G       1G     QiK4v3p-words-splitter-v1.apps.example.com
+QiK4v3p-words-http-v1                  started           0/1         1G       1G     QiK4v3p-words-http-v1.apps.example.com
 </pre>
 
-Run the `cf logs` command on the `RWSDZgk-words-log-v1` application:
+Run the `cf logs` command on the `QiK4v3p-words-log-v1` application:
 
 <pre class="terminal">
-$ cf logs RWSDZgk-words-log-v1
-Retrieving logs for app RWSDZgk-words-log-v1 in org myorg / space dev as user...
+$ cf logs QiK4v3p-words-log-v1
+Retrieving logs for app QiK4v3p-words-log-v1 in org myorg / space development as user...
 </pre>
 
-Then, in a separate command line, use the Data Flow shell (started using the `cf dataflow-shell` command) to send a POST request to the `RWSDZgk-words-http-v1` application:
+Then, in a separate command line, use the Data Flow shell (started using the `cf dataflow-shell` command) to send a POST request to the `QiK4v3p-words-http-v1` application:
 
 <pre class="terminal">
-$ cf dataflow-shell dataflow
-...
-Welcome to the Spring Cloud Data Flow shell. For assistance hit TAB or type "help".
-dataflow:>http post --target http://RWSDZgk-words-http-v1.apps.wise.com --data "This is a test"
-> POST (text/plain) http://RWSDZgk-words-http-v1.apps.wise.com This is a test
+dataflow:>http post --target http://QiK4v3p-words-http-v1.apps.example.com --data "This is a test"
+> POST (text/plain) http://QiK4v3p-words-http-v1.apps.example.com This is a test
 > 202 ACCEPTED
 </pre>
 
-Watch for the processed data in the `RWSDZgk-words-log-v1` application's logs:
+Watch for the processed data in the `QiK4v3p-words-log-v1` application's logs:
 
 <pre class="terminal">
-2018-06-07T16:47:08.80-0500 [APP/PROC/WEB/0] OUT 2018-06-07 21:47:08.808  INFO 16 --- [plitter.words-1] RWSDZgk-words-log-v1                     : This
-2018-06-07T16:47:08.81-0500 [APP/PROC/WEB/0] OUT 2018-06-07 21:47:08.810  INFO 16 --- [plitter.words-1] RWSDZgk-words-log-v1                     : is
-2018-06-07T16:47:08.82-0500 [APP/PROC/WEB/0] OUT 2018-06-07 21:47:08.820  INFO 16 --- [plitter.words-1] RWSDZgk-words-log-v1                     : a
-2018-06-07T16:47:08.82-0500 [APP/PROC/WEB/0] OUT 2018-06-07 21:47:08.822  INFO 16 --- [plitter.words-1] RWSDZgk-words-log-v1                     : test
+2019-03-22T10:53:58.60-0500 [APP/PROC/WEB/0] OUT 2019-03-22 15:53:58.608  INFO 19 --- [plitter.words-1] QiK4v3p-words-log-v1 : This
+2019-03-22T10:53:58.65-0500 [APP/PROC/WEB/0] OUT 2019-03-22 15:53:58.650  INFO 19 --- [plitter.words-1] QiK4v3p-words-log-v1 : is
+2019-03-22T10:53:58.65-0500 [APP/PROC/WEB/0] OUT 2019-03-22 15:53:58.655  INFO 19 --- [plitter.words-1] QiK4v3p-words-log-v1 : a
+2019-03-22T10:53:58.66-0500 [APP/PROC/WEB/0] OUT 2019-03-22 15:53:58.660  INFO 19 --- [plitter.words-1] QiK4v3p-words-log-v1 : test
 </pre>
-
