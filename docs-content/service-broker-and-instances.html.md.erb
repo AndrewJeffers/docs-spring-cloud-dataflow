@@ -25,7 +25,7 @@ The broker relies on the [MySQL for Pivotal Cloud Foundry v2](https://network.pi
 
 The Spring Cloud Data Flow product upgrade process checks before redeploying the service broker to see whether the product's version has changed. If the version has not changed, the upgrade process will continue without redeploying the service broker.
 
-The service broker application is deployed using a [blue-green deployment strategy](http://martinfowler.com/bliki/BlueGreenDeployment.html). During an upgrade of the service broker, the broker will continue processing requests to provision, deprovision, bind, and unbind service instances, without downtime.
+The service broker application is deployed using a [blue-green deployment strategy](https://martinfowler.com/bliki/BlueGreenDeployment.html). During an upgrade of the service broker, the broker will continue processing requests to provision, deprovision, bind, and unbind service instances, without downtime.
 
 ###<a id='access-via-apps-manager'></a> Access Via Apps Manager
 
