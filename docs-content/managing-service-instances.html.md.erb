@@ -51,7 +51,7 @@ $ cf create-service p-dataflow standard data-flow -c '{"maven.remote-repositorie
 To configure a private Maven repository that requires authentication, you can provide a username and password, such as the following:
 
 <pre class="terminal">
-$ cf create-service p-dataflow standard data-flow -c '{"maven.remote-repositories.repo1.url":"http://my.private.maven/repo","maven.remote-repositories.repo1.auth.username":"user","maven.remote-repositories.repo1.auth.password":"password"}'
+$ cf create-service p-dataflow standard data-flow -c '{"maven.remote-repositories.repo1.url":"https://my.private.maven/repo","maven.remote-repositories.repo1.auth.username":"user","maven.remote-repositories.repo1.auth.password":"password"}'
 </pre>
 
 ### <a id="limiting-concurrent-tasks"></a>Limiting Concurrent Tasks
