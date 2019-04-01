@@ -82,7 +82,7 @@ With `stream-only` set to `true`, the service instance's dashboard (see [Using t
 
 ### <a id="using-scheduler-for-pcf"></a>Using Scheduler for PCF
 
-You can use the Scheduler for PCF service with Spring Cloud Data Flow for PCF to schedule task executions. If you configure a Data Flow service instance to use Scheduler for PCF, the Data Flow broker will create a new Scheduler service instance in the Data Flow service instance's backing space. This Scheduler service instance will be bound to the Data Flow server's backing application.
+You can use the Scheduler for PCF service with Spring Cloud Data Flow for PCF to schedule task executions (see the Spring Cloud Data Flow OSS documentation on [Scheduling Tasks](https://docs.spring.io/spring-cloud-dataflow/docs/current/reference/htmlsingle/#spring-cloud-dataflow-schedule-launch-tasks)). If you configure a Data Flow service instance to use Scheduler for PCF, the Data Flow broker will create a new Scheduler service instance in the Data Flow service instance's backing space. This Scheduler service instance will be bound to the Data Flow server's backing application.
 
 To configure a Data Flow service instance to use Scheduler for PCF, pass a `scheduler` parameter to the `cf create-service` or `cf update-service` command. This parameter is a JSON object with the fields listed below.
 
