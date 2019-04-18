@@ -104,9 +104,9 @@ Getting apps in org myorg / space dev as user...
 OK
 
 name                 requested state   instances   memory   disk   urls
-words-http-v2        started           1/1         1G       1G     words-http-v2.wise.com
-words-log-v2         started           1/1         1G       1G     words-log-v2.wise.com
-words-splitter-v2    started           1/1         1G       1G     words-splitter-v2.wise.com
+words-http-v2        started           1/1         1G       1G     words-http-v2.example.com
+words-log-v2         started           1/1         1G       1G     words-log-v2.example.com
+words-splitter-v2    started           1/1         1G       1G     words-splitter-v2.example.com
 </pre>
 
 Run the `cf logs` command on the `words-log-v2` application:
@@ -122,8 +122,8 @@ Then, in a separate command line, use the Data Flow shell (started using the `cf
 $ cf dataflow-shell data-flow
 ...
 Welcome to the Spring Cloud Data Flow shell. For assistance hit TAB or type "help".
-dataflow:>http post --target https://words-http-v2.wise.com --data "This is a test"
-> POST (text/plain) https://words-http-v2.wise.com This is a test
+dataflow:>http post --target https://words-http-v2.example.com --data "This is a test"
+> POST (text/plain) https://words-http-v2.example.com This is a test
 > 202 ACCEPTED
 </pre>
 
