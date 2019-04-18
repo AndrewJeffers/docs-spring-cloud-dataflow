@@ -12,9 +12,9 @@ This template helps partners prepare documentation for Pivotal Cloud Foundry (PC
 
 ### <a id='overview'></a>Overview
 
-Every partner service in PCF is documented on our PCF documentation site. The links to these partner service docs appear on the [front page](http://docs.pivotal.io) under **Partner Services for Pivotal Cloud Foundry**.
+Every partner service in PCF is documented on our PCF documentation site. The links to these partner service docs appear on the [front page](https://docs.pivotal.io) under **Partner Services for Pivotal Cloud Foundry**.
 
-For a good example of a partner service doc, see [ISS Knowtify Search Analytics](http://docs.pivotal.io/knowtify/index.html).
+For a good example of a partner service doc, see [ISS Knowtify Search Analytics](https://docs.pivotal.io/knowtify/index.html).
 
 ### <a id='template'></a>How To Use This Template
 
@@ -68,7 +68,7 @@ In Terminal window:
 
      `$ cd workspace`
 
-1. Follow the instructions at `http://brew.sh` to install brew / homebrew
+1. Follow the instructions at `https://brew.sh` to install brew / homebrew
 
     `$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
@@ -91,7 +91,7 @@ In Terminal window:
     Enter file in which to save the key (/Users/pspinrad/.ssh/id_rsa): 
     ```
 
-1. Get a [Github](http://github.com) account.
+1. Get a [Github](https://github.com) account.
 
 1. Add your RSA public key to your Github account / profile page.
 
