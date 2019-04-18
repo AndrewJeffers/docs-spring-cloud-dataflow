@@ -23,41 +23,41 @@ You can obtain credentials to use in an app for accessing a Data Flow service in
 	OK
 
 	name      requested state   instances   memory   disk   urls
-	example   started           1/1         1G       1G     example.apps.wise.com
+	sample    started           1/1         1G       1G     sample.apps.example.com
 	Getting services in org myorg / space dev as user...
 
 	name                                              service                 plan       bound apps   last operation
 	analytics-4f124186-ad62-405f-be25-d8afa95b885f    p-dataflow-analytics    proxy                   create succeeded
-	data-flow                                         p-dataflow              standard   example      create succeeded
+	data-flow                                         p-dataflow              standard   sample       create succeeded
 	messaging-4f124186-ad62-405f-be25-d8afa95b885f    p-dataflow-messaging    proxy                   create succeeded
-	mysql                                             p.mysql                 db-small   example      create succeeded
+	mysql                                             p.mysql                 db-small   sample       create succeeded
 	relational-4f124186-ad62-405f-be25-d8afa95b885f   p-dataflow-relational   proxy
 	</pre>
 
 1. Bind the app to the service instance.
 
 	<pre class="terminal">
-	$ cf bind-service example data-flow
+	$ cf bind-service sample data-flow
 	Getting apps in org myorg / space dev as user...
 	OK
 
 	name      requested state   instances   memory   disk   urls
-	example   started           1/1         1G       1G     example.apps.wise.com
+	sample    started           1/1         1G       1G     sample.apps.example.com
 	Getting services in org myorg / space dev as user...
 
 	name                                              service                 plan       bound apps   last operation
 	analytics-4f124186-ad62-405f-be25-d8afa95b885f    p-dataflow-analytics    proxy                   create succeeded
-	data-flow                                         p-dataflow              standard   example      create succeeded
+	data-flow                                         p-dataflow              standard   sample       create succeeded
 	messaging-4f124186-ad62-405f-be25-d8afa95b885f    p-dataflow-messaging    proxy                   create succeeded
-	mysql                                             p.mysql                 db-small   example      create succeeded
+	mysql                                             p.mysql                 db-small   sample       create succeeded
 	relational-4f124186-ad62-405f-be25-d8afa95b885f   p-dataflow-relational   proxy
 	</pre>
 
 1. Use the `cf env` command to print the environment variables for the app.
 
 	<pre class="terminal">
-	$ cf env example
-	Getting env variables for app example in org myorg / space dev as user...
+	$ cf env sample
+	Getting env variables for app sample in org myorg / space dev as user...
 	OK
 
 	System-Provided:
@@ -67,11 +67,11 @@ You can obtain credentials to use in an app for accessing a Data Flow service in
 		 {
 			"binding_name": null,
 			"credentials": {
-			 "access-token-url": "https://uaa.sys.wise.com/oauth/token",
+			 "access-token-url": "https://uaa.sys.example.com/oauth/token",
 			 "client-id": "p-dataflow-binding-56b0d6b9-b9c6-4085-9513-c51081535517",
 			 "client-secret": "placeholder_client_secret",
-			 "dataflow-url": "https://dataflow-423914c6-78bc-445a-a91b-96a3bfe8708e.apps.wise.com",
-			 "skipper-url": "https://skipper-423914c6-78bc-445a-a91b-96a3bfe8708e.apps.wise.com"
+			 "dataflow-url": "https://dataflow-423914c6-78bc-445a-a91b-96a3bfe8708e.apps.example.com",
+			 "skipper-url": "https://skipper-423914c6-78bc-445a-a91b-96a3bfe8708e.apps.example.com"
 			},
 			"instance_name": "data-flow",
 			"label": "p-dataflow",
@@ -103,9 +103,9 @@ You can obtain credentials to use in an app for accessing a Data Flow service in
 
 	name                                              service                 plan       bound apps   last operation
 	analytics-4f124186-ad62-405f-be25-d8afa95b885f    p-dataflow-analytics    proxy                   create succeeded
-	data-flow                                         p-dataflow              standard   example      create succeeded
+	data-flow                                         p-dataflow              standard   sample       create succeeded
 	messaging-4f124186-ad62-405f-be25-d8afa95b885f    p-dataflow-messaging    proxy                   create succeeded
-	mysql                                             p.mysql                 db-small   example      create succeeded
+	mysql                                             p.mysql                 db-small   sample       create succeeded
 	relational-4f124186-ad62-405f-be25-d8afa95b885f   p-dataflow-relational   proxy
 	</pre>
 
@@ -122,11 +122,11 @@ You can obtain credentials to use in an app for accessing a Data Flow service in
 	Getting key my-service-key for service instance data-flow as user...
 
 	{
-	 "access-token-url": "https://uaa.sys.wise.com/oauth/token",
+	 "access-token-url": "https://uaa.sys.example.com/oauth/token",
 	 "client-id": "p-dataflow-binding-82856547-33f8-4e0d-8101-67e56b95b7e8",
 	 "client-secret": "made-up_client_secret",
-	 "dataflow-url": "https://dataflow-423914c6-78bc-445a-a91b-96a3bfe8708e.apps.wise.com",
-	 "skipper-url": "https://skipper-423914c6-78bc-445a-a91b-96a3bfe8708e.apps.wise.com"
+	 "dataflow-url": "https://dataflow-423914c6-78bc-445a-a91b-96a3bfe8708e.apps.example.com",
+	 "skipper-url": "https://skipper-423914c6-78bc-445a-a91b-96a3bfe8708e.apps.example.com"
 	}
 	</pre>
 

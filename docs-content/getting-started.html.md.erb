@@ -106,9 +106,9 @@ Getting apps in org myorg / space dev as user...
 OK
 
 name                        requested state   instances   memory   disk   urls
-RWSDZgk-words-http-v1       started           1/1         1G       1G     RWSDZgk-words-http-v1.apps.wise.com
-RWSDZgk-words-log-v1        started           1/1         1G       1G     RWSDZgk-words-log-v1.apps.wise.com
-RWSDZgk-words-splitter-v1   started           1/1         1G       1G     RWSDZgk-words-splitter-v1.apps.wise.com
+RWSDZgk-words-http-v1       started           1/1         1G       1G     RWSDZgk-words-http-v1.apps.example.com
+RWSDZgk-words-log-v1        started           1/1         1G       1G     RWSDZgk-words-log-v1.apps.example.com
+RWSDZgk-words-splitter-v1   started           1/1         1G       1G     RWSDZgk-words-splitter-v1.apps.example.com
 </pre>
 
 Run the `cf logs` command on the `RWSDZgk-words-log-v1` application:
@@ -124,8 +124,8 @@ Then, in a separate command line, use the Data Flow shell (started using the `cf
 $ cf dataflow-shell dataflow
 ...
 Welcome to the Spring Cloud Data Flow shell. For assistance hit TAB or type "help".
-dataflow:>http post --target https://RWSDZgk-words-http-v1.apps.wise.com --data "This is a test"
-> POST (text/plain) https://RWSDZgk-words-http-v1.apps.wise.com This is a test
+dataflow:>http post --target https://RWSDZgk-words-http-v1.apps.example.com --data "This is a test"
+> POST (text/plain) https://RWSDZgk-words-http-v1.apps.example.com This is a test
 > 202 ACCEPTED
 </pre>
 
