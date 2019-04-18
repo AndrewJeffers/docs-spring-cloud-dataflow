@@ -50,6 +50,6 @@ Known issues in this release:
                                         plan requires client support for asynchronous
                                         service operations.
     ```
-* There is an unintentional hard dependency on [MySQL for PCF v1](http://docs.pivotal.io/p-mysql/1-10/index.html). The `deploy-all` errand will fail with `400` or `500` HTTP status code response depending on the services available in the PCF Marketplace catalog. A fix is scheduled to be released in the `v1.0.1` release of SCDF for PCF.
+* There is an unintentional hard dependency on [MySQL for PCF v1](https://docs.pivotal.io/p-mysql/1-10/index.html). The `deploy-all` errand will fail with `400` or `500` HTTP status code response depending on the services available in the PCF Marketplace catalog. A fix is scheduled to be released in the `v1.0.1` release of SCDF for PCF.
 
 * The `run-tests` errand requires access to the Internet. If your PCF environment does not allow errand VMs to access the Internet, this errand will fail. If the `run-tests` errand fails, this indicates that the service broker has been installed and made available across PCF orgs. In this case, Pivotal recommends disabling the `run-tests` errand and manually verifying the broker's functionality by creating a service instance.
