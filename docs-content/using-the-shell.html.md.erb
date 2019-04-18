@@ -70,7 +70,7 @@ tags:
 plan:            standard
 description:     Deploys Spring Cloud Data Flow servers to orchestrate data pipelines
 documentation:
-dashboard:       https://p-dataflow.apps.wise.com/instances/2f6ec0c6-c828-45bb-905a-4779ce50552b/dashboard
+dashboard:       https://p-dataflow.apps.example.com/instances/2f6ec0c6-c828-45bb-905a-4779ce50552b/dashboard
 
 Showing status of last operation from service data-flow...
 
@@ -85,13 +85,13 @@ Visit the URL given for "Dashboard" and authenticate using your PCF credentials.
 For example, given the following URL:
 
 ```
-https://dataflow-2f6ec0c6-c828-45bb-905a-4779ce50552b.apps.wise.com/dashboard/#/apps
+https://dataflow-2f6ec0c6-c828-45bb-905a-4779ce50552b.apps.example.com/dashboard/#/apps
 ```
 
 Copy the following:
 
 ```
-https://dataflow-2f6ec0c6-c828-45bb-905a-4779ce50552b.apps.wise.com
+https://dataflow-2f6ec0c6-c828-45bb-905a-4779ce50552b.apps.example.com
 ```
 
 From the directory containing the shell JAR file, run the shell from the command line using a command as shown below.
@@ -111,7 +111,7 @@ The complete command may look something like the following:
 <pre class="terminal">
 $ java -jar spring-cloud-dataflow-shell-1.5.0.RELEASE.jar \
 --dataflow.skip-ssl-validation=true \
---dataflow.uri=https://dataflow-2f6ec0c6-c828-45bb-905a-4779ce50552b.apps.wise.com \
+--dataflow.uri=https://dataflow-2f6ec0c6-c828-45bb-905a-4779ce50552b.apps.example.com \
 --dataflow.credentials-provider-command="cf oauth-token" --dataflow.mode=skipper
 </pre>
 
