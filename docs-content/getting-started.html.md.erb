@@ -28,7 +28,7 @@ dataflow:>
 Import the stream app starters using the Data Flow shell's `app import` command:
 
 <pre class="terminal">
-dataflow:>app import http://bit.ly/Darwin-SR3-stream-applications-rabbit-maven
+dataflow:>app import https://bit.ly/Darwin-SR3-stream-applications-rabbit-maven
 Successfully registered 64 applications from [source.sftp, source.mqtt.metadata,...
 processor.scriptable-transform.metadata, processor.object-detection]
 </pre>
@@ -69,7 +69,7 @@ To import the "RabbitMQ + Maven" stream app starters, select the **Bulk import a
 
 ![Bulk Importing Applications](bulk-importing-applications.png)
 
-In the **URI** field, enter `http://bit.ly/Darwin-SR3-stream-applications-rabbit-maven`. Then click **Import the application(s)**.
+In the **URI** field, enter `https://bit.ly/Darwin-SR3-stream-applications-rabbit-maven`. Then click **Import the application(s)**.
 
 With the app starters imported, visit the **Streams** tab. You can use three of the imported starter applications---the `http` source, the `split` processor, and the `log` sink---to create a stream that consumes data via an HTTP POST request, processes it by splitting it into words, and outputs the results in logs.
 
@@ -128,8 +128,8 @@ Retrieving logs for app QiK4v3p-words-log-v1 in org myorg / space development as
 Then, in a separate command line, use the Data Flow shell (started using the `cf dataflow-shell` command) to send a POST request to the `QiK4v3p-words-http-v1` application:
 
 <pre class="terminal">
-dataflow:>http post --target http://QiK4v3p-words-http-v1.apps.example.com --data "This is a test"
-> POST (text/plain) http://QiK4v3p-words-http-v1.apps.example.com This is a test
+dataflow:>http post --target https://QiK4v3p-words-http-v1.apps.example.com --data "This is a test"
+> POST (text/plain) https://QiK4v3p-words-http-v1.apps.example.com This is a test
 > 202 ACCEPTED
 </pre>
 
