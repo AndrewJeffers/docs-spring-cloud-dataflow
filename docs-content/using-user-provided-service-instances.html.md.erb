@@ -61,7 +61,7 @@ An example of fields contained in the `user-provided` object for a messaging ser
   "ssl": false,
   "hostname": "stonehill.rmq.cloudamqp.com",
   "uri": "amqp://buckstorm:fake-password@stonehill.rmq.cloudamqp.com/buckstorm",
-  "http_api_uri": "http://buckstorm:fake-password@stonehill.rmq.cloudamqp.com:1883/api",
+  "http_api_uri": "https://buckstorm:fake-password@stonehill.rmq.cloudamqp.com:1883/api",
   "tags": ["rabbitmq"]
 }
 ```
@@ -69,5 +69,5 @@ An example of fields contained in the `user-provided` object for a messaging ser
 To create a Spring Cloud Data Flow service instance using these connection values for the service instance's messaging service instance:
 
 <pre class="terminal">
-$ cf create-service p-dataflow standard data-flow -c '{"messaging-data-service": { "user-provided": {"dashboard_url":"https://api.cloudamqp.com/console/a-GUID-would-go-here/details","username":"buckstorm","vhost":"buckstorm","password":"fake-password","ssl":false,"hostname":"stonehill.rmq.cloudamqp.com","uri":"amqp://buckstorm:fake-password@stonehill.rmq.cloudamqp.com/buckstorm","http_api_uri":"http://buckstorm:fake-password@stonehill.rmq.cloudamqp.com:1883/api","tags":["rabbitmq"]} }}'
+$ cf create-service p-dataflow standard data-flow -c '{"messaging-data-service": { "user-provided": {"dashboard_url":"https://api.cloudamqp.com/console/a-GUID-would-go-here/details","username":"buckstorm","vhost":"buckstorm","password":"fake-password","ssl":false,"hostname":"stonehill.rmq.cloudamqp.com","uri":"amqp://buckstorm:fake-password@stonehill.rmq.cloudamqp.com/buckstorm","http_api_uri":"https://buckstorm:fake-password@stonehill.rmq.cloudamqp.com:1883/api","tags":["rabbitmq"]} }}'
 </pre>
