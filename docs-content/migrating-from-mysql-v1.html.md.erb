@@ -17,6 +17,8 @@ The Spring Cloud Data Flow broker, the Spring Cloud Data Flow server created for
 
 1. In the Spring Cloud Data Flow [tile configuration](./tile-configuration.html), update the [settings for the service broker's backing MySQL service](./tile-configuration.html#configure-broker-database-service-and-plan), the [settings for the Data Flow server's backing MySQL service](./tile-configuration.html#configure-data-flow-server-dependent-services), and the [settings for the Spring Cloud Skipper server's backing MySQL service](./tile-configuration.html#configure-skipper-database-service-and-plan), using MySQL for PCF v2 values.
 
+1. Using the MYSqlv2 migration tool, the p-dataflow-db should be migrated from v1 to v2. Once complet the p-dataflow-1.3.x application should be rebound to the new V2 service instance to ensure no loss of data from the broker. Once migrated and reboud, the remaining migration steps can be completed. 
+
 1. Return to the Installation Dashboard.
 
 1. If you are using Ops Manager v2.3 or later, click **Review Pending Changes**. For more information about this Ops Manager page, see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
